@@ -320,13 +320,13 @@
     .bstep-n { font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; color: var(--ouro); display: block; line-height: 1; margin-bottom: 14px; }
     .bstep h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3vw, 34px); color: #F8F5F0; margin-bottom: 12px; line-height: 1.08; letter-spacing: -0.01em; }
     .bstep p { color: #C8C4BB; font-size: 16px; line-height: 1.6; max-width: 420px; }
-    .battle-progress { position: absolute; left: 5%; bottom: 8%; width: 220px; height: 2px; background: rgba(168,139,91,0.25); z-index: 2; }
+    .battle-progress { position: relative; width: 220px; height: 2px; background: rgba(168,139,91,0.25); margin-top: 22px; }
     .battle-progress span { display: block; height: 100%; width: 0; background: var(--ouro); transition: width .1s linear; }
     @media (max-width: 760px) {
       .battle { height: 560vh; }
       .battle-hud { left: 6%; right: 6%; top: 8%; max-width: none; }
       .bstep h3 { font-size: 22px; } .bstep p { font-size: 14px; }
-      .battle-progress { left: 6%; bottom: 8%; width: 56%; }
+      .battle-progress { width: 56%; }
     }
     /* ── Esquema de fundos: seções COM foto (alternadas) ── */
     .sec-photo { position: relative; background: #14110D var(--bg, none) center / cover no-repeat; background-attachment: fixed; }
@@ -492,30 +492,8 @@
     .footer-li:hover { border-color: var(--ouro); color: #F8F5F0; }
     .footer-copy { max-width: 1160px; margin: 48px auto 0; color: #4a443b; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; }
 
-    /* ══════════════ CAMPO HOSTIL — topografia decorativa ══════════════ */
+    /* ══════════════ CAMPO HOSTIL — layout ══════════════ */
     #problem { position: relative; overflow: hidden; }
-    #problem .container { position: relative; z-index: 1; }
-    .topografia-wrap {
-      position: absolute; top: 50%; right: clamp(8px, 5%, 60px);
-      transform: translateY(-50%);
-      width: 380px; height: 280px; pointer-events: none; z-index: 0;
-      color: #8a6d3b; opacity: 0.42;
-    }
-    .topografia { width: 100%; height: 100%; display: block; overflow: visible; }
-    .topografia path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
-    @media (max-width: 768px) { .topografia-wrap { width: 220px; height: 160px; opacity: 0.15; } }
-
-    /* ══════════════ ICP — mira (retícula) decorativa ══════════════ */
-    #icp { position: relative; overflow: hidden; }
-    #icp .container { position: relative; z-index: 1; }
-    .mira-wrap {
-      position: absolute; top: 50%; right: clamp(16px, 6%, 80px);
-      transform: translateY(-50%);
-      width: 360px; height: 360px; pointer-events: none; z-index: 0;
-      color: var(--ouro); opacity: 0.10;
-    }
-    .mira { width: 100%; height: 100%; animation: rosaGira 120s linear infinite; transform-origin: 50% 50%; display: block; }
-    @media (max-width: 768px) { .mira-wrap { width: 210px; height: 210px; } }
 
     /* ══════════════ ABOUT content fix ══════════════ */
     .about-content { min-width: 0; }
@@ -597,7 +575,7 @@
         <img class="hero-logo" src="logo.svg" alt="Mind &amp; Biz" />
         <span class="label">Consultoria de Marketing com Visão de Negócio</span>
         <h1>A mente que faz o<br><em>negócio funcionar.</em></h1>
-        <p class="hero-sub">Integramos estratégia e execução — do branding ao CRO. Sem planejamento na gaveta. Sem relatório que ninguém aplica.</p>
+        <p class="hero-sub">Integramos estratégia e execução — do branding à conversão. Sem planejamento na gaveta. Sem relatório que ninguém aplica.</p>
         <div class="hero-cta-row">
           <a href="#contact" class="btn nav-anchor">Quero conversar →</a>
           <a href="#services" class="btn btn-outline nav-anchor">Ver o que fazemos</a>
@@ -608,28 +586,6 @@
 
   <!-- ── PROBLEM (light) ── -->
   <section id="problem" class="sec-light">
-    <div class="topografia-wrap" aria-hidden="true">
-      <svg class="topografia" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-        <!-- curva 1 — exterior, cota mais baixa (anima primeiro) -->
-        <path id="ch-c1" pathLength="1000" stroke-width="0.9"
-          d="M 284,-24 C 342,-36 396,10 394,82 C 392,154 352,196 298,198 C 244,200 192,164 190,90 C 188,20 230,-12 284,-24 Z"/>
-        <!-- curva 2 -->
-        <path id="ch-c2" pathLength="1000" stroke-width="1"
-          d="M 287,-4 C 336,-14 380,24 378,84 C 376,144 344,172 298,172 C 252,172 210,142 210,84 C 210,28 244,6 287,-4 Z"/>
-        <!-- curva 3 -->
-        <path id="ch-c3" pathLength="1000" stroke-width="1.1"
-          d="M 290,18 C 328,10 366,40 364,86 C 362,132 334,158 296,156 C 258,154 224,126 224,82 C 224,40 256,26 290,18 Z"/>
-        <!-- curva 4 -->
-        <path id="ch-c4" pathLength="1000" stroke-width="1.2"
-          d="M 292,42 C 322,36 350,58 348,90 C 346,120 322,138 294,136 C 266,134 242,112 242,84 C 242,58 264,48 292,42 Z"/>
-        <!-- curva 5 — interior, cota mais alta -->
-        <path id="ch-c5" pathLength="1000" stroke-width="1.3"
-          d="M 294,64 C 314,60 330,74 328,92 C 326,110 310,120 292,118 C 274,116 262,102 264,84 C 266,68 278,67 294,64 Z"/>
-        <!-- marcador de pico (triângulo tático — anima por último) -->
-        <path id="ch-peak" pathLength="1000" stroke-width="1.5"
-          d="M 286,80 L 295,62 L 304,80 L 286,80"/>
-      </svg>
-    </div>
     <div class="container">
       <div class="prob-grid">
         <div class="prob-lead reveal">
@@ -641,8 +597,8 @@
           <div class="prob-item reveal">
             <span class="prob-n">01</span>
             <div>
-              <h3>Diagnóstico sem execução</h3>
-              <p class="prob-txt">O marketing consome orçamento mas não entrega resultado claro. Às vezes falta diagnóstico — às vezes falta execução.</p>
+              <h3>Investimento sem direção. Resultado sem clareza.</h3>
+              <p class="prob-txt">Às vezes o marketing ainda não existe, e a dúvida é por onde começar. Às vezes existe — e simplesmente não entrega. O que falta, nos dois casos, é clareza: onde investir, o que priorizar, o que esperar de retorno.</p>
             </div>
           </div>
           <div class="prob-item reveal">
@@ -670,7 +626,7 @@
       <div class="head-lead reveal" style="margin-bottom:0;">
         <span class="label">A Estratégia</span>
         <h2>Estratégia que <em>sai do papel.</em></h2>
-        <span class="pos-tag">Somos parceiros de crescimento.</span>
+        <span class="pos-tag">Do pensamento de negócio à entrega de marketing.</span>
         <p class="pos-body">A Mind & Biz existe na interseção entre estratégia de negócio e execução de marketing. Do diagnóstico ao resultado — sem deixar o plano na gaveta.</p>
         <p class="pos-contrast">Enquanto outros entregam peças avulsas, a Mind & Biz entrega crescimento.</p>
       </div>
@@ -678,7 +634,7 @@
         <div class="pillar">
           <div class="pillar-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3V7z"/><path d="M9 4v13"/><path d="M15 7v13"/></svg></div>
           <h3>Estratégia</h3>
-          <p>Diagnóstico preciso, posicionamento claro e plano de crescimento com prioridades reais — sem achismo.</p>
+          <p>Diagnóstico preciso, posicionamento claro e plano de crescimento com prioridades reais — com método, não intuição.</p>
         </div>
         <div class="pillar">
           <div class="pillar-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
@@ -718,7 +674,7 @@
       <div class="reveal">
         <span class="label">A Formação</span>
         <h2>Seis frentes, <em>um plano de batalha.</em></h2>
-        <p>Do branding ao CRO, cada serviço é uma legião que parte da nossa base e avança com objetivo claro. Role para ver o plano se desenhar sobre o mapa.</p>
+        <p>Do branding à conversão, cada serviço é uma legião que parte da nossa base e avança com objetivo claro.</p>
       </div>
       <aside class="services-battle-order" aria-label="Serviços — visão geral">
         <span class="sbo-title">Ordem de Batalha</span>
@@ -764,13 +720,13 @@
         </g>
       </svg>
       <div class="battle-hud">
-        <span class="battle-eyebrow">A Formação · Do branding ao CRO</span>
+        <span class="battle-eyebrow">A Formação · Do branding à conversão</span>
         <div class="battle-steps">
           <article class="bstep" data-i="0"><span class="bstep-n">01</span><h3>Consultoria Estratégica</h3><p>Diagnóstico, plano de crescimento e acompanhamento para decisões mais rápidas e bem fundamentadas.</p></article>
           <article class="bstep" data-i="1"><span class="bstep-n">02</span><h3>Posicionamento de Marca</h3><p>Defina quem você é, para quem fala e por que te escolher. Clareza que converte antes de qualquer anúncio.</p></article>
           <article class="bstep" data-i="2"><span class="bstep-n">03</span><h3>Identidade Visual</h3><p>Design que comunica antes de você falar. Da logo ao sistema visual completo, com coerência em todos os pontos.</p></article>
           <article class="bstep" data-i="3"><span class="bstep-n">04</span><h3>Presença Digital</h3><p>Site institucional, landing pages, conteúdo e SEO — a base orgânica antes de investir em tráfego pago.</p></article>
-          <article class="bstep" data-i="4"><span class="bstep-n">05</span><h3>Tráfego Pago</h3><p>Campanhas de performance no Meta e Google com foco em ROI real, não em alcance ou vaidade de números.</p></article>
+          <article class="bstep" data-i="4"><span class="bstep-n">05</span><h3>Tráfego Pago</h3><p>Campanhas de performance nos canais certos — Meta, Google, LinkedIn — com foco em ROI real, não em alcance ou vaidade de números.</p></article>
           <article class="bstep" data-i="5"><span class="bstep-n">06</span><h3>Funil de Vendas e CRO</h3><p>Jornada de compra estruturada do primeiro contato ao fechamento — com automações e otimização de conversão.</p></article>
         </div>
         <div class="battle-progress"><span></span></div>
@@ -780,44 +736,16 @@
 
   <!-- ── ICP (dark) ── -->
   <section id="icp" class="sec-dark flat-up">
-    <div class="mira-wrap" aria-hidden="true">
-      <svg class="mira" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <!-- Anel externo -->
-        <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="0.7"/>
-        <!-- Anel médio -->
-        <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="0.45" opacity="0.7"/>
-        <!-- Anel interno -->
-        <circle cx="60" cy="60" r="20" fill="none" stroke="currentColor" stroke-width="0.5"/>
-        <!-- Linhas de mira (com gap no anel interno) -->
-        <line x1="60" y1="4" x2="60" y2="40" stroke="currentColor" stroke-width="0.7"/>
-        <line x1="60" y1="80" x2="60" y2="116" stroke="currentColor" stroke-width="0.7"/>
-        <line x1="4" y1="60" x2="40" y2="60" stroke="currentColor" stroke-width="0.7"/>
-        <line x1="80" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="0.7"/>
-        <!-- Marcadores no anel médio -->
-        <line x1="60" y1="22" x2="60" y2="29" stroke="currentColor" stroke-width="0.9"/>
-        <line x1="60" y1="91" x2="60" y2="98" stroke="currentColor" stroke-width="0.9"/>
-        <line x1="22" y1="60" x2="29" y2="60" stroke="currentColor" stroke-width="0.9"/>
-        <line x1="91" y1="60" x2="98" y2="60" stroke="currentColor" stroke-width="0.9"/>
-        <!-- Traços diagonais no anel externo -->
-        <line x1="97" y1="23" x2="93" y2="27" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-        <line x1="97" y1="97" x2="93" y2="93" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-        <line x1="23" y1="97" x2="27" y2="93" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-        <line x1="23" y1="23" x2="27" y2="27" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-        <!-- Centro -->
-        <circle cx="60" cy="60" r="2.5" fill="currentColor"/>
-        <circle cx="60" cy="60" r="6.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
-      </svg>
-    </div>
     <div class="container">
       <div class="head-lead reveal">
         <span class="label">Quem Marcha Conosco</span>
-        <h2>Trabalhamos com quem está pronto para <em>construir de verdade.</em></h2>
+        <h2>Trabalhamos com quem está <em>comprometido com o resultado.</em></h2>
         <p>Escolhemos projetos onde podemos fazer diferença de verdade — não por exclusividade, mas por responsabilidade com o resultado.</p>
       </div>
       <div class="icp-cards">
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/></svg></div>
-          <h3>Startups pós-PMF</h3>
+          <h3>Startups pós-PMF (Product-Market Fit)</h3>
           <p>Produto validado, primeiros clientes, time rodando — mas o crescimento ainda depende de indicação e esforço pontual. Com investimento muitas vezes escasso, cada real precisa ir para o lugar certo: antes de ativar canais de aquisição, é preciso posicionamento, ICP claro e uma mensagem que funcione.</p>
         </div>
         <div class="icp-card reveal">
@@ -833,7 +761,7 @@
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
           <h3>Profissionais liberais</h3>
-          <p>A expertise existe; falta a estrutura que transforma conhecimento em autoridade e autoridade em clientes. Médicos, advogados e consultores que dependem de indicação — e precisam construir uma presença que trabalhe por eles.</p>
+          <p>Profissionais liberais com reputação construída — mas ainda dependentes de indicação para crescer. A expertise existe; falta a estrutura que transforma o que você faz em autoridade reconhecida e em clientes consistentes.</p>
         </div>
       </div>
       <div class="not-for reveal">
@@ -872,7 +800,7 @@
           <h2>Arthur Ginder da Costa</h2>
           <div class="about-role">Fundador · Mind & Biz | CMOaaS</div>
           <p>Quase duas décadas construindo marcas e crescimento — dos grandes players às startups de tecnologia. Liderei o marketing na HP (Personal Systems) e Locaweb, construí marca em Amanco e Mary Kay e o growth de startups como InfoPrice e HiperStream — sempre unindo estratégia de negócio e execução de marketing, do branding ao CRO.</p>
-          <p>À frente da Mind & Biz, levo essa visão 360º para empresas que precisam construir marketing de verdade — do diagnóstico ao funil, unindo estratégia e execução. Para projetos de longo prazo, atuo como CMOaaS: assumindo a função completa de marketing — modelo em operação com a HubCred, onde conduzo o full-funnel com branding, performance e IA. Para projetos pontuais, atuo com escopo e prazo definidos — cobrindo o espectro completo: posicionamento, branding, performance, go-to-market ou IA aplicada — podendo incluir apoio a times internos, curadoria e seleção de fornecedores, ou execução direta conforme o projeto.</p>
+          <p>À frente da Mind & Biz, levo essa visão 360º para empresas que precisam construir marketing de verdade — do diagnóstico ao funil, unindo estratégia e execução. Para projetos de longo prazo, atuo como CMOaaS: assumindo a função completa de marketing — modelo em operação com a HubCred, onde conduzo a jornada completa — branding, performance e IA. Para projetos pontuais, atuo com escopo e prazo definidos — cobrindo o espectro completo: posicionamento, branding, performance, go-to-market ou IA aplicada — podendo incluir apoio a times internos, curadoria e seleção de fornecedores, ou execução direta conforme o projeto.</p>
           <div class="about-tags">
             <span class="about-tag">CMOaaS</span>
             <span class="about-tag">Branding</span>
@@ -919,7 +847,7 @@
   <section id="clients" class="sec-dark sec-photo" style="--bg:url('https://d8j0ntlcm91z4.cloudfront.net/user_3ENG4F3noLTBtOJ5wpeuamwI7f8/hf_20260623_033211_f53baef1-be95-44b1-a8df-5f6d7c92b3ec_min.webp')">
     <div class="container">
       <div class="head-lead reveal">
-        <span class="label">As Campanhas</span>
+        <span class="label">As Missões</span>
         <h2>Projetos com <em>impacto real.</em></h2>
         <p>Cada projeto começa com um diagnóstico honesto. Se não for o modelo certo para o momento, dizemos antes de começar.</p>
       </div>
@@ -944,7 +872,7 @@
           </div>
           <div class="client-sector">Fintech de Crédito · IA</div>
           <div class="client-name">HubCred</div>
-          <p class="client-desc">Atuação como CMOaaS: aquisição B2B (plataforma e white-label) e performance B2C — campanhas full-funnel em Meta, Google e WhatsApp API, com branding, conteúdo e otimização contínua focada em ROI, alavancada por IA.</p>
+          <p class="client-desc">Atuação como CMOaaS: aquisição B2B (plataforma e white-label) e performance B2C — campanhas de ponta a ponta, com branding, conteúdo e otimização contínua focada em ROI, alavancada por IA.</p>
           <div class="client-result">CMOaaS · Branding · Product Marketing · Social · Performance · Demand Gen</div>
           <a href="https://hubcred.com.br" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:10px 20px;margin-top:16px;">Ver site →</a>
         </div>
@@ -970,7 +898,7 @@
       <div class="contact-wrap reveal">
         <span class="label">A Convocação</span>
         <h2>A primeira conversa<br>é parte do <em>diagnóstico.</em></h2>
-        <p class="contact-sub">Nossa equipe retorna em até 24h úteis. Se preferir uma resposta imediata, inicie agora pelo WhatsApp.</p>
+        <p class="contact-sub">Retorno em até 24h úteis. Se preferir uma resposta imediata, inicie agora pelo WhatsApp.</p>
 
         <div class="contact-channels">
           <a href="https://wa.me/5511999318970?text=Ol%C3%A1%2C+Arthur%21+Vi+o+site+da+Mind+%26+Biz+e+quero+conversar." target="_blank" rel="noopener" class="btn contact-wa-btn">
@@ -1027,7 +955,7 @@
         <div id="success">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
           <h3>Mensagem recebida. ✓</h3>
-          <p>Nossa equipe responde em até 24h úteis. Se preferir uma resposta mais rápida, inicie a conversa agora mesmo no WhatsApp.</p>
+          <p>Resposta em até 24h úteis. Se preferir uma resposta mais rápida, inicie a conversa agora mesmo no WhatsApp.</p>
           <a id="wa-open" href="#" target="_blank" rel="noopener" class="btn" style="margin-top:22px;">Iniciar conversa no WhatsApp →</a>
         </div>
       </div>
@@ -1233,46 +1161,6 @@
     render();
   })();
 
-  /* ════════════ CAMPO HOSTIL — terrain reveal on scroll ════════════ */
-  (function(){
-    var sec  = document.getElementById('problem');
-    var ids  = ['ch-c1','ch-c2','ch-c3','ch-c4','ch-c5','ch-peak'];
-    var els  = ids.map(function(id){ return document.getElementById(id); });
-    if (!sec || !els[0]) return;
-
-    /* janelas de animação em [start, end] como fração do progresso da seção */
-    var stages = [
-      [0.02, 0.32],  /* c1 exterior  — primeiro */
-      [0.14, 0.42],  /* c2           */
-      [0.24, 0.52],  /* c3           */
-      [0.34, 0.60],  /* c4           */
-      [0.44, 0.68],  /* c5 interior  */
-      [0.60, 0.80],  /* peak         — último  */
-    ];
-
-    function progress(){
-      var r   = sec.getBoundingClientRect();
-      var raw = (window.innerHeight - r.top) / (window.innerHeight + r.height);
-      return Math.max(0, Math.min(1, raw));
-    }
-
-    var ticking = false;
-    function tick(){
-      var p = progress();
-      els.forEach(function(el, i){
-        if (!el) return;
-        var s     = stages[i];
-        var local = Math.max(0, Math.min(1, (p - s[0]) / (s[1] - s[0])));
-        el.style.strokeDashoffset = 1000 * (1 - local);
-      });
-      ticking = false;
-    }
-
-    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(tick); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', tick, { passive: true });
-    tick();
-  })();
 </script>
 </body>
 </html>
