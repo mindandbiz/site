@@ -499,10 +499,11 @@
       position: absolute; top: 50%; right: clamp(8px, 5%, 60px);
       transform: translateY(-50%);
       width: 380px; height: 280px; pointer-events: none; z-index: 0;
-      color: #8a6d3b; opacity: 0.38;
+      color: #8a6d3b; opacity: 0.42;
     }
-    .topografia { width: 100%; height: 100%; display: block; }
-    @media (max-width: 768px) { .topografia-wrap { width: 220px; height: 160px; opacity: 0.14; } }
+    .topografia { width: 100%; height: 100%; display: block; overflow: visible; }
+    .topografia path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+    @media (max-width: 768px) { .topografia-wrap { width: 220px; height: 160px; opacity: 0.15; } }
 
     /* ══════════════ ICP — mira (retícula) decorativa ══════════════ */
     #icp { position: relative; overflow: hidden; }
@@ -609,60 +610,31 @@
   <section id="problem" class="sec-light">
     <div class="topografia-wrap" aria-hidden="true">
       <svg class="topografia" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-        <!-- grade de coordenadas (fundo) -->
-        <g stroke-width="0.4" opacity="0.4">
-          <line x1="0" y1="56" x2="380" y2="56"/><line x1="0" y1="112" x2="380" y2="112"/>
-          <line x1="0" y1="168" x2="380" y2="168"/><line x1="0" y1="224" x2="380" y2="224"/>
-          <line x1="56" y1="0" x2="56" y2="280"/><line x1="112" y1="0" x2="112" y2="280"/>
-          <line x1="168" y1="0" x2="168" y2="280"/><line x1="224" y1="0" x2="224" y2="280"/>
-          <line x1="280" y1="0" x2="280" y2="280"/><line x1="336" y1="0" x2="336" y2="280"/>
-        </g>
-        <!-- marcadores de grade (ticks nas bordas) -->
-        <g stroke-width="1" opacity="0.6">
-          <line x1="56" y1="0" x2="56" y2="5"/><line x1="112" y1="0" x2="112" y2="5"/>
-          <line x1="168" y1="0" x2="168" y2="5"/><line x1="224" y1="0" x2="224" y2="5"/>
-          <line x1="280" y1="0" x2="280" y2="5"/><line x1="336" y1="0" x2="336" y2="5"/>
-          <line x1="0" y1="56" x2="5" y2="56"/><line x1="0" y1="112" x2="5" y2="112"/>
-          <line x1="0" y1="168" x2="5" y2="168"/><line x1="0" y1="224" x2="5" y2="224"/>
-        </g>
-        <!-- referências de coordenada -->
-        <g font-size="7" fill="currentColor" stroke="none" font-family="monospace" letter-spacing="0.5" opacity="0.55">
-          <text x="53" y="10">C</text><text x="109" y="10">D</text>
-          <text x="165" y="10">E</text><text x="221" y="10">F</text>
-          <text x="277" y="10">G</text><text x="333" y="10">H</text>
-          <text x="3" y="60">4</text><text x="3" y="116">5</text>
-          <text x="3" y="172">6</text><text x="3" y="228">7</text>
-        </g>
-        <!-- curvas de nível irregulares — alto relevo superior-direito, ponto cota ~(295,95) -->
-        <!-- nível 1 — cota 220 (exterior) -->
-        <path d="M18,272 C55,255 115,270 188,252 C248,236 298,208 338,182 C365,164 375,134 358,100 C342,68 304,46 262,55 C224,63 186,84 162,114 C140,140 120,164 92,194 C65,220 30,250 18,272 Z" stroke-width="1"/>
-        <!-- nível 2 — cota 260 -->
-        <path d="M92,258 C128,238 174,250 218,230 C256,212 298,186 326,161 C348,140 354,112 336,88 C320,66 288,56 256,66 C224,76 200,100 178,126 C158,150 140,174 124,200 C110,224 100,246 92,258 Z" stroke-width="1.1"/>
-        <!-- nível 3 — cota 300 -->
-        <path d="M158,238 C186,222 216,232 244,212 C270,193 296,168 314,144 C328,124 328,100 312,84 C296,68 270,64 248,76 C226,88 210,110 196,134 C183,156 174,180 168,200 C162,218 160,232 158,238 Z" stroke-width="1.1"/>
-        <!-- nível 4 — cota 340 -->
-        <path d="M210,214 C228,200 250,208 270,190 C290,172 308,150 318,128 C326,110 322,90 306,79 C290,68 266,72 248,84 C230,97 218,118 210,140 C203,160 202,178 205,194 C207,208 210,216 210,214 Z" stroke-width="1.2"/>
-        <!-- nível 5 — cota 380 (próximo ao pico) -->
-        <path d="M248,184 C260,172 276,178 288,162 C300,147 308,128 304,112 C300,97 286,90 272,97 C258,104 248,120 243,138 C238,155 241,170 247,181 Z" stroke-width="1.3"/>
-        <!-- pico (triângulo tático) em (290,88) -->
-        <path d="M284,95 L291,80 L298,95 Z" fill="currentColor" stroke="none"/>
-        <line x1="283" y1="95" x2="299" y2="95" stroke-width="0.9"/>
-        <!-- cotas de altitude -->
-        <g font-size="7" fill="currentColor" stroke="none" font-family="monospace" letter-spacing="0.5">
-          <text x="25" y="270">220</text>
-          <text x="94" y="268">260</text>
-          <text x="158" y="247">300</text>
-          <text x="212" y="222">340</text>
-          <text x="250" y="193">380</text>
-          <text x="296" y="78">▲ 412</text>
-        </g>
+        <!-- curva 1 — exterior, cota mais baixa (anima primeiro) -->
+        <path id="ch-c1" pathLength="1000" stroke-width="0.9"
+          d="M 284,-24 C 342,-36 396,10 394,82 C 392,154 352,196 298,198 C 244,200 192,164 190,90 C 188,20 230,-12 284,-24 Z"/>
+        <!-- curva 2 -->
+        <path id="ch-c2" pathLength="1000" stroke-width="1"
+          d="M 287,-4 C 336,-14 380,24 378,84 C 376,144 344,172 298,172 C 252,172 210,142 210,84 C 210,28 244,6 287,-4 Z"/>
+        <!-- curva 3 -->
+        <path id="ch-c3" pathLength="1000" stroke-width="1.1"
+          d="M 290,18 C 328,10 366,40 364,86 C 362,132 334,158 296,156 C 258,154 224,126 224,82 C 224,40 256,26 290,18 Z"/>
+        <!-- curva 4 -->
+        <path id="ch-c4" pathLength="1000" stroke-width="1.2"
+          d="M 292,42 C 322,36 350,58 348,90 C 346,120 322,138 294,136 C 266,134 242,112 242,84 C 242,58 264,48 292,42 Z"/>
+        <!-- curva 5 — interior, cota mais alta -->
+        <path id="ch-c5" pathLength="1000" stroke-width="1.3"
+          d="M 294,64 C 314,60 330,74 328,92 C 326,110 310,120 292,118 C 274,116 262,102 264,84 C 266,68 278,67 294,64 Z"/>
+        <!-- marcador de pico (triângulo tático — anima por último) -->
+        <path id="ch-peak" pathLength="1000" stroke-width="1.5"
+          d="M 286,80 L 295,62 L 304,80 L 286,80"/>
       </svg>
     </div>
     <div class="container">
       <div class="prob-grid">
         <div class="prob-lead reveal">
           <span class="label">O Campo Hostil</span>
-          <h2>Toda boa estratégia já ficou <em>presa no papel.</em></h2>
+          <h2>O resultado não aparece. E nem sempre fica claro <em>por quê.</em></h2>
           <p>Você tem visão, energia e vontade. Mas o resultado esperado não chega — não é falta de esforço. É falta de estrutura e execução integrada.</p>
         </div>
         <div class="prob-list">
@@ -1259,6 +1231,47 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', render, { passive: true });
     render();
+  })();
+
+  /* ════════════ CAMPO HOSTIL — terrain reveal on scroll ════════════ */
+  (function(){
+    var sec  = document.getElementById('problem');
+    var ids  = ['ch-c1','ch-c2','ch-c3','ch-c4','ch-c5','ch-peak'];
+    var els  = ids.map(function(id){ return document.getElementById(id); });
+    if (!sec || !els[0]) return;
+
+    /* janelas de animação em [start, end] como fração do progresso da seção */
+    var stages = [
+      [0.02, 0.32],  /* c1 exterior  — primeiro */
+      [0.14, 0.42],  /* c2           */
+      [0.24, 0.52],  /* c3           */
+      [0.34, 0.60],  /* c4           */
+      [0.44, 0.68],  /* c5 interior  */
+      [0.60, 0.80],  /* peak         — último  */
+    ];
+
+    function progress(){
+      var r   = sec.getBoundingClientRect();
+      var raw = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+      return Math.max(0, Math.min(1, raw));
+    }
+
+    var ticking = false;
+    function tick(){
+      var p = progress();
+      els.forEach(function(el, i){
+        if (!el) return;
+        var s     = stages[i];
+        var local = Math.max(0, Math.min(1, (p - s[0]) / (s[1] - s[0])));
+        el.style.strokeDashoffset = 1000 * (1 - local);
+      });
+      ticking = false;
+    }
+
+    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(tick); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', tick, { passive: true });
+    tick();
   })();
 </script>
 </body>
