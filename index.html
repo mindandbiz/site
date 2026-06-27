@@ -522,6 +522,38 @@
     .sbo-n { font-family: 'Spectral', serif; font-style: italic; color: var(--ouro); opacity: 0.65; font-size: 14px; min-width: 26px; text-align: right; }
     @media (max-width: 860px) { .services-battle-order { display: none; } }
 
+    /* ══════════════ MOBILE HERO ══════════════ */
+    @media (max-width: 640px) {
+      #hero {
+        align-items: flex-end;
+        padding: 76px 0 clamp(36px, 8vh, 64px);
+        background-position: 68% 15%;
+      }
+      #hero-overlay {
+        background:
+          linear-gradient(180deg, rgba(20,17,13,0.55) 0%, rgba(20,17,13,0.08) 28%, rgba(20,17,13,0.85) 58%, rgba(20,17,13,0.97) 100%),
+          radial-gradient(130% 90% at 60% 45%, transparent 28%, rgba(20,17,13,0.42) 100%);
+      }
+      .hero-logo { display: none; }
+      #hero .label { font-size: 12px; letter-spacing: 0.14em; margin-bottom: 14px; }
+      #hero h1 { margin-bottom: 16px; }
+      .hero-sub { font-size: 15px; margin-bottom: 28px; }
+      .hero-cta-row { flex-direction: column; gap: 10px; }
+      .hero-cta-row .btn { justify-content: center; }
+    }
+
+    /* ══════════════ MOBILE BATTLE / MAPA ══════════════ */
+    @media (max-width: 760px) {
+      .battle-svg { display: none; }
+      .battle-stage::after {
+        height: 80%;
+        background: linear-gradient(transparent, rgba(16,14,10,0.94));
+      }
+      .battle-hud { top: auto; bottom: 10%; }
+      .battle-steps { min-height: 200px; }
+      .bstep-n { font-size: 34px; }
+    }
+
     /* ══════════════ FLOATING WA ══════════════ */
     #wa-float {
       position: fixed; bottom: 24px; right: 24px; z-index: 9999;
@@ -628,7 +660,6 @@
         <h2>Estratégia que <em>sai do papel.</em></h2>
         <span class="pos-tag">Do pensamento de negócio à entrega de marketing.</span>
         <p class="pos-body">A Mind & Biz existe na interseção entre estratégia de negócio e execução de marketing. Do diagnóstico ao resultado — sem deixar o plano na gaveta.</p>
-        <p class="pos-contrast">Enquanto outros entregam peças avulsas, a Mind & Biz entrega crescimento.</p>
       </div>
       <div class="pillars reveal">
         <div class="pillar">
