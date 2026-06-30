@@ -437,6 +437,16 @@
 
     /* ══════════════ FAQ ══════════════ */
     .faq-section { background: var(--d0); }
+    /* ══════════════ CLT LOGO MARQUEE ══════════════ */
+    .clt-section-label { font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ouro); margin: 26px 0 52px; }
+    .clt-marquee { overflow: hidden; margin: 0 0 28px; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%); }
+    .clt-track { display: flex; align-items: center; gap: 44px; width: max-content; animation: cltSlide 24s linear infinite; }
+    .clt-marquee:hover .clt-track { animation-play-state: paused; }
+    @keyframes cltSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .clt-logo-link { display: flex; align-items: center; flex-shrink: 0; }
+    .clt-logo-link img { height: 60px; width: auto; max-width: 200px; object-fit: contain; filter: grayscale(1); opacity: 0.65; transition: filter 0.4s ease, opacity 0.4s ease; }
+    .clt-logo-link:hover img { filter: grayscale(0); opacity: 1; }
+
     .faq-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(168,139,91,0.15); }
     .faq-item { border-bottom: 1px solid rgba(168,139,91,0.15); }
     .faq-q {
