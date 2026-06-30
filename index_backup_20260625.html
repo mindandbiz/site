@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mind & Biz — Consultoria de Marketing com Visão de Negócio</title>
   <meta name="description" content="A Mind & Biz existe na interseção entre estratégia de negócio e execução de marketing. Do branding ao CRO — sem planejamento na gaveta." />
-  <link rel="canonical" href="https://mindandbiz.com.br/" />
-  <link rel="alternate" hreflang="pt-BR" href="https://mindandbiz.com.br/" />
-  <link rel="alternate" hreflang="en-US" href="https://mindandbiz.com.br/en/" />
-  <link rel="alternate" hreflang="x-default" href="https://mindandbiz.com.br/" />
   <link rel="icon" href="/favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
   <link rel="icon" href="/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
   <link rel="apple-touch-icon" href="/favicon.png" />
@@ -129,20 +125,6 @@
     }
     nav a.nav-link:hover { color: var(--ouro); }
     .hdr-cta { font-size: 13px; padding: 11px 20px; }
-    /* language switcher */
-    .lang-switch {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
-      border: 1px solid rgba(168,139,91,0.3); border-radius: 4px;
-      overflow: hidden; white-space: nowrap;
-    }
-    .lang-switch a {
-      padding: 5px 9px; text-decoration: none; color: #C8C4BB;
-      transition: background 0.2s, color 0.2s;
-    }
-    .lang-switch a.active { background: var(--ouro); color: #14110D; }
-    .lang-switch a:not(.active):hover { color: var(--ouro); }
-    .lang-switch span { color: rgba(168,139,91,0.4); font-size: 10px; }
     /* hamburger (mobile) */
     .hdr-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
     .hdr-toggle span { display: block; width: 24px; height: 2px; background: var(--ouro); margin: 5px 0; transition: transform .3s, opacity .3s; }
@@ -161,7 +143,6 @@
       nav.open { transform: translateX(0); }
       nav a.nav-link { font-size: 18px; }
       .hdr-cta { font-size: 15px; align-self: flex-start; }
-      .lang-switch { align-self: flex-start; }
       body.nav-locked { overflow: hidden; }
     }
 
@@ -339,13 +320,13 @@
     .bstep-n { font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; color: var(--ouro); display: block; line-height: 1; margin-bottom: 14px; }
     .bstep h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3vw, 34px); color: #F8F5F0; margin-bottom: 12px; line-height: 1.08; letter-spacing: -0.01em; }
     .bstep p { color: #C8C4BB; font-size: 16px; line-height: 1.6; max-width: 420px; }
-    .battle-progress { position: relative; width: 220px; height: 2px; background: rgba(168,139,91,0.25); margin-top: 22px; }
+    .battle-progress { position: absolute; left: 5%; bottom: 8%; width: 220px; height: 2px; background: rgba(168,139,91,0.25); z-index: 2; }
     .battle-progress span { display: block; height: 100%; width: 0; background: var(--ouro); transition: width .1s linear; }
     @media (max-width: 760px) {
       .battle { height: 560vh; }
       .battle-hud { left: 6%; right: 6%; top: 8%; max-width: none; }
       .bstep h3 { font-size: 22px; } .bstep p { font-size: 14px; }
-      .battle-progress { width: 56%; }
+      .battle-progress { left: 6%; bottom: 8%; width: 56%; }
     }
     /* ── Esquema de fundos: seções COM foto (alternadas) ── */
     .sec-photo { position: relative; background: #14110D var(--bg, none) center / cover no-repeat; background-attachment: fixed; }
@@ -475,7 +456,7 @@
     #success p { color: #C8C4BB; font-size: 15px; }
 
     /* ══════════════ CLT LOGO MARQUEE ══════════════ */
-    .clt-section-label { font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ouro); margin: 26px 0 52px; }
+    .clt-section-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,196,187,0.4); margin: 26px 0 14px; }
     .clt-marquee { overflow: hidden; margin: 0 0 28px; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%); }
     .clt-track { display: flex; align-items: center; gap: 44px; width: max-content; animation: cltSlide 24s linear infinite; }
     .clt-marquee:hover .clt-track { animation-play-state: paused; }
@@ -511,8 +492,29 @@
     .footer-li:hover { border-color: var(--ouro); color: #F8F5F0; }
     .footer-copy { max-width: 1160px; margin: 48px auto 0; color: #4a443b; font-size: 11px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; }
 
-    /* ══════════════ CAMPO HOSTIL — layout ══════════════ */
+    /* ══════════════ CAMPO HOSTIL — topografia decorativa ══════════════ */
     #problem { position: relative; overflow: hidden; }
+    #problem .container { position: relative; z-index: 1; }
+    .topografia-wrap {
+      position: absolute; top: 50%; right: clamp(8px, 5%, 60px);
+      transform: translateY(-50%);
+      width: 380px; height: 280px; pointer-events: none; z-index: 0;
+      color: #8a6d3b; opacity: 0.15;
+    }
+    .topografia { width: 100%; height: 100%; display: block; }
+    @media (max-width: 768px) { .topografia-wrap { width: 220px; height: 160px; opacity: 0.05; } }
+
+    /* ══════════════ ICP — mira (retícula) decorativa ══════════════ */
+    #icp { position: relative; overflow: hidden; }
+    #icp .container { position: relative; z-index: 1; }
+    .mira-wrap {
+      position: absolute; top: 50%; right: clamp(16px, 6%, 80px);
+      transform: translateY(-50%);
+      width: 360px; height: 360px; pointer-events: none; z-index: 0;
+      color: var(--ouro); opacity: 0.10;
+    }
+    .mira { width: 100%; height: 100%; animation: rosaGira 120s linear infinite; transform-origin: 50% 50%; display: block; }
+    @media (max-width: 768px) { .mira-wrap { width: 210px; height: 210px; } }
 
     /* ══════════════ ABOUT content fix ══════════════ */
     .about-content { min-width: 0; }
@@ -541,62 +543,6 @@
     .sbo-n { font-family: 'Spectral', serif; font-style: italic; color: var(--ouro); opacity: 0.65; font-size: 14px; min-width: 26px; text-align: right; }
     @media (max-width: 860px) { .services-battle-order { display: none; } }
 
-    /* ══════════════ MOBILE HERO ══════════════ */
-    @media (max-width: 640px) {
-      #hero {
-        align-items: flex-end;
-        padding: 76px 0 clamp(36px, 8vh, 64px);
-        background-position: 68% 15%;
-      }
-      #hero-overlay {
-        background:
-          linear-gradient(180deg, rgba(20,17,13,0.55) 0%, rgba(20,17,13,0.08) 28%, rgba(20,17,13,0.85) 58%, rgba(20,17,13,0.97) 100%),
-          radial-gradient(130% 90% at 60% 45%, transparent 28%, rgba(20,17,13,0.42) 100%);
-      }
-      .hero-logo { display: none; }
-      #hero .label { font-size: 12px; letter-spacing: 0.14em; margin-bottom: 14px; }
-      #hero h1 { margin-bottom: 16px; }
-      .hero-sub { font-size: 15px; margin-bottom: 28px; }
-      .hero-cta-row { flex-direction: column; gap: 10px; }
-      .hero-cta-row .btn { justify-content: center; }
-    }
-
-    /* ══════════════ MOBILE BATTLE / MAPA ══════════════ */
-    @media (max-width: 760px) {
-      .battle-svg { display: none; }
-      .battle-stage::after {
-        height: 80%;
-        background: linear-gradient(transparent, rgba(16,14,10,0.94));
-      }
-      .battle-hud { top: auto; bottom: 10%; }
-      .battle-steps { min-height: 200px; }
-      .bstep-n { font-size: 34px; }
-    }
-
-    /* ══════════════ FAQ ══════════════ */
-    .faq-section { background: var(--d0); padding: clamp(80px, 11vw, 150px) 0; }
-    .faq-list { display: flex; flex-direction: column; border-top: 1px solid rgba(168,139,91,0.15); }
-    .faq-item { border-bottom: 1px solid rgba(168,139,91,0.15); }
-    .faq-q {
-      width: 100%; background: none; border: 0; cursor: pointer; text-align: left;
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
-      padding: 24px 0; font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(16px, 1.6vw, 19px); font-weight: 600;
-      color: #F8F5F0; letter-spacing: -0.01em;
-    }
-    .faq-q:hover { color: var(--ouro); }
-    .faq-icon {
-      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
-      border: 1px solid rgba(168,139,91,0.35); display: flex; align-items: center; justify-content: center;
-      transition: background 0.25s, border-color 0.25s;
-    }
-    .faq-icon svg { transition: transform 0.35s ease; }
-    .faq-item.open .faq-icon { background: var(--ouro); border-color: var(--ouro); }
-    .faq-item.open .faq-icon svg { transform: rotate(45deg); }
-    .faq-a { overflow: hidden; max-height: 0; transition: max-height 0.45s cubic-bezier(.16,1,.3,1); }
-    .faq-a-inner { padding: 0 0 28px; color: #C8C4BB; font-size: 15px; line-height: 1.75; max-width: 760px; }
-    .faq-item.open .faq-a { max-height: 600px; }
-
     /* ══════════════ FLOATING WA ══════════════ */
     #wa-float {
       position: fixed; bottom: 24px; right: 24px; z-index: 9999;
@@ -621,12 +567,6 @@
       <a href="#icp" class="nav-link nav-anchor">Para quem</a>
       <a href="#about" class="nav-link nav-anchor">Sobre</a>
       <a href="#clients" class="nav-link nav-anchor">Clientes</a>
-      <a href="#faq" class="nav-link nav-anchor">FAQ</a>
-      <div class="lang-switch">
-        <a href="/" class="active">PT</a>
-        <span>|</span>
-        <a href="/en/">EN</a>
-      </div>
       <a href="#contact" class="btn hdr-cta nav-anchor">Falar com a Mind &amp; Biz</a>
     </nav>
   </header>
@@ -656,7 +596,7 @@
         <img class="hero-logo" src="logo.svg" alt="Mind &amp; Biz" />
         <span class="label">Consultoria de Marketing com Visão de Negócio</span>
         <h1>A mente que faz o<br><em>negócio funcionar.</em></h1>
-        <p class="hero-sub">Estratégia, execução ou os dois — com profundidade de quem entende o negócio antes do marketing.</p>
+        <p class="hero-sub">Integramos estratégia e execução — do branding ao CRO. Sem planejamento na gaveta. Sem relatório que ninguém aplica.</p>
         <div class="hero-cta-row">
           <a href="#contact" class="btn nav-anchor">Quero conversar →</a>
           <a href="#services" class="btn btn-outline nav-anchor">Ver o que fazemos</a>
@@ -667,26 +607,38 @@
 
   <!-- ── PROBLEM (light) ── -->
   <section id="problem" class="sec-light">
+    <div class="topografia-wrap" aria-hidden="true">
+      <svg class="topografia" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="190" cy="140" rx="175" ry="125" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <ellipse cx="190" cy="140" rx="140" ry="100" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <ellipse cx="190" cy="140" rx="105" ry="75" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <ellipse cx="190" cy="140" rx="70" ry="50" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <ellipse cx="190" cy="140" rx="35" ry="25" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <ellipse cx="190" cy="140" rx="12" ry="8" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="190" y1="10" x2="190" y2="270" stroke="currentColor" stroke-width="0.35" opacity="0.4"/>
+        <line x1="10" y1="140" x2="370" y2="140" stroke="currentColor" stroke-width="0.35" opacity="0.4"/>
+      </svg>
+    </div>
     <div class="container">
       <div class="prob-grid">
         <div class="prob-lead reveal">
           <span class="label">O Campo Hostil</span>
-          <h2>O resultado não aparece. E nem sempre fica claro <em>por quê.</em></h2>
-          <p>Você tem visão, energia e vontade. Mas o resultado esperado não chega — não é falta de esforço. É falta de estrutura e marketing com método.</p>
+          <h2>Toda boa estratégia já ficou <em>presa no papel.</em></h2>
+          <p>Você tem visão, energia e vontade. Mas o resultado esperado não chega — não é falta de esforço. É falta de estrutura e execução integrada.</p>
         </div>
         <div class="prob-list">
           <div class="prob-item reveal">
             <span class="prob-n">01</span>
             <div>
-              <h3>Investimento sem direção. Resultado sem clareza.</h3>
-              <p class="prob-txt">Às vezes o marketing ainda não existe, e a dúvida é por onde começar. Às vezes existe — e simplesmente não entrega. O que falta, nos dois casos, é clareza: onde investir, o que priorizar, o que esperar de retorno.</p>
+              <h3>Diagnóstico sem execução</h3>
+              <p class="prob-txt">Você tem clareza dos problemas, mas os próximos passos nunca saem do papel. O plano existe. A ação não.</p>
             </div>
           </div>
           <div class="prob-item reveal">
             <span class="prob-n">02</span>
             <div>
               <h3>Operação no modo emergência</h3>
-              <p class="prob-txt">O dia a dia consome tudo. O que precisa ser construído espera. Sempre. Você apaga incêndios e não avança no que importa.</p>
+              <p class="prob-txt">O dia a dia consome tudo. O estratégico espera. Sempre. Você apaga incêndios e não constrói o que importa.</p>
             </div>
           </div>
           <div class="prob-item reveal">
@@ -707,14 +659,15 @@
       <div class="head-lead reveal" style="margin-bottom:0;">
         <span class="label">A Estratégia</span>
         <h2>Estratégia que <em>sai do papel.</em></h2>
-        <span class="pos-tag">Do pensamento de negócio à entrega de marketing.</span>
-        <p class="pos-body">A Mind & Biz traz visão de negócio para o marketing. O escopo depende do que o projeto precisa — estratégia, execução ou os dois. A profundidade é sempre a mesma.</p>
+        <span class="pos-tag">Somos parceiros de crescimento.</span>
+        <p class="pos-body">A Mind & Biz existe na interseção entre estratégia de negócio e execução de marketing. Nosso trabalho começa onde consultores tradicionais terminam — e vai até o resultado aparecer.</p>
+        <p class="pos-contrast">Enquanto outros entregam peças avulsas, a Mind & Biz entrega crescimento.</p>
       </div>
       <div class="pillars reveal">
         <div class="pillar">
           <div class="pillar-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3V7z"/><path d="M9 4v13"/><path d="M15 7v13"/></svg></div>
           <h3>Estratégia</h3>
-          <p>Diagnóstico preciso, posicionamento claro e plano de crescimento com prioridades reais — com método, não intuição.</p>
+          <p>Diagnóstico preciso, posicionamento claro e plano de crescimento com prioridades reais — sem achismo.</p>
         </div>
         <div class="pillar">
           <div class="pillar-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
@@ -754,7 +707,7 @@
       <div class="reveal">
         <span class="label">A Formação</span>
         <h2>Seis frentes, <em>um plano de batalha.</em></h2>
-        <p>Do branding à conversão, cada serviço é uma legião que parte da nossa base e avança com objetivo claro.</p>
+        <p>Do branding ao CRO, cada serviço é uma legião que parte da nossa base e avança com objetivo claro. Role para ver o plano se desenhar sobre o mapa.</p>
       </div>
       <aside class="services-battle-order" aria-label="Serviços — visão geral">
         <span class="sbo-title">Ordem de Batalha</span>
@@ -800,13 +753,13 @@
         </g>
       </svg>
       <div class="battle-hud">
-        <span class="battle-eyebrow">A Formação · Do branding à conversão</span>
+        <span class="battle-eyebrow">A Formação · Do branding ao CRO</span>
         <div class="battle-steps">
           <article class="bstep" data-i="0"><span class="bstep-n">01</span><h3>Consultoria Estratégica</h3><p>Diagnóstico, plano de crescimento e acompanhamento para decisões mais rápidas e bem fundamentadas.</p></article>
           <article class="bstep" data-i="1"><span class="bstep-n">02</span><h3>Posicionamento de Marca</h3><p>Defina quem você é, para quem fala e por que te escolher. Clareza que converte antes de qualquer anúncio.</p></article>
           <article class="bstep" data-i="2"><span class="bstep-n">03</span><h3>Identidade Visual</h3><p>Design que comunica antes de você falar. Da logo ao sistema visual completo, com coerência em todos os pontos.</p></article>
           <article class="bstep" data-i="3"><span class="bstep-n">04</span><h3>Presença Digital</h3><p>Site institucional, landing pages, conteúdo e SEO — a base orgânica antes de investir em tráfego pago.</p></article>
-          <article class="bstep" data-i="4"><span class="bstep-n">05</span><h3>Tráfego Pago</h3><p>Campanhas de performance nos canais certos — Meta, Google, LinkedIn — com foco em ROI real, não em alcance ou vaidade de números.</p></article>
+          <article class="bstep" data-i="4"><span class="bstep-n">05</span><h3>Tráfego Pago</h3><p>Campanhas de performance no Meta e Google com foco em ROI real, não em alcance ou vaidade de números.</p></article>
           <article class="bstep" data-i="5"><span class="bstep-n">06</span><h3>Funil de Vendas e CRO</h3><p>Jornada de compra estruturada do primeiro contato ao fechamento — com automações e otimização de conversão.</p></article>
         </div>
         <div class="battle-progress"><span></span></div>
@@ -816,32 +769,60 @@
 
   <!-- ── ICP (dark) ── -->
   <section id="icp" class="sec-dark flat-up">
+    <div class="mira-wrap" aria-hidden="true">
+      <svg class="mira" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Anel externo -->
+        <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="0.7"/>
+        <!-- Anel médio -->
+        <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="0.45" opacity="0.7"/>
+        <!-- Anel interno -->
+        <circle cx="60" cy="60" r="20" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        <!-- Linhas de mira (com gap no anel interno) -->
+        <line x1="60" y1="4" x2="60" y2="40" stroke="currentColor" stroke-width="0.7"/>
+        <line x1="60" y1="80" x2="60" y2="116" stroke="currentColor" stroke-width="0.7"/>
+        <line x1="4" y1="60" x2="40" y2="60" stroke="currentColor" stroke-width="0.7"/>
+        <line x1="80" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="0.7"/>
+        <!-- Marcadores no anel médio -->
+        <line x1="60" y1="22" x2="60" y2="29" stroke="currentColor" stroke-width="0.9"/>
+        <line x1="60" y1="91" x2="60" y2="98" stroke="currentColor" stroke-width="0.9"/>
+        <line x1="22" y1="60" x2="29" y2="60" stroke="currentColor" stroke-width="0.9"/>
+        <line x1="91" y1="60" x2="98" y2="60" stroke="currentColor" stroke-width="0.9"/>
+        <!-- Traços diagonais no anel externo -->
+        <line x1="97" y1="23" x2="93" y2="27" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+        <line x1="97" y1="97" x2="93" y2="93" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+        <line x1="23" y1="97" x2="27" y2="93" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+        <line x1="23" y1="23" x2="27" y2="27" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
+        <!-- Centro -->
+        <circle cx="60" cy="60" r="2.5" fill="currentColor"/>
+        <circle cx="60" cy="60" r="6.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      </svg>
+    </div>
     <div class="container">
       <div class="head-lead reveal">
         <span class="label">Quem Marcha Conosco</span>
-        <h2>Trabalhamos com quem está <em>comprometido com o resultado.</em></h2>
-        <p>Escolhemos projetos onde podemos fazer diferença de verdade — não por exclusividade, mas por responsabilidade com o resultado.</p>
+        <h2>Trabalhamos com quem está pronto para <em>construir de verdade.</em></h2>
+        <p>Não atendemos todo mundo. Escolhemos os projetos onde podemos gerar impacto real — e nos comprometemos com o resultado.</p>
       </div>
       <div class="icp-cards">
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/></svg></div>
-          <h3>Startups pós-PMF (Product-Market Fit)</h3>
-          <p>Produto validado, primeiros clientes, time rodando — mas o crescimento ainda depende de indicação e esforço pontual. Com investimento muitas vezes escasso, cada real precisa ir para o lugar certo: antes de ativar canais de aquisição, é preciso posicionamento, ICP claro e uma mensagem que funcione.</p>
+          <h3>Startups pós-PMF</h3>
+          <p>Produto validado, primeiros clientes, time rodando — mas o crescimento ainda depende de indicação e esforço pontual. Com investimento muitas vezes escasso, cada real precisa ir para o lugar certo: antes de ativar canal, é preciso posicionamento, ICP claro e uma mensagem que funcione.</p>
         </div>
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
           <h3>Empresas que querem usar IA no marketing</h3>
-          <p>A tentação é gerar logo, peças e posts e pular direto para a produção. Mas a IA trabalha sobre o que já existe: sem fundação — posicionamento, ICP e manual de marca — vira volume sem direção. Com a fundação no lugar, a IA multiplica; sem ela, só gera ruído.</p>
+          <p>A tentação é gerar logo, peças e posts e pular direto para a produção. Mas a IA trabalha sobre o que já existe: sem diagnóstico, posicionamento, ICP e manual de marca, vira volume sem direção. Com a fundação no lugar, a IA multiplica; sem ela, só gera ruído.</p>
         </div>
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="14" x2="22" y2="14"/></svg></div>
-          <h3>PMEs e negócios locais estabelecidos</h3>
-          <p>A empresa tem clientes, reputação e operação rodando — mas o marketing ainda é improviso: posts sem frequência, boca a boca como principal canal, presença digital montada aos pedaços. Não falta produto; falta estrutura. Organizamos o marketing do zero ou reorganizamos o que já existe — posicionamento, canais certos e execução consistente — para crescer além do alcance atual.</p>
+          <h3>PMEs em crescimento</h3>
+          <p>A empresa cresceu, mas o marketing ainda responde a urgências — sem cadência, sem métrica, sem posicionamento. Estruturamos o que falta: diagnóstico, estratégia e execução integrada. Para crescer com consistência, não por acaso.</p>
         </div>
         <div class="icp-card reveal">
           <div class="icp-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
           <h3>Profissionais liberais</h3>
-          <p>Profissionais liberais com reputação construída — mas ainda dependentes de indicação para crescer. A expertise existe; falta a estrutura que transforma o que você faz em autoridade reconhecida e em clientes consistentes.</p>
+          <p>A expertise existe; falta a estrutura que transforma conhecimento em autoridade e autoridade em clientes. Médicos, advogados e consultores que querem parar de depender só de indicação e ser encontrados por quem já procura.</p>
         </div>
       </div>
       <div class="not-for reveal">
@@ -861,7 +842,7 @@
           <div class="nf-card">
             <span class="nf-x"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
             <h4>Quem quer só delegar</h4>
-            <p>O trabalho se constrói em conjunto. Resultado exige presença: o cliente apoia o diagnóstico, participa das decisões e acompanha a execução — não apenas aprova no fim. Orçamento simbólico e ausência geram o mesmo resultado — nenhum.</p>
+            <p>Consultoria se constrói em conjunto. Resultado exige presença, não só delegação: o cliente participa do processo, não apenas aprova no fim. Orçamento simbólico e ausência geram o mesmo resultado — nenhum.</p>
           </div>
         </div>
       </div>
@@ -876,11 +857,11 @@
           <img src="arthur-hi-03_3x4_enhanced.jpg" alt="Arthur Ginder da Costa">
         </div>
         <div class="about-content reveal">
-          <span class="label">O General</span>
+          <span class="label">O Estrategista</span>
           <h2>Arthur Ginder da Costa</h2>
           <div class="about-role">Fundador · Mind & Biz | CMOaaS</div>
           <p>Quase duas décadas construindo marcas e crescimento — dos grandes players às startups de tecnologia. Liderei o marketing na HP (Personal Systems) e Locaweb, construí marca em Amanco e Mary Kay e o growth de startups como InfoPrice e HiperStream — sempre unindo estratégia de negócio e execução de marketing, do branding ao CRO.</p>
-          <p>À frente da Mind & Biz, levo essa visão 360º para empresas que precisam construir marketing de verdade — com o escopo que o projeto exige, seja estratégia, execução ou os dois. Para projetos de longo prazo, atuo como CMOaaS: assumindo a função completa de marketing — modelo em operação com a HubCred, onde conduzo a jornada completa — branding, performance e IA. Para projetos pontuais, atuo com escopo e prazo definidos — cobrindo o espectro completo: posicionamento, branding, performance, go-to-market ou IA aplicada — podendo incluir apoio a times internos, curadoria e seleção de fornecedores, ou execução direta conforme o projeto.</p>
+          <p>À frente da Mind & Biz, levo essa visão 360º para empresas que precisam construir marketing de verdade — do diagnóstico ao funil, unindo estratégia e execução. Para projetos estratégicos de longo prazo, atuo como CMOaaS: assumindo a função completa de marketing e respondendo pelo resultado. Esse modelo está em operação com a HubCred, onde conduzo o full-funnel (B2B e B2C) com branding, performance e IA.</p>
           <div class="about-tags">
             <span class="about-tag">CMOaaS</span>
             <span class="about-tag">Branding</span>
@@ -927,9 +908,9 @@
   <section id="clients" class="sec-dark sec-photo" style="--bg:url('https://d8j0ntlcm91z4.cloudfront.net/user_3ENG4F3noLTBtOJ5wpeuamwI7f8/hf_20260623_033211_f53baef1-be95-44b1-a8df-5f6d7c92b3ec_min.webp')">
     <div class="container">
       <div class="head-lead reveal">
-        <span class="label">As Missões</span>
+        <span class="label">As Campanhas</span>
         <h2>Projetos com <em>impacto real.</em></h2>
-        <p>Cada projeto começa com um olhar honesto sobre o negócio — o que faz sentido, o que o marketing pode resolver e por onde começar.</p>
+        <p>Cada projeto começa com um diagnóstico honesto. Só entramos onde acreditamos que podemos fazer diferença.</p>
       </div>
       <div class="clients-grid">
         <div class="client-card reveal">
@@ -952,7 +933,7 @@
           </div>
           <div class="client-sector">Fintech de Crédito · IA</div>
           <div class="client-name">HubCred</div>
-          <p class="client-desc">Atuação como CMOaaS: aquisição B2B (plataforma e white-label) e performance B2C — campanhas de ponta a ponta, com branding, conteúdo e otimização contínua focada em ROI, alavancada por IA.</p>
+          <p class="client-desc">Atuação como CMOaaS: aquisição B2B (plataforma e white-label) e performance B2C — campanhas full-funnel em Meta, Google e WhatsApp API, com branding, conteúdo e otimização contínua focada em ROI, alavancada por IA.</p>
           <div class="client-result">CMOaaS · Branding · Product Marketing · Social · Performance · Demand Gen</div>
           <a href="https://hubcred.com.br" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:10px 20px;margin-top:16px;">Ver site →</a>
         </div>
@@ -972,68 +953,13 @@
     </div>
   </section>
 
-  <!-- ── FAQ ── -->
-  <section id="faq" class="faq-section">
-    <div class="container">
-      <div class="head-lead reveal">
-        <span class="label">Perguntas Frequentes</span>
-        <h2>Tudo que você queria saber sobre <em>Consultoria de Marketing.</em></h2>
-        <p>Respostas diretas sobre como funciona, para quem é e o que esperar.</p>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            O que é um CMO Fracionado (Fractional CMO)?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Um CMO Fracionado é um executivo sênior de marketing que atua na sua empresa em regime parcial ou por projeto — entregando liderança de marketing em nível C sem o custo de uma contratação CLT. Você tem estratégia, supervisão de execução e responsabilidade por resultados de alguém que assume a função de marketing e conecta ela diretamente ao negócio.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            Quando a empresa precisa de um CMO Fracionado em vez de contratar full-time?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Quando você precisa de liderança de marketing agora, mas não está pronto — ou não precisa — de um CMO em tempo integral. Cenários comuns: você validou o product-market fit e precisa construir o motor de crescimento; seu marketing não está convertendo e você precisa de uma visão externa; está entrando em um novo mercado ou lançando um produto e precisa de uma liderança de go-to-market estruturada.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            O que a Mind &amp; Biz faz como CMO Fracionado?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">A Mind & Biz assume a responsabilidade completa pela função de marketing — do diagnóstico e posicionamento à execução e performance. Isso inclui estratégia de marca, definição de ICP, estratégia de canais, gestão de campanhas, supervisão de equipe ou fornecedores e otimização contínua. O escopo se adapta ao que o negócio precisa em cada fase.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            Como a Mind &amp; Biz é diferente de uma consultoria de marketing tradicional?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Uma consultoria entrega um plano. A Mind & Biz entrega resultado. Combinamos profundidade estratégica com execução hands-on — do posicionamento e branding à performance e go-to-market. Não entregamos um deck e sumimos; trabalhamos ao seu lado até o marketing estar funcionando de verdade.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            Com quais setores ou tamanhos de empresa a Mind &amp; Biz trabalha?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Funciona melhor com startups pós-PMF, PMEs crescendo além das indicações e empresas que estão implementando IA no seu stack de marketing. Setor-agnóstico — o que importa é que você tenha um produto real, comprometimento genuíno com crescimento e abertura para um diagnóstico honesto.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            Como começa um projeto com a Mind &amp; Biz?
-            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Com uma conversa. A primeira call já faz parte do diagnóstico — mapeamos a situação atual, identificamos os bloqueios reais e definimos o que faz sentido: CMO Fracionado, um projeto focado ou um escopo específico de execução. Sem proposta genérica antes de entender o negócio.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── CONTACT (dark) ── -->
   <section id="contact" class="sec-dark">
     <div class="container">
       <div class="contact-wrap reveal">
         <span class="label">A Convocação</span>
-        <h2>A primeira conversa<br>é parte do <em>diagnóstico.</em></h2>
-        <p class="contact-sub">Retorno em até 24h úteis. Se preferir uma resposta imediata, inicie agora pelo WhatsApp.</p>
+        <h2>A primeira conversa<br>é o <em>diagnóstico.</em></h2>
+        <p class="contact-sub">Nossa equipe retorna em até 24h úteis. Se preferir uma resposta imediata, inicie agora pelo WhatsApp.</p>
 
         <div class="contact-channels">
           <a href="https://wa.me/5511999318970?text=Ol%C3%A1%2C+Arthur%21+Vi+o+site+da+Mind+%26+Biz+e+quero+conversar." target="_blank" rel="noopener" class="btn contact-wa-btn">
@@ -1047,7 +973,7 @@
           <p class="form-req-note" style="margin-bottom:18px;">* Campos obrigatórios</p>
           <div class="form-row">
             <div class="form-group"><label for="f-nome">Nome *</label><input id="f-nome" type="text" placeholder="Seu nome" autocomplete="name" /></div>
-            <div class="form-group"><label for="f-email">E-mail *</label><input id="f-email" type="email" placeholder="voce@suaempresa.com.br" autocomplete="email" /></div>
+            <div class="form-group"><label for="f-email">E-mail corporativo *</label><input id="f-email" type="email" placeholder="voce@suaempresa.com.br" autocomplete="email" /></div>
           </div>
           <div class="form-row">
             <div class="form-group"><label for="f-tel">WhatsApp *</label><input id="f-tel" type="tel" placeholder="(11) 90000-0000" autocomplete="tel" /></div>
@@ -1073,14 +999,13 @@
               <button type="button" class="seg" data-v="Por projeto">Por projeto</button>
             </div>
             <div class="budgets" id="f-budget">
-              <label class="budget"><input type="radio" name="budget" value="Até R$ 2 mil"><span>Até R$ 2 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 2–5 mil"><span>R$ 2–5 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 5–10 mil"><span>R$ 5–10 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 10–20 mil"><span>R$ 10–20 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 20–50 mil"><span>R$ 20–50 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 50–100 mil"><span>R$ 50–100 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 100–200 mil"><span>R$ 100–200 mil</span></label>
-              <label class="budget"><input type="radio" name="budget" value="R$ 200 mil ou mais"><span>R$ 200 mil ou mais</span></label>
+              <label class="budget"><input type="radio" name="budget" value="Até R$ 5K"><span>Até R$ 5K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 5–10K"><span>R$ 5–10K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 10–20K"><span>R$ 10–20K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 20–50K"><span>R$ 20–50K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 50–100K"><span>R$ 50–100K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 100–200K"><span>R$ 100–200K</span></label>
+              <label class="budget"><input type="radio" name="budget" value="R$ 200K ou mais"><span>R$ 200K ou mais</span></label>
             </div>
           </div>
           <div class="form-group"><label for="f-msg">Objetivos do projeto *</label><textarea id="f-msg" placeholder="Conte brevemente sobre seu negócio e o que quer resolver."></textarea></div>
@@ -1091,7 +1016,7 @@
         <div id="success">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#A68B5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
           <h3>Mensagem recebida. ✓</h3>
-          <p>Resposta em até 24h úteis. Se preferir uma resposta mais rápida, inicie a conversa agora mesmo no WhatsApp.</p>
+          <p>Nossa equipe responde em até 24h úteis. Se preferir uma resposta mais rápida, inicie a conversa agora mesmo no WhatsApp.</p>
           <a id="wa-open" href="#" target="_blank" rel="noopener" class="btn" style="margin-top:22px;">Iniciar conversa no WhatsApp →</a>
         </div>
       </div>
@@ -1296,20 +1221,3 @@
     window.addEventListener('resize', render, { passive: true });
     render();
   })();
-
-  /* ════════════ FAQ ACCORDION ════════════ */
-  (function(){
-    document.querySelectorAll('.faq-item').forEach(function(item){
-      var btn = item.querySelector('.faq-q');
-      if (!btn) return;
-      btn.addEventListener('click', function(){
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); el.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
-        if (!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-      });
-    });
-  })();
-
-</script>
-</body>
-</html>
