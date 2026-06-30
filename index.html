@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mind & Biz — Consultoria de Marketing com Visão de Negócio</title>
   <meta name="description" content="A Mind & Biz existe na interseção entre estratégia de negócio e execução de marketing. Do branding ao CRO — sem planejamento na gaveta." />
+  <link rel="canonical" href="https://mindandbiz.com.br/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://mindandbiz.com.br/" />
+  <link rel="alternate" hreflang="en-US" href="https://mindandbiz.com.br/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://mindandbiz.com.br/" />
   <link rel="icon" href="/favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
   <link rel="icon" href="/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
   <link rel="apple-touch-icon" href="/favicon.png" />
@@ -125,6 +129,20 @@
     }
     nav a.nav-link:hover { color: var(--ouro); }
     .hdr-cta { font-size: 13px; padding: 11px 20px; }
+    /* language switcher */
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      border: 1px solid rgba(168,139,91,0.3); border-radius: 4px;
+      overflow: hidden; white-space: nowrap;
+    }
+    .lang-switch a {
+      padding: 5px 9px; text-decoration: none; color: #C8C4BB;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-switch a.active { background: var(--ouro); color: #14110D; }
+    .lang-switch a:not(.active):hover { color: var(--ouro); }
+    .lang-switch span { color: rgba(168,139,91,0.4); font-size: 10px; }
     /* hamburger (mobile) */
     .hdr-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
     .hdr-toggle span { display: block; width: 24px; height: 2px; background: var(--ouro); margin: 5px 0; transition: transform .3s, opacity .3s; }
@@ -143,6 +161,7 @@
       nav.open { transform: translateX(0); }
       nav a.nav-link { font-size: 18px; }
       .hdr-cta { font-size: 15px; align-self: flex-start; }
+      .lang-switch { align-self: flex-start; }
       body.nav-locked { overflow: hidden; }
     }
 
@@ -578,6 +597,11 @@
       <a href="#icp" class="nav-link nav-anchor">Para quem</a>
       <a href="#about" class="nav-link nav-anchor">Sobre</a>
       <a href="#clients" class="nav-link nav-anchor">Clientes</a>
+      <div class="lang-switch">
+        <a href="/" class="active">PT</a>
+        <span>|</span>
+        <a href="/en/">EN</a>
+      </div>
       <a href="#contact" class="btn hdr-cta nav-anchor">Falar com a Mind &amp; Biz</a>
     </nav>
   </header>
