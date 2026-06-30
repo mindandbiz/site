@@ -1095,6 +1095,7 @@
   var lenis = null;
   (function(){
     if (typeof Lenis === 'undefined') return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return; // mobile: usa scroll nativo
     lenis = new Lenis({ lerp: 0.08 });
     function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
@@ -1245,6 +1246,7 @@
     }
     function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(render); } }
     window.addEventListener('scroll', onScroll, { passive: true });
+    if (lenis) lenis.on('scroll', render);
     window.addEventListener('resize', render, { passive: true });
     render();
   })();
@@ -1260,13 +1262,4 @@
           o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
         });
         if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  })();
-
-  </script>
-</body>
-</html>
+          

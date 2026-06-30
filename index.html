@@ -341,12 +341,6 @@
     .bstep p { color: #C8C4BB; font-size: 16px; line-height: 1.6; max-width: 420px; }
     .battle-progress { position: relative; width: 220px; height: 2px; background: rgba(168,139,91,0.25); margin-top: 22px; }
     .battle-progress span { display: block; height: 100%; width: 0; background: var(--ouro); transition: width .1s linear; }
-    @media (max-width: 760px) {
-      .battle { height: 560vh; }
-      .battle-hud { left: 6%; right: 6%; top: 8%; max-width: none; }
-      .bstep h3 { font-size: 22px; } .bstep p { font-size: 14px; }
-      .battle-progress { width: 56%; }
-    }
     /* ── Esquema de fundos: seções COM foto (alternadas) ── */
     .sec-photo { position: relative; background: #14110D var(--bg, none) center / cover no-repeat; background-attachment: fixed; }
     .sec-photo::before { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(rgba(16,14,10,0.74), rgba(16,14,10,0.87)); }
@@ -1132,6 +1126,7 @@
   var lenis = null;
   (function(){
     if (typeof Lenis === 'undefined') return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return; // mobile: usa scroll nativo
     lenis = new Lenis({ lerp: 0.08 });
     function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
@@ -1161,4 +1156,7 @@
     document.body.classList.remove('nav-locked');
   }
   if (toggleEl && navEl){
-    toggleEl.addEve
+    toggleEl.addEventListener('click', function(){
+      var open = navEl.classList.toggle('open');
+      toggleEl.classList.toggle('open', open);
+      toggleEl.
