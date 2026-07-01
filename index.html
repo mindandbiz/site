@@ -564,18 +564,85 @@
 
     /* ══════════════ MOBILE BATTLE / MAPA ══════════════ */
     @media (max-width: 760px) {
-      .battle { height: 560vh; }
+      /* Scroll-driven desativado no mobile — layout vertical natural */
+      .battle { height: auto; }
+      .battle-stage { position: relative; height: auto; display: flex; flex-direction: column; }
+      .battle-stage::after { display: none; }
       .battle-svg { display: none; }
-      .battle-stage::after {
-        height: 80%;
-        background: linear-gradient(transparent, rgba(16,14,10,0.94));
+      .battle-progress { display: none; }
+
+      /* Faixa do campo de batalha no topo */
+      .battle-map { position: relative; height: 180px; flex-shrink: 0; }
+      .battle-map::after { height: 100%; background: linear-gradient(rgba(16,14,10,0) 30%, var(--d1)); }
+
+      /* HUD vira container de leitura vertical */
+      .battle-hud {
+        position: relative;
+        left: auto; right: auto; top: auto; bottom: auto;
+        max-width: none;
+        padding: 28px 20px 64px;
+        background: var(--d1);
       }
-      .battle-hud { left: 6%; right: 6%; top: auto; bottom: 10%; max-width: none; }
-      .battle-steps { min-height: 200px; }
-      .bstep h3 { font-size: 22px; }
+
+      /* Linha vertical como espinha da timeline */
+      .battle-steps {
+        min-height: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .battle-steps::before {
+        content: '';
+        position: absolute;
+        left: 13px;
+        top: 28px;
+        bottom: 28px;
+        width: 1.5px;
+        background: rgba(166,139,91,0.22);
+        border-radius: 2px;
+      }
+
+      /* Cada passo: flex row, animado via IntersectionObserver */
+      .bstep {
+        position: relative !important;
+        pointer-events: auto !important;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 0 0 36px;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .bstep.mb-in {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+      }
+
+      /* Número do passo como nó circular na linha */
+      .bstep-n {
+        width: 28px;
+        min-width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(166,139,91,0.4);
+        background: var(--d1);
+        color: var(--ouro);
+        font-size: 9px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 26px;
+        display: block;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: 0;
+        flex-shrink: 0;
+      }
+
+      .bstep h3 { font-size: 20px; margin-bottom: 6px; }
       .bstep p { font-size: 14px; }
-      .bstep-n { font-size: 34px; }
-      .battle-progress { width: 56%; }
     }
 
     /* ══════════════ FAQ ══════════════ */
@@ -1280,6 +1347,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   (function(){
     var sec = document.querySelector('.battle');
     if (!sec) return;
+    /* ── Mobile: IntersectionObserver, layout vertical ── */
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      var mSteps = sec.querySelectorAll('.bstep');
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add('mb-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      mSteps.forEach(function(s){ io.observe(s); });
+      return;
+    }
+    /* ── Desktop: scroll-driven ── */
     var lines = sec.querySelectorAll('.bline');
     var nodes = sec.querySelectorAll('.bnode');
     var steps = sec.querySelectorAll('.bstep');
@@ -1291,7 +1370,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var total = sec.offsetHeight - window.innerHeight;
       var p = total > 0 ? Math.max(0, Math.min(1, (-rect.top) / total)) : 0;
       if (bar) bar.style.width = (p * 100).toFixed(1) + '%';
-      var p2 = Math.min(1, p * 1.2); // Funil aparece em ~46% do scroll
+      var p2 = Math.min(1, p * 1.2);
       var af = Math.min(p2 * N, N - 0.001), cur = Math.floor(af), frac = af - cur;
       if (p >= 1) { cur = N - 1; frac = 1; }
       for (var i = 0; i < N; i++){
