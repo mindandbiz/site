@@ -177,9 +177,19 @@
       min-height: 100vh;
       padding: 80px 0 clamp(60px, 8vh, 120px);
       display: flex; align-items: center;
-      background: #14110D url('https://d8j0ntlcm91z4.cloudfront.net/user_3ENG4F3noLTBtOJ5wpeuamwI7f8/hf_20260623_031316_0c529206-3a52-4a0a-a024-042bbea6823b.jpeg') 68% center / cover no-repeat;
+      background: #14110D;
+      position: relative;
       overflow: hidden;
     }
+    /* Ken Burns — leve zoom cinematográfico no fundo do hero */
+    #hero::before {
+      content: ''; position: absolute; inset: -3%; z-index: 0; pointer-events: none;
+      background: #14110D url('https://d8j0ntlcm91z4.cloudfront.net/user_3ENG4F3noLTBtOJ5wpeuamwI7f8/hf_20260623_031316_0c529206-3a52-4a0a-a024-042bbea6823b.jpeg') 68% center / cover no-repeat;
+      transform-origin: 62% 42%;
+      animation: heroKen 26s ease-out forwards;
+      will-change: transform;
+    }
+    @keyframes heroKen { from { transform: scale(1); } to { transform: scale(1.09); } }
     #hero-routes { display: none; } /* hero virou foto (general); rotas SVG não se aplicam */
     #hero-routes-off { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; will-change: transform; }
     #hero-routes .rt { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.72; animation: rtDraw 2.6s cubic-bezier(.22,1,.36,1) forwards; }
@@ -547,8 +557,8 @@
       #hero {
         align-items: flex-end;
         padding: 76px 0 clamp(36px, 8vh, 64px);
-        background-position: 68% 15%;
       }
+      #hero::before { background-position: 68% 15%; }
       #hero-overlay {
         background:
           linear-gradient(180deg, rgba(20,17,13,0.55) 0%, rgba(20,17,13,0.08) 28%, rgba(20,17,13,0.85) 58%, rgba(20,17,13,0.97) 100%),
@@ -692,6 +702,10 @@
     .front-meta { min-width: 0; }
     .front-n { display: block; font-family: 'Spectral', serif; font-style: italic; font-size: 15px; color: var(--ouro); opacity: 0.85; line-height: 1; margin-bottom: 5px; }
     .front-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(15px, 1.5vw, 17px); font-weight: 600; color: #F8F5F0; letter-spacing: -0.01em; line-height: 1.15; }
+
+    /* CTA — seta desliza no hover */
+    .btn .ar, .btn-submit .ar { display: inline-block; transition: transform .22s ease; }
+    .btn:hover .ar, .btn-submit:hover .ar { transform: translateX(4px); }
 
     /* ══════════════ REDUCED MOTION ══════════════ */
     @media (prefers-reduced-motion: reduce) {
@@ -1454,6 +1468,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); el.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
         if (!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
       });
+    });
+  })();
+
+  /* ════════════ CTA — envolve a seta final para animar no hover ════════════ */
+  (function(){
+    document.querySelectorAll('.btn, .btn-submit').forEach(function(b){
+      if (/→\s*$/.test(b.textContent)) {
+        b.innerHTML = b.innerHTML.replace(/\s*→\s*$/, ' <span class="ar">→</span>');
+      }
     });
   })();
 
