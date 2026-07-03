@@ -22,6 +22,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700;800&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+  <!-- Preload do fundo do hero (LCP) -->
+  <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
+  <link rel="preload" as="image" href="https://d8j0ntlcm91z4.cloudfront.net/user_3ENG4F3noLTBtOJ5wpeuamwI7f8/hf_20260623_031316_0c529206-3a52-4a0a-a024-042bbea6823b.jpeg" fetchpriority="high" />
   <style>
     /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -135,6 +138,9 @@
       letter-spacing: 0.03em; transition: color 0.2s; white-space: nowrap;
     }
     nav a.nav-link:hover { color: var(--ouro); }
+    nav a.nav-link.active { color: var(--ouro); }
+    nav a.nav-link { position: relative; }
+    nav a.nav-link.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1.5px; background: var(--ouro); border-radius: 2px; }
     .hdr-cta { font-size: 13px; padding: 11px 20px; }
     /* language switcher */
     .lang-switch {
@@ -1311,6 +1317,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function onScroll(){ if (window.scrollY > 40) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled'); }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  })();
+
+  /* ════════════ NAV SCROLL-SPY + HERO PARALLAX (scroll) ════════════ */
+  (function(){
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+    var map = [];
+    navLinks.forEach(function(l){
+      var h = l.getAttribute('href');
+      if (h && h.charAt(0) === '#'){
+        var sec = document.getElementById(h.slice(1));
+        if (sec) map.push({ link: l, sec: sec });
+      }
+    });
+    var hero = document.getElementById('hero');
+    var heroInner = hero ? hero.querySelector('.hero-inner') : null;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ticking = false;
+    function frame(){
+      ticking = false;
+      /* scroll-spy: destaca a seção atual no menu */
+      if (map.length){
+        var line = 130, current = null;
+        for (var i = 0; i < map.length; i++){
+          if (map[i].sec.getBoundingClientRect().top <= line) current = map[i];
+        }
+        for (var j = 0; j < navLinks.length; j++) navLinks[j].classList.remove('active');
+        if (current) current.link.classList.add('active');
+      }
+      /* hero: sobe e desaparece conforme o scroll avança */
+      if (heroInner && !reduce){
+        var hh = hero.offsetHeight || window.innerHeight;
+        var p = Math.min(1, Math.max(0, window.scrollY / hh));
+        heroInner.style.transform = 'translate3d(0,' + (p * -64).toFixed(1) + 'px,0)';
+        heroInner.style.opacity = Math.max(0, 1 - p * 1.15).toFixed(3);
+      }
+    }
+    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(frame); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (lenis) lenis.on('scroll', frame);
+    window.addEventListener('resize', onScroll, { passive: true });
+    frame();
   })();
 
   /* ════════════ REVEAL ON SCROLL ════════════ */
