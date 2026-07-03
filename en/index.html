@@ -324,17 +324,14 @@
     @media (max-width: 820px) { .prob-grid { grid-template-columns: 1fr; gap: 48px; } }
 
     /* ══════════════ POSITIONING (dark + photo) ══════════════ */
-    .sec-photo {
-      background-color: var(--d0);
-      background-image: var(--bg);
-      background-size: cover; background-position: center;
-    }
+    .sec-photo { position: relative; overflow: hidden; background: var(--d0); }
     .sec-photo::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(20,17,13,0.88) 0%, rgba(20,17,13,0.55) 100%);
-      z-index: 0;
+      content: ''; position: absolute; left: 0; right: 0; top: -15%; height: 130%; z-index: 0;
+      background: var(--bg, none) center / cover no-repeat;
+      transform: translate3d(0, var(--py, 0px), 0); will-change: transform;
     }
-    .sec-photo .container { position: relative; z-index: 1; }
+    .sec-photo::after { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(rgba(16,14,10,0.76), rgba(16,14,10,0.88)); }
+    .sec-photo > .container { position: relative; z-index: 1; }
     .pos-tag { display: block; font-size: clamp(19px, 2.4vw, 26px); font-weight: 600; color: var(--ouro); margin-bottom: 18px; font-family: 'Space Grotesk', sans-serif; }
     .pos-body { color: #C8C4BB; max-width: 600px; line-height: 1.7; margin-bottom: 48px; }
     .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
@@ -1408,6 +1405,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (lenis) lenis.on('scroll', render);
     window.addEventListener('resize', render, { passive: true });
     render();
+  })();
+
+  /* ════════════ PARALLAX — .sec-photo (transform-based, Lenis-aware) ════════════ */
+  (function(){
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var secs = Array.prototype.slice.call(document.querySelectorAll('.sec-photo'));
+    if (!secs.length) return;
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var vh = window.innerHeight;
+      for (var i = 0; i < secs.length; i++){
+        var rect = secs[i].getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) continue;
+        var center = rect.top + rect.height / 2;
+        var prog = (vh / 2 - center) / vh;           // ~ -1 .. 1
+        if (prog < -1) prog = -1; else if (prog > 1) prog = 1;
+        secs[i].style.setProperty('--py', (prog * rect.height * 0.10).toFixed(1) + 'px');
+      }
+    }
+    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (lenis) lenis.on('scroll', update);
+    window.addEventListener('resize', update, { passive: true });
+    update();
   })();
 
   /* ════════════ FAQ ACCORDION ════════════ */
