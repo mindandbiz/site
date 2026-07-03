@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="../favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700;800&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json">
   {
@@ -640,6 +640,34 @@
     }
     #wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.45); }
 
+    /* ══════════════ SERVICES — FRONTS (icon grid, same iconography as the map) ══════════════ */
+    #services.battle-intro .container { display: block; position: relative; z-index: 1; }
+    #services.battle-intro .container > .reveal { max-width: 720px; }
+    .fronts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: clamp(40px, 5vw, 64px); position: relative; z-index: 1; }
+    @media (max-width: 720px) { .fronts-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+    @media (max-width: 400px) { .fronts-grid { grid-template-columns: 1fr; } }
+    .front-card { display: flex; align-items: center; gap: 16px; background: var(--d2); border: 1px solid rgba(168,139,91,0.18); border-radius: 12px; padding: 20px 22px; transition: transform .3s ease, border-color .3s ease, background .3s ease; }
+    .front-card:hover { transform: translateY(-4px); border-color: rgba(168,139,91,0.5); background: #29241c; }
+    .front-badge { flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #14110D; border: 2px solid #C9A857; box-shadow: 0 0 0 4px rgba(201,168,87,0.08); }
+    .front-badge svg { width: 24px; height: 24px; }
+    .front-meta { min-width: 0; }
+    .front-n { display: block; font-family: 'Spectral', serif; font-style: italic; font-size: 15px; color: var(--ouro); opacity: 0.85; line-height: 1; margin-bottom: 5px; }
+    .front-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(15px, 1.5vw, 17px); font-weight: 600; color: #F8F5F0; letter-spacing: -0.01em; line-height: 1.15; }
+
+    /* ══════════════ REDUCED MOTION ══════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; transition-delay: 0s !important; }
+      .rosa-ventos, .clt-track { animation: none !important; }
+      #hero .hero-inner > * { opacity: 1 !important; transform: none !important; }
+    }
+
     /* ══════════════ MOBILE HERO ══════════════ */
     @media (max-width: 640px) {
       #hero {
@@ -809,17 +837,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2>Six fronts, <em>one battle plan.</em></h2>
         <p>From branding to conversion, each service is a unit that departs from our base and advances with a clear objective.</p>
       </div>
-      <aside class="services-battle-order" aria-label="Services — overview">
-        <span class="sbo-title">Battle Order</span>
-        <ol class="sbo-list">
-          <li><span class="sbo-n">I</span><span>Strategic Consulting</span></li>
-          <li><span class="sbo-n">II</span><span>Brand Positioning</span></li>
-          <li><span class="sbo-n">III</span><span>Visual Identity</span></li>
-          <li><span class="sbo-n">IV</span><span>Digital Presence</span></li>
-          <li><span class="sbo-n">V</span><span>Paid Media</span></li>
-          <li><span class="sbo-n">VI</span><span>Sales Funnel &amp; CRO</span></li>
-        </ol>
-      </aside>
+      <div class="fronts-grid" role="list" aria-label="The six fronts">
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
+          <span class="front-meta"><span class="front-n">I</span><span class="front-name">Strategic Consulting</span></span>
+        </div>
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+          <span class="front-meta"><span class="front-n">II</span><span class="front-name">Brand Positioning</span></span>
+        </div>
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="9.75" y1="8.5" x2="9.75" y2="15.5"/><path d="M9.75 8.5h2a2 2 0 0 1 0 4h-2"/><line x1="11.75" y1="12.5" x2="14.25" y2="15.5"/></svg></span>
+          <span class="front-meta"><span class="front-n">III</span><span class="front-name">Visual Identity</span></span>
+        </div>
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          <span class="front-meta"><span class="front-n">IV</span><span class="front-name">Digital Presence</span></span>
+        </div>
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+          <span class="front-meta"><span class="front-n">V</span><span class="front-name">Paid Media</span></span>
+        </div>
+        <div class="front-card reveal" role="listitem">
+          <span class="front-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#F8F5F0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 10v6l-4-2v-4z"/></svg></span>
+          <span class="front-meta"><span class="front-n">VI</span><span class="front-name">Sales Funnel &amp; CRO</span></span>
+        </div>
+      </div>
     </div>
   </section>
   <section class="battle" aria-label="Battle Plan — services">
@@ -1229,6 +1272,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
       });
     }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+    /* Stagger: sibling .reveal elements in the same container cascade (~80ms) */
+    var groups = new Map();
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var p = el.parentElement;
+      if (!p) return;
+      if (!groups.has(p)) groups.set(p, []);
+      groups.get(p).push(el);
+    });
+    groups.forEach(function(list){
+      if (list.length < 2) return;
+      list.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i, 6) * 0.08) + 's'; });
+    });
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
     setTimeout(function(){
       document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
