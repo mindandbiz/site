@@ -21,7 +21,7 @@
   <meta property="og:title" content="Mind & Biz — Business-Led Marketing Consulting" />
   <meta property="og:description" content="Fractional CMO and marketing strategy for companies that need to build real marketing — with the depth of someone who understands the business before the marketing." />
   <meta property="og:url" content="https://www.mindandbiz.com.br/en/" />
-  <meta property="og:image" content="https://www.mindandbiz.com.br/og-cover.jpg" />
+  <meta property="og:image" content="https://www.mindandbiz.com.br/og-cover-en.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mind & Biz — Business-Led Marketing Consulting" />
   <meta name="twitter:description" content="Fractional CMO and marketing strategy for companies that need to build real marketing — with the depth of someone who understands the business before the marketing." />
-  <meta name="twitter:image" content="https://www.mindandbiz.com.br/og-cover.jpg" />
+  <meta name="twitter:image" content="https://www.mindandbiz.com.br/og-cover-en.jpg" />
   <link rel="icon" href="../favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
   <link rel="icon" href="../favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
   <link rel="apple-touch-icon" href="../favicon.png" />
@@ -1580,6 +1580,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && !modal.hidden) close();
+    });
+  })();
+
+  /* ── GTM: conversion events (dataLayer) ── */
+  (function(){
+    window.dataLayer = window.dataLayer || [];
+    document.addEventListener('click', function(e){
+      var a = e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
+      if (!a) return;
+      var sec = a.closest('section[id]');
+      var loc = a.id === 'wa-float' ? 'float' : (a.closest('.exit-modal') ? 'exit_modal' : (sec ? sec.id : (a.closest('footer') ? 'footer' : 'page')));
+      window.dataLayer.push({ event: 'whatsapp_click', click_location: loc });
+    });
+    var form = document.getElementById('contact-form');
+    if (form) form.addEventListener('submit', function(){
+      window.dataLayer.push({ event: 'contact_form_submit' });
     });
   })();
 
