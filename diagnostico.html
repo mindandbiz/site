@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TTQBL5VB');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico de Marketing — Mind &amp; Biz</title>
+  <meta name="description" content="Reconhecimento de terreno: responda algumas perguntas sobre o seu negócio e receba na hora um diagnóstico das cinco frentes de marketing — marca, ativo próprio, distribuição, aquisição e conversão." />
+  <link rel="canonical" href="https://www.mindandbiz.com.br/diagnostico" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mind &amp; Biz" />
+  <meta property="og:title" content="Diagnóstico de Marketing — Mind &amp; Biz" />
+  <meta property="og:description" content="Reconhecimento de terreno em 5 minutos. Um raio-x das cinco frentes do seu marketing — sem enrolação e sem custo." />
+  <meta property="og:url" content="https://www.mindandbiz.com.br/diagnostico" />
+  <meta property="og:image" content="https://www.mindandbiz.com.br/og-cover.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diagnóstico de Marketing — Mind &amp; Biz" />
+  <meta name="twitter:description" content="Reconhecimento de terreno em 5 minutos. Um raio-x das cinco frentes do seu marketing." />
+  <meta name="twitter:image" content="https://www.mindandbiz.com.br/og-cover.jpg" />
+  <link rel="icon" href="/favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700;800&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       Design tokens — espelham index.html (não divergir)
+       ═══════════════════════════════════════════════════════ */
+    :root {
+      --chumbo:   #1E1E1E;
+      --imperial: #404040;
+      --ouro:     #A68B5B;
+      --ouro-dk:  #8a7249;
+      --marfim:   #F8F5F0;
+      --borda:    #C8C4BB;
+      --wa:       #25D366;
+      --d0: #14110D;
+      --d1: #1A1712;
+      --d2: #211D17;
+      /* semáforo do diagnóstico */
+      --bad:  #B4542F;
+      --mid:  #B58B3A;
+      --good: #6F8B4E;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--d0);
+      color: var(--marfim);
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.05; letter-spacing: -0.02em; margin: 0; }
+    h1 { font-size: clamp(32px, 5.2vw, 58px); font-weight: 700; }
+    h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 700; }
+    h3 { font-size: clamp(17px, 2vw, 21px); font-weight: 600; letter-spacing: -0.01em; }
+    p  { font-size: clamp(15px, 1.5vw, 17px); margin: 0 0 14px; }
+    a  { color: var(--ouro); }
+    .num { font-family: 'Spectral', serif; font-style: italic; font-weight: 500; }
+
+    .label {
+      display: inline-block;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ouro);
+    }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--ouro); color: #14110D;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      padding: 15px 30px; border-radius: 6px;
+      text-decoration: none; border: none; cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background .2s, transform .2s;
+    }
+    .btn:hover { background: var(--ouro-dk); transform: translateY(-2px); }
+    .btn-wa { background: var(--wa); color: #06301A; }
+    .btn-wa:hover { background: #1fb857; }
+
+    /* ── Cabeçalho ── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(20,17,13,.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,196,187,.12);
+    }
+    .hdr-inner {
+      max-width: 1160px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .hdr-inner img { height: 30px; width: auto; display: block; }
+    .hdr-back {
+      font-size: 14px; color: var(--borda); text-decoration: none;
+      border: 1px solid rgba(200,196,187,.22); border-radius: 5px;
+      padding: 8px 14px; transition: border-color .2s, color .2s;
+      white-space: nowrap;
+    }
+    .hdr-back:hover { color: var(--marfim); border-color: var(--ouro); }
+
+    /* ── Abertura ── */
+    .intro { padding: clamp(44px, 7vw, 84px) 0 clamp(20px, 3vw, 30px); text-align: center; }
+    .intro h1 { margin: 12px 0 18px; }
+    .intro .lead { color: var(--borda); max-width: 580px; margin: 0 auto 26px; }
+    .intro-meta {
+      display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+      font-size: 13.5px; color: var(--borda);
+      border-top: 1px solid rgba(200,196,187,.12);
+      padding-top: 20px; max-width: 620px; margin: 0 auto;
+    }
+    .intro-meta span::before { content: "▸ "; color: var(--ouro); }
+
+    /* ── Progresso ── */
+    .progress-shell { position: sticky; top: 59px; z-index: 40; background: var(--d0); padding-top: 14px; }
+    .progress-meta {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--borda); margin-bottom: 7px;
+    }
+    .progress-meta b { color: var(--ouro); font-weight: 700; }
+    .progress-track { height: 3px; background: rgba(200,196,187,.14); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0; background: var(--ouro); transition: width .45s cubic-bezier(.2,.8,.2,1); }
+
+    /* ── Chat ── */
+    .chat { padding: 26px 0 10px; min-height: 46vh; }
+    .msg { display: flex; margin-bottom: 16px; animation: rise .38s cubic-bezier(.2,.8,.2,1) both; }
+    .msg.from-bot  { justify-content: flex-start; }
+    .msg.from-user { justify-content: flex-end; }
+    .bubble {
+      max-width: 86%; padding: 13px 18px; border-radius: 14px;
+      font-size: 15.5px; line-height: 1.55;
+    }
+    .from-bot .bubble {
+      background: var(--d2);
+      border: 1px solid rgba(200,196,187,.13);
+      border-bottom-left-radius: 4px;
+    }
+    .from-user .bubble {
+      background: var(--ouro); color: #14110D;
+      font-weight: 500; border-bottom-right-radius: 4px;
+    }
+    .bubble strong { color: var(--ouro); font-weight: 600; }
+    .from-user .bubble strong { color: #14110D; }
+    .bubble .hint { display: block; margin-top: 7px; font-size: 13.5px; color: var(--borda); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    .typing { display: flex; gap: 5px; padding: 16px 18px; }
+    .typing i {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--borda);
+      opacity: .45; animation: blink 1.25s infinite;
+    }
+    .typing i:nth-child(2) { animation-delay: .2s; }
+    .typing i:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%,60%,100% { opacity: .25; } 30% { opacity: .95; } }
+
+    /* ── Área de resposta ── */
+    .answer {
+      position: sticky; bottom: 0;
+      background: linear-gradient(180deg, rgba(20,17,13,0) 0%, var(--d0) 22%);
+      padding: 16px 0 22px;
+    }
+    .opts { display: flex; flex-wrap: wrap; gap: 9px; }
+    .opt {
+      background: transparent; color: var(--marfim);
+      border: 1px solid rgba(200,196,187,.3);
+      border-radius: 999px; padding: 11px 19px;
+      font-family: inherit; font-size: 14.5px; cursor: pointer;
+      transition: border-color .18s, background .18s, color .18s;
+      text-align: left;
+    }
+    .opt:hover { border-color: var(--ouro); color: var(--ouro); }
+    .opt.on { background: var(--ouro); border-color: var(--ouro); color: #14110D; font-weight: 600; }
+    .opt.on::before { content: "✓ "; }
+
+    .field { display: flex; gap: 9px; align-items: stretch; }
+    .field input {
+      flex: 1; min-width: 0;
+      background: var(--d2); color: var(--marfim);
+      border: 1px solid rgba(200,196,187,.24); border-radius: 8px;
+      padding: 14px 16px; font-family: inherit; font-size: 15.5px;
+    }
+    .field input:focus { outline: none; border-color: var(--ouro); }
+    .field input::placeholder { color: rgba(200,196,187,.5); }
+    .field .btn { padding: 14px 24px; }
+
+    .under {
+      display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      margin-top: 11px; min-height: 20px;
+    }
+    .undo, .skip {
+      background: none; border: none; padding: 0; cursor: pointer;
+      font-family: inherit; font-size: 13px; color: var(--borda);
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+    .undo:hover, .skip:hover { color: var(--ouro); }
+    .undo[hidden], .skip[hidden] { display: none; }
+
+    /* ── Relatório ── */
+    .report { padding: 8px 0 90px; animation: rise .5s cubic-bezier(.2,.8,.2,1) both; }
+    .report[hidden] { display: none; }
+
+    .verdict {
+      border: 1px solid rgba(166,139,91,.4);
+      background: var(--d1); border-radius: 12px;
+      padding: clamp(24px, 4vw, 38px);
+      display: flex; gap: clamp(20px, 4vw, 40px); align-items: center; flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+    .gauge { flex: 0 0 auto; text-align: center; }
+    .gauge .big { font-size: clamp(56px, 10vw, 84px); line-height: 1; color: var(--ouro); }
+    .gauge .of { font-size: 13px; color: var(--borda); letter-spacing: .1em; text-transform: uppercase; }
+    .verdict-txt { flex: 1 1 280px; }
+    .verdict-txt h2 { margin-bottom: 10px; }
+    .verdict-txt p { color: var(--borda); margin: 0; }
+
+    .fronts { display: grid; gap: 14px; margin-bottom: 34px; }
+    .front {
+      background: var(--d1); border: 1px solid rgba(200,196,187,.12);
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .front-top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 9px; }
+    .front-top h3 { font-size: 16.5px; }
+    .front-score { font-size: 15px; font-weight: 700; white-space: nowrap; }
+    .bar { height: 6px; background: rgba(200,196,187,.13); border-radius: 3px; overflow: hidden; }
+    .bar span { display: block; height: 100%; border-radius: 3px; width: 0; transition: width .9s cubic-bezier(.2,.8,.2,1); }
+    .front p { font-size: 14.5px; color: var(--borda); margin: 10px 0 0; }
+    .s-bad  { color: var(--bad); }  .f-bad  { background: var(--bad); }
+    .s-mid  { color: var(--mid); }  .f-mid  { background: var(--mid); }
+    .s-good { color: var(--good); } .f-good { background: var(--good); }
+
+    .block-title { margin: 0 0 16px; }
+    .block-title .label { display: block; margin-bottom: 8px; }
+
+    .findings { list-style: none; padding: 0; margin: 0 0 34px; display: grid; gap: 12px; }
+    .findings li {
+      border-left: 2px solid var(--ouro);
+      background: var(--d1);
+      padding: 15px 18px; border-radius: 0 8px 8px 0;
+      font-size: 15px;
+    }
+    .findings li b { color: var(--ouro); display: block; margin-bottom: 4px; font-size: 14px; letter-spacing: .02em; }
+    .findings li span { color: var(--borda); }
+
+    .sealed {
+      border: 1px dashed rgba(166,139,91,.45);
+      border-radius: 10px; padding: 22px 24px; margin-bottom: 32px;
+      background: rgba(166,139,91,.05);
+    }
+    .sealed h3 { margin-bottom: 10px; }
+    .sealed p { color: var(--borda); font-size: 15px; margin-bottom: 10px; }
+    .sealed p:last-child { margin-bottom: 0; }
+
+    .cta { text-align: center; border-top: 1px solid rgba(200,196,187,.12); padding-top: 34px; }
+    .cta h2 { margin-bottom: 12px; }
+    .cta > p { color: var(--borda); max-width: 540px; margin: 0 auto 22px; }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta-note { font-size: 13px; color: rgba(200,196,187,.7); margin: 18px 0 0; }
+
+    /* ── Sondagem técnica (PageSpeed) ── */
+    .tech { margin-bottom: 32px; }
+    .tech[hidden] { display: none; }
+    .tech-item {
+      background: var(--d1); border: 1px solid rgba(200,196,187,.12);
+      border-radius: 10px; padding: 16px 18px; margin-bottom: 10px;
+    }
+    .tech-item h4 { font-size: 15px; margin-bottom: 10px; word-break: break-all; }
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      font-size: 12.5px; padding: 5px 12px; border-radius: 999px;
+      border: 1px solid currentColor; font-weight: 600;
+    }
+    .tech-note { font-size: 13px; color: var(--borda); margin: 8px 0 0; }
+
+    footer {
+      border-top: 1px solid rgba(200,196,187,.12);
+      padding: 26px 0; text-align: center;
+      font-size: 13px; color: rgba(200,196,187,.6);
+    }
+    footer a { color: rgba(200,196,187,.8); text-decoration: none; }
+    footer a:hover { color: var(--ouro); }
+
+    @media (max-width: 560px) {
+      .bubble { max-width: 92%; font-size: 15px; }
+      .verdict { gap: 18px; }
+      .hdr-back { padding: 7px 11px; font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTQBL5VB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <header>
+    <div class="hdr-inner">
+      <a href="/" aria-label="Mind &amp; Biz — página inicial"><img src="/logo.svg" alt="Mind &amp; Biz" /></a>
+      <a href="/" class="hdr-back">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ── Abertura ── -->
+    <section class="intro" id="intro">
+      <span class="label">Reconhecimento de Terreno</span>
+      <h1>Antes do plano,<br />o diagnóstico.</h1>
+      <p class="lead">
+        Nenhuma campanha séria começa sem mapear o terreno. Responda o que dá pra responder
+        e eu devolvo, na hora, um raio-x das cinco frentes que sustentam (ou travam) o
+        crescimento do seu negócio.
+      </p>
+      <button class="btn" id="start">Iniciar o reconhecimento →</button>
+      <div class="intro-meta">
+        <span>4 a 6 minutos</span>
+        <span>Sem custo</span>
+        <span>Resultado na tela, sem cadastro</span>
+      </div>
+    </section>
+
+    <!-- ── Progresso ── -->
+    <div class="progress-shell" id="progress-shell" hidden>
+      <div class="progress-meta">
+        <span id="stage-name">Abertura</span>
+        <span><b id="pct">0%</b></span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <!-- ── Conversa ── -->
+    <section class="chat" id="chat" aria-live="polite" aria-atomic="false"></section>
+
+    <!-- ── Resposta ── -->
+    <div class="answer" id="answer" hidden>
+      <div id="input-zone"></div>
+      <div class="under">
+        <button class="undo" id="undo" hidden>↩ corrigir resposta anterior</button>
+        <button class="skip" id="skip" hidden>pular esta →</button>
+      </div>
+    </div>
+
+    <!-- ── Relatório ── -->
+    <section class="report" id="report" hidden></section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Mind &amp; Biz — consultoria de marketing com visão de negócio ·
+      <a href="/">mindandbiz.com.br</a> · <a href="/privacidade.html">Privacidade</a>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════════
+     CONFIGURAÇÃO
+     ═══════════════════════════════════════════════════════════════ */
+  var CONFIG = {
+    whatsapp: '5511999318970',
+
+    // ── Sondagem técnica automática (Google PageSpeed Insights) ──
+    // Deixe vazio para desligar. Com chave, a página analisa sozinha o site
+    // do lead e o dos concorrentes (performance, SEO, boas práticas).
+    // Chave gratuita: console.cloud.google.com → ativar "PageSpeed Insights API"
+    // → Credenciais → Criar chave → RESTRINGIR por referenciador HTTP
+    // (*.mindandbiz.com.br/*) e por API (só PageSpeed). Sem restrição, não use.
+    psiKey: '',
+
+    // Sem chave a API usa a cota anônima global, que vive estourada (HTTP 429).
+    // Deixamos a tentativa ligada: se passar, é bônus; se falhar, o diagnóstico
+    // segue normalmente sem o bloco técnico.
+    psiTryWithoutKey: true,
+    psiTimeoutMs: 32000
+  };
+
+  /* ═══════════════════════════════════════════════════════════════
+     ROTEIRO
+     Cada passo: {id, stage, bot:[falas], type, opts|placeholder, ...}
+     type: 'choice' | 'multi' | 'text' | 'say'
+     'when' controla ramificação — recebe as respostas até aqui.
+     ═══════════════════════════════════════════════════════════════ */
+  var STAGES = ['Abertura','O negócio','Marca','Território próprio','Distribuição','Aquisição','Conversão','Concorrência','Objetivo'];
+
+  var SCRIPT = [
+    // ── 0. Abertura ──────────────────────────────────────────────
+    { id:'nome', stage:0, type:'text', placeholder:'Seu primeiro nome',
+      bot:['Vamos ao reconhecimento. Primeiro, o básico: <strong>como eu te chamo?</strong>'] },
+
+    { id:'empresa', stage:0, type:'text', placeholder:'Nome do negócio',
+      bot:[function(a){ return 'Prazer, ' + esc(a.nome) + '. E <strong>qual é o nome do negócio?</strong>'; }] },
+
+    // ── 1. O negócio ─────────────────────────────────────────────
+    { id:'segmento', stage:1, type:'choice',
+      bot:[function(a){ return 'Certo. Agora eu preciso entender o terreno em que a ' + esc(a.empresa) + ' opera.'; },
+           'Qual dessas opções descreve melhor o que vocês fazem?'],
+      opts:['Serviço para empresas (B2B)','Serviço para consumidor final','Comércio ou loja física','E-commerce','Software / produto digital','Profissional liberal','Outro'] },
+
+    { id:'tempo', stage:1, type:'choice',
+      bot:['<strong>Há quanto tempo o negócio existe?</strong>'],
+      opts:['Menos de 1 ano','1 a 3 anos','3 a 10 anos','Mais de 10 anos'] },
+
+    { id:'faturamento', stage:1, type:'choice', skippable:true,
+      bot:['Essa aqui é opcional, mas muda bastante a leitura: <strong>qual a faixa de faturamento mensal?</strong>',
+           'Serve pra calibrar o que é investimento realista de marketing no seu caso — nada além disso.'],
+      opts:['Até R$ 20 mil/mês','R$ 20 a 50 mil/mês','R$ 50 a 150 mil/mês','R$ 150 a 500 mil/mês','Acima de R$ 500 mil/mês','Prefiro não dizer'] },
+
+    { id:'origem', stage:1, type:'multi',
+      bot:['<strong>De onde vêm os seus clientes hoje?</strong><span class="hint">Marque todas que valem — e depois confirme.</span>'],
+      opts:['Indicação e boca a boca','Busca no Google','Instagram ou outras redes','Tráfego pago','Prospecção ativa','Marketplace ou plataforma','Clientes antigos que voltam','Sinceramente, não sei dizer'] },
+
+    // ── 2. Marca ─────────────────────────────────────────────────
+    { id:'logo', stage:2, type:'choice',
+      bot:['Vamos falar de marca — a camada que todo mundo acha que é só o desenho.',
+           '<strong>Vocês têm logo?</strong>'],
+      opts:['Sim, feito por profissional','Sim, mas amador ou datado','Não temos'] },
+
+    { id:'manual', stage:2, type:'choice',
+      bot:['<strong>E manual de marca?</strong><span class="hint">Documento com cores, tipografia, uso do logo e tom de voz.</span>'],
+      opts:['Sim, documentado e seguido','Existe, mas ninguém consulta','Não temos','Não sei o que é isso'] },
+
+    { id:'posicionamento', stage:2, type:'choice',
+      bot:['Pergunta que separa marca de logotipo:',
+           '<strong>Você consegue dizer, em uma frase, por que um cliente escolhe vocês e não o concorrente ao lado?</strong>'],
+      opts:['Sim, está escrito e a equipe usa','Sim, mas só na minha cabeça','Tenho uma ideia vaga','Não, e isso me incomoda'] },
+
+    { id:'materiais', stage:2, type:'choice',
+      bot:['<strong>Quando precisa de uma arte — post, cardápio, proposta, apresentação — como resolve?</strong>'],
+      opts:['Temos modelos prontos e padronizados','Alguém da equipe faz do zero','Contratamos por fora toda vez','Faço no improviso mesmo'] },
+
+    // ── 3. Território próprio ────────────────────────────────────
+    { id:'temSite', stage:3, type:'choice',
+      bot:['Agora o território que é seu de verdade — o que não depende do algoritmo de ninguém.',
+           '<strong>Vocês têm site?</strong>'],
+      opts:['Sim, temos site','Só um linktree ou página de rede social','Não temos nada'] },
+
+    { id:'siteUrl', stage:3, type:'text', placeholder:'seusite.com.br',
+      when:function(a){ return a.temSite === 'Sim, temos site'; },
+      bot:['<strong>Qual o endereço?</strong><span class="hint">Vou dar uma olhada enquanto a gente continua conversando.</span>'] },
+
+    { id:'siteFuncao', stage:3, type:'multi',
+      when:function(a){ return a.temSite === 'Sim, temos site'; },
+      bot:['<strong>O que o site faz hoje pelo negócio?</strong>'],
+      opts:['É uma vitrine institucional','Gera pedidos de contato ou orçamento','Vende direto pela internet','Recebe conteúdo e blog','Sinceramente, não faz nada'] },
+
+    { id:'siteIdade', stage:3, type:'choice',
+      when:function(a){ return a.temSite === 'Sim, temos site'; },
+      bot:['<strong>Quando ele foi atualizado pela última vez?</strong>'],
+      opts:['Nos últimos 6 meses','Entre 1 e 2 anos atrás','Mais de 2 anos atrás','Não faço ideia'] },
+
+    { id:'lista', stage:3, type:'choice',
+      bot:['<strong>Vocês têm uma lista própria de contatos de clientes?</strong><span class="hint">E-mails ou telefones organizados, que dá pra acionar quando quiser.</span>'],
+      opts:['Sim, organizada e usada','Temos os dados, mas nunca usamos','Está espalhado em vários lugares','Não temos'] },
+
+    // ── 4. Distribuição ──────────────────────────────────────────
+    { id:'redes', stage:4, type:'multi',
+      bot:['Vamos às redes — onde vocês alugam atenção.',
+           '<strong>Onde a marca está presente hoje?</strong>'],
+      opts:['Instagram','Facebook','LinkedIn','TikTok','YouTube','WhatsApp Business','Google Meu Negócio','Nenhuma rede ativa'] },
+
+    { id:'instagram', stage:4, type:'text', placeholder:'@perfil', skippable:true,
+      when:function(a){ return (a.redes||'').indexOf('Instagram') > -1; },
+      bot:['<strong>Qual o @ do Instagram de vocês?</strong>'] },
+
+    { id:'frequencia', stage:4, type:'choice',
+      when:function(a){ return (a.redes||'').indexOf('Nenhuma rede ativa') === -1; },
+      bot:['<strong>Com que frequência vocês publicam?</strong>'],
+      opts:['Todo dia','Algumas vezes por semana','Uma vez por semana','Quando sobra tempo','Está parado há meses'] },
+
+    { id:'quemPosta', stage:4, type:'choice',
+      when:function(a){ return (a.redes||'').indexOf('Nenhuma rede ativa') === -1; },
+      bot:['<strong>Quem cuida disso?</strong>'],
+      opts:['Eu mesmo, no intervalo do trabalho','Alguém da equipe, acumulando função','Agência ou freelancer','Profissional dedicado','Ninguém, na prática'] },
+
+    { id:'pauta', stage:4, type:'choice',
+      when:function(a){ return (a.redes||'').indexOf('Nenhuma rede ativa') === -1; },
+      bot:['<strong>Existe um planejamento do que vai ser publicado?</strong>'],
+      opts:['Sim, calendário definido com antecedência','Mais ou menos, decidimos na semana','Postamos o que aparece no dia'] },
+
+    // ── 5. Aquisição ─────────────────────────────────────────────
+    { id:'trafego', stage:5, type:'choice',
+      bot:['Aquisição paga agora.',
+           '<strong>Vocês investem em anúncios?</strong>'],
+      opts:['Sim, de forma constante','Impulsiono um post de vez em quando','Já testei e parei','Nunca investi'] },
+
+    { id:'verba', stage:5, type:'choice',
+      when:function(a){ return a.trafego === 'Sim, de forma constante' || a.trafego === 'Impulsiono um post de vez em quando'; },
+      bot:['<strong>Quanto por mês, mais ou menos?</strong>'],
+      opts:['Até R$ 1 mil','R$ 1 a 5 mil','R$ 5 a 20 mil','Acima de R$ 20 mil'] },
+
+    { id:'quemTrafego', stage:5, type:'choice',
+      when:function(a){ return a.trafego === 'Sim, de forma constante' || a.trafego === 'Impulsiono um post de vez em quando'; },
+      bot:['<strong>Quem opera as campanhas?</strong>'],
+      opts:['Eu mesmo','Equipe interna','Agência','Freelancer','O sobrinho / alguém próximo'] },
+
+    { id:'mede', stage:5, type:'choice',
+      bot:['Essa é a pergunta mais importante do diagnóstico inteiro:',
+           '<strong>Você sabe quanto custa conquistar um cliente novo?</strong>'],
+      opts:['Sei o custo por cliente fechado','Sei o custo por lead, não por cliente','Só acompanho alcance e cliques','Não meço nada disso'] },
+
+    // ── 6. Conversão ─────────────────────────────────────────────
+    { id:'canal', stage:6, type:'multi',
+      bot:['Chegamos na parte que quase todo diagnóstico ignora: o que acontece <em>depois</em> que a pessoa se interessa.',
+           '<strong>Por onde um interessado fala com vocês?</strong>'],
+      opts:['WhatsApp','Telefone','Formulário no site','Direct das redes','E-mail','Presencialmente','Marketplace / plataforma'] },
+
+    { id:'resposta', stage:6, type:'choice',
+      bot:['<strong>Quanto tempo, na média real, alguém demora pra ser respondido?</strong><span class="hint">A média real, não a que a gente gostaria.</span>'],
+      opts:['Minutos','Poucas horas','No mesmo dia','No dia seguinte ou depois','Depende muito do movimento'] },
+
+    { id:'foraHorario', stage:6, type:'choice',
+      bot:['<strong>E quando chega mensagem fora do horário comercial ou no fim de semana?</strong>'],
+      opts:['Temos resposta automática ou plantão','Alguém responde quando vê','Fica pro próximo dia útil','Provavelmente se perde'] },
+
+    { id:'crm', stage:6, type:'choice',
+      bot:['<strong>Como vocês acompanham quem pediu orçamento e ainda não fechou?</strong>'],
+      opts:['CRM ou ferramenta dedicada','Planilha','Na cabeça e no histórico do WhatsApp','Não acompanhamos'] },
+
+    { id:'followup', stage:6, type:'choice',
+      bot:['<strong>E quem pediu orçamento e sumiu — vocês voltam a procurar?</strong>'],
+      opts:['Sim, temos rotina de retomada','Às vezes, quando lembramos','Não, se sumiu é porque não quis'] },
+
+    // ── 7. Concorrência ──────────────────────────────────────────
+    { id:'conc1', stage:7, type:'text', placeholder:'site.com.br ou @perfil',
+      bot:['Falta o outro lado do campo.',
+           '<strong>Quem é o concorrente que mais te incomoda?</strong><span class="hint">Manda o site ou o @ do Instagram — quero olhar o que eles fazem.</span>'] },
+
+    { id:'conc2', stage:7, type:'text', placeholder:'site.com.br ou @perfil', skippable:true,
+      bot:['<strong>Tem um segundo?</strong><span class="hint">Se não tiver, pode pular.</span>'] },
+
+    { id:'conc3', stage:7, type:'text', placeholder:'site.com.br ou @perfil', skippable:true,
+      bot:['<strong>E um terceiro?</strong><span class="hint">Opcional também.</span>'] },
+
+    { id:'diferenca', stage:7, type:'choice',
+      bot:['<strong>Comparando com eles, como você se sente na disputa?</strong>'],
+      opts:['Somos claramente melhores, mas eles aparecem mais','Estamos parelhos','Eles estão à frente','Não faço ideia de como nos comparamos'] },
+
+    // ── 8. Objetivo ──────────────────────────────────────────────
+    { id:'objetivo', stage:8, type:'choice',
+      bot:['Última parte. Preciso saber pra onde você quer marchar.',
+           '<strong>Qual é a prioridade dos próximos 6 meses?</strong>'],
+      opts:['Aumentar o volume de clientes novos','Vender mais para quem já é cliente','Entrar em um novo mercado ou público','Profissionalizar a marca','Reduzir a dependência de indicação','Não sei por onde começar'] },
+
+    { id:'travamento', stage:8, type:'text', placeholder:'Escreva com suas palavras', skippable:true,
+      bot:['<strong>E o que mais te trava hoje?</strong><span class="hint">Pode escrever solto — é o campo que eu mais leio.</span>'] },
+
+    { id:'contato', stage:8, type:'text', placeholder:'WhatsApp ou e-mail', skippable:true,
+      bot:['Fechado. Vou montar o relatório.',
+           'Antes: <strong>me deixa um WhatsApp ou e-mail?</strong><span class="hint">Opcional — só pra eu conseguir te devolver o diagnóstico completo se você pedir.</span>'] }
+  ];
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOTOR DE PONTUAÇÃO — determinístico, 5 frentes
+     Cada regra devolve pontos; a frente é normalizada em 0–100.
+     ═══════════════════════════════════════════════════════════════ */
+  var SCALES = {
+    logo:            { 'Sim, feito por profissional':10, 'Sim, mas amador ou datado':5, 'Não temos':0 },
+    manual:          { 'Sim, documentado e seguido':10, 'Existe, mas ninguém consulta':4, 'Não temos':0, 'Não sei o que é isso':0 },
+    posicionamento:  { 'Sim, está escrito e a equipe usa':10, 'Sim, mas só na minha cabeça':5, 'Tenho uma ideia vaga':2, 'Não, e isso me incomoda':0 },
+    materiais:       { 'Temos modelos prontos e padronizados':10, 'Alguém da equipe faz do zero':5, 'Contratamos por fora toda vez':4, 'Faço no improviso mesmo':1 },
+
+    temSite:         { 'Sim, temos site':10, 'Só um linktree ou página de rede social':3, 'Não temos nada':0 },
+    siteIdade:       { 'Nos últimos 6 meses':10, 'Entre 1 e 2 anos atrás':6, 'Mais de 2 anos atrás':2, 'Não faço ideia':2 },
+    lista:           { 'Sim, organizada e usada':10, 'Temos os dados, mas nunca usamos':4, 'Está espalhado em vários lugares':2, 'Não temos':0 },
+
+    frequencia:      { 'Todo dia':10, 'Algumas vezes por semana':9, 'Uma vez por semana':6, 'Quando sobra tempo':3, 'Está parado há meses':0 },
+    quemPosta:       { 'Profissional dedicado':10, 'Agência ou freelancer':8, 'Alguém da equipe, acumulando função':5, 'Eu mesmo, no intervalo do trabalho':4, 'Ninguém, na prática':0 },
+    pauta:           { 'Sim, calendário definido com antecedência':10, 'Mais ou menos, decidimos na semana':5, 'Postamos o que aparece no dia':2 },
+
+    trafego:         { 'Sim, de forma constante':10, 'Impulsiono um post de vez em quando':4, 'Já testei e parei':2, 'Nunca investi':0 },
+    quemTrafego:     { 'Agência':9, 'Equipe interna':9, 'Freelancer':7, 'Eu mesmo':5, 'O sobrinho / alguém próximo':1 },
+    mede:            { 'Sei o custo por cliente fechado':10, 'Sei o custo por lead, não por cliente':6, 'Só acompanho alcance e cliques':2, 'Não meço nada disso':0 },
+
+    resposta:        { 'Minutos':10, 'Poucas horas':8, 'No mesmo dia':5, 'No dia seguinte ou depois':1, 'Depende muito do movimento':2 },
+    foraHorario:     { 'Temos resposta automática ou plantão':10, 'Alguém responde quando vê':5, 'Fica pro próximo dia útil':3, 'Provavelmente se perde':0 },
+    crm:             { 'CRM ou ferramenta dedicada':10, 'Planilha':6, 'Na cabeça e no histórico do WhatsApp':2, 'Não acompanhamos':0 },
+    followup:        { 'Sim, temos rotina de retomada':10, 'Às vezes, quando lembramos':4, 'Não, se sumiu é porque não quis':0 }
+  };
+
+  var FRONTS = [
+    { key:'marca',        nome:'Marca e Posicionamento', fields:['logo','manual','posicionamento','materiais'] },
+    { key:'territorio',   nome:'Território Próprio',     fields:['temSite','siteIdade','lista'] },
+    { key:'distribuicao', nome:'Distribuição e Conteúdo', fields:['frequencia','quemPosta','pauta'] },
+    { key:'aquisicao',    nome:'Aquisição',              fields:['trafego','quemTrafego','mede'] },
+    { key:'conversao',    nome:'Conversão e Retomada',   fields:['resposta','foraHorario','crm','followup'] }
+  ];
+
+  function scoreFronts(a) {
+    var out = {};
+    FRONTS.forEach(function (f) {
+      var got = 0, max = 0;
+      f.fields.forEach(function (field) {
+        var scale = SCALES[field];
+        if (!scale) return;
+        var val = a[field];
+        // Pergunta não feita por ramificação: só conta se a ausência for um dado.
+        if (val === undefined || val === '—') {
+          if (field === 'siteIdade' && a.temSite && a.temSite !== 'Sim, temos site') { max += 10; }
+          else if ((field === 'frequencia' || field === 'quemPosta' || field === 'pauta') &&
+                   (a.redes || '').indexOf('Nenhuma rede ativa') > -1) { max += 10; }
+          else if (field === 'quemTrafego' &&
+                   (a.trafego === 'Já testei e parei' || a.trafego === 'Nunca investi')) { max += 10; got += 3; }
+          return;
+        }
+        max += 10;
+        got += (scale[val] !== undefined ? scale[val] : 5);
+      });
+      out[f.key] = max ? Math.round(got / max * 100) : null;
+    });
+
+    // Diversidade de canais entra na frente de aquisição.
+    var origens = (a.origem || '').split(' · ').filter(function (o) {
+      return o && o !== 'Sinceramente, não sei dizer';
+    });
+    if (out.aquisicao !== null) {
+      var bonus = origens.length >= 3 ? 10 : origens.length === 2 ? 4 : origens.length === 1 ? -8 : -12;
+      out.aquisicao = clamp(out.aquisicao + bonus);
+    }
+    return out;
+  }
+
+  function clamp(n) { return Math.max(0, Math.min(100, n)); }
+  function tier(n) { return n >= 70 ? 'good' : n >= 40 ? 'mid' : 'bad'; }
+  function tierWord(n) { return n >= 70 ? 'Sólido' : n >= 40 ? 'Frágil' : 'Descoberto'; }
+
+  /* ── Leitura curta por frente ─────────────────────────────────── */
+  var FRONT_READ = {
+    marca: {
+      bad:  'A marca hoje é um logo e pouco mais. Sem posicionamento escrito e sem padrão, cada peça que sai reinventa a empresa — e o cliente nunca consolida uma lembrança.',
+      mid:  'Existe marca, mas ela mora na cabeça de alguém. O que está na sua cabeça não escala: a equipe não consegue reproduzir, e o fornecedor de fora chuta.',
+      good: 'Fundação de marca em ordem. A alavanca aqui deixa de ser construir e passa a ser explorar consistência para ganhar preço.'
+    },
+    territorio: {
+      bad:  'Praticamente todo o seu marketing está em terreno alugado. Se uma conta cair ou o alcance mudar, o negócio fica sem canal — e sem lista pra reagir.',
+      mid:  'Você tem território próprio, mas subaproveitado: ele existe como cartão de visita, não como máquina de captar e reter.',
+      good: 'Você controla ativos próprios de verdade. Isso reduz risco de plataforma e barateia toda aquisição futura.'
+    },
+    distribuicao: {
+      bad:  'A distribuição está parada ou refém do improviso. Sem cadência, o algoritmo não entrega e o público não cria hábito de te ver.',
+      mid:  'Há presença, mas o ritmo oscila com a rotina da operação. Publicar sobra pro fim do dia — e conteúdo feito no resto do dia rende resultado de resto.',
+      good: 'Cadência e responsável definidos. Daqui pra frente o ganho vem de qualidade e de pauta ligada a venda, não de volume.'
+    },
+    aquisicao: {
+      bad:  'A entrada de clientes depende de sorte ou de um canal só. É a frente que mais expõe o negócio: quando ele seca, não há plano B.',
+      mid:  'Já existe aquisição ativa, mas ainda sem leitura de custo. Investir sem saber o custo por cliente é apostar, não comprar.',
+      good: 'Aquisição diversificada e medida. O trabalho aqui é de eficiência e escala, não de fundação.'
+    },
+    conversao: {
+      bad:  'O gargalo mais caro está aqui. Você paga (em dinheiro ou em reputação) pra gerar interesse e perde o interessado no meio do caminho.',
+      mid:  'A conversão funciona no improviso: quando a operação está tranquila, atende bem; quando lota, vaza. É justamente na hora cheia que chega mais gente.',
+      good: 'Atendimento e retomada estruturados. Cada real investido em atrair rende mais aqui do que renderia na média do mercado.'
+    }
+  };
+
+  /* ═══════════════════════════════════════════════════════════════
+     ACHADOS — observação com número, nunca prescrição.
+     Regra da casa: diagnóstico vai, receita fica atrás do contrato.
+     ═══════════════════════════════════════════════════════════════ */
+  function buildFindings(a, s) {
+    var f = [], origens = (a.origem || '').split(' · ').filter(Boolean);
+
+    if (origens.length === 1 && origens[0] === 'Indicação e boca a boca') {
+      f.push(['Canal único, e ele não é seu',
+        'Todo o seu crescimento entra por um canal que você não controla, não acelera e não mede. Indicação é ótimo sinal de qualidade e péssimo plano de crescimento: ela cresce na velocidade da sua agenda, não na do mercado.']);
+    } else if (origens.length === 1) {
+      f.push(['Concentração total em um canal',
+        'Cem por cento da entrada vem de uma fonte só (' + esc(origens[0]).toLowerCase() + '). Qualquer oscilação dela — algoritmo, custo, sazonalidade — bate direto no caixa, sem amortecedor.']);
+    }
+    if (a.origem === 'Sinceramente, não sei dizer' || origens.indexOf('Sinceramente, não sei dizer') > -1) {
+      f.push(['Origem do cliente é ponto cego',
+        'Não saber de onde vem cliente significa que toda decisão de investimento é chute. Não dá pra cortar o que não funciona nem dobrar o que funciona.']);
+    }
+
+    if (a.mede === 'Não meço nada disso' || a.mede === 'Só acompanho alcance e cliques') {
+      var gasta = a.verba && a.verba !== '—';
+      f.push(['Investimento sem leitura de retorno',
+        gasta
+          ? 'Vocês colocam ' + esc(a.verba).toLowerCase() + ' por mês em anúncio e acompanham alcance e clique — métricas que sobem mesmo quando a venda cai. O número que decide (quanto custa um cliente fechado) não está na mesa.'
+          : 'Sem custo por cliente definido, não existe teto de investimento defensável: qualquer verba parece cara, e qualquer resultado parece razoável.']);
+    }
+
+    if (a.posicionamento === 'Sim, mas só na minha cabeça' || a.posicionamento === 'Tenho uma ideia vaga' || a.posicionamento === 'Não, e isso me incomoda') {
+      f.push(['Diferencial não documentado',
+        'Se o motivo de escolherem vocês não está escrito, ele não chega ao site, nem ao anúncio, nem ao vendedor no WhatsApp. Na prática, a decisão do cliente cai pra única variável que sempre está visível: preço.']);
+    }
+
+    if (a.resposta === 'No dia seguinte ou depois' || a.resposta === 'Depende muito do movimento' || a.resposta === 'No mesmo dia') {
+      f.push(['Janela de resposta larga demais',
+        'A intenção de compra tem prazo de validade curto. Quem espera resposta costuma mandar mensagem pro concorrente no intervalo — e fecha com quem responder primeiro, não com quem é melhor.']);
+    }
+    if (a.foraHorario === 'Provavelmente se perde' || a.foraHorario === 'Fica pro próximo dia útil') {
+      f.push(['Vazamento fora do horário',
+        'Boa parte da demanda nasce à noite e no fim de semana, exatamente quando a operação está fechada. Esse contato não aparece em relatório nenhum: ele não vira lead perdido, ele nunca vira lead.']);
+    }
+    if (a.crm === 'Na cabeça e no histórico do WhatsApp' || a.crm === 'Não acompanhamos') {
+      f.push(['Orçamento em aberto sem dono',
+        'Quem pediu preço e não respondeu é o público mais barato que existe — já conhece vocês. Sem lugar pra registrar, esse estoque simplesmente evapora.']);
+    }
+    if (a.followup === 'Não, se sumiu é porque não quis') {
+      f.push(['Zero retomada',
+        'Sumir raramente é recusa; quase sempre é a vida atropelando. Sem rotina de retomada, vocês tratam adiamento como "não" e descartam demanda já paga.']);
+    }
+
+    if (a.temSite === 'Não temos nada' || a.temSite === 'Só um linktree ou página de rede social') {
+      f.push(['Sem território próprio',
+        'Sem site, vocês não aparecem em busca, não controlam a narrativa e não têm pra onde levar o tráfego. Toda a operação vive dentro de plataformas cujas regras mudam sem aviso.']);
+    } else if (a.siteIdade === 'Mais de 2 anos atrás' || a.siteIdade === 'Não faço ideia') {
+      f.push(['Site parado no tempo',
+        'Um site sem atualização há mais de dois anos costuma estar defasado em velocidade, leitura no celular e critério de busca — os três fatores que decidem se ele aparece e se a pessoa espera carregar.']);
+    }
+    if ((a.siteFuncao || '').indexOf('Sinceramente, não faz nada') > -1) {
+      f.push(['Site sem função definida',
+        'Você mesmo diz que o site não faz nada. Um ativo que não capta e não vende é custo de manutenção com aparência de estratégia.']);
+    }
+
+    if (a.frequencia === 'Está parado há meses' || a.frequencia === 'Quando sobra tempo') {
+      f.push(['Cadência refém da rotina',
+        'Publicar quando sobra tempo significa publicar quando o negócio está devagar — ou seja, o esforço de marketing some justamente nos períodos que precisariam alimentar os meses seguintes.']);
+    }
+    if (a.quemPosta === 'Ninguém, na prática') {
+      f.push(['Perfil sem responsável',
+        'Perfil ativo sem dono envelhece mal: para quem pesquisa antes de comprar, um perfil abandonado comunica que o negócio pode ter fechado.']);
+    }
+    if (a.lista === 'Temos os dados, mas nunca usamos' || a.lista === 'Está espalhado em vários lugares') {
+      f.push(['Base de clientes dormindo',
+        'Vocês já pagaram pra conquistar essas pessoas. Enquanto a base fica parada, o esforço vai todo pra atrair estranho — que é a forma mais cara de vender.']);
+    }
+    if (a.manual === 'Existe, mas ninguém consulta' || a.materiais === 'Faço no improviso mesmo') {
+      f.push(['Identidade que não se repete',
+        'Sem padrão aplicado, cada peça soa como uma empresa diferente. Reconhecimento de marca é efeito de repetição — e repetição é exatamente o que falta aqui.']);
+    }
+
+    if (a.diferenca === 'Somos claramente melhores, mas eles aparecem mais') {
+      f.push(['Melhor produto, pior vitrine',
+        'Você mesmo diagnosticou o problema: a disputa não está sendo ganha na qualidade, está sendo perdida na visibilidade. O cliente não compara quem é melhor, compara quem ele encontra.']);
+    }
+    if (a.diferenca === 'Não faço ideia de como nos comparamos') {
+      f.push(['Concorrência não monitorada',
+        'Sem acompanhar o que o concorrente comunica e cobra, vocês negociam no escuro — e costumam descobrir a mudança de preço dele pela boca do cliente.']);
+    }
+
+    if (a.tempo === 'Mais de 10 anos' && s.marca !== null && s.marca < 50) {
+      f.push(['Reputação madura, marca imatura',
+        'Mais de dez anos de operação constroem um patrimônio de confiança que a marca atual não está capturando. Negócio antigo com marca improvisada perde para entrante novo com apresentação melhor — mesmo entregando pior.']);
+    }
+    if (a.objetivo === 'Reduzir a dependência de indicação' && origens.indexOf('Tráfego pago') === -1) {
+      f.push(['Objetivo sem canal correspondente',
+        'A meta é sair da indicação, mas nenhum canal ativo de captação está em operação. Sem uma fonte nova de demanda, a dependência não cai — ela só é adiada.']);
+    }
+
+    return f;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ESTADO
+     ═══════════════════════════════════════════════════════════════ */
+  var A = {};              // respostas
+  var trail = [];          // histórico p/ desfazer
+  var i = 0;               // índice no roteiro
+  var techQueue = [];      // urls p/ sondagem técnica
+  var techResults = [];
+
+  var el = {
+    chat:    document.getElementById('chat'),
+    answer:  document.getElementById('answer'),
+    zone:    document.getElementById('input-zone'),
+    undo:    document.getElementById('undo'),
+    skip:    document.getElementById('skip'),
+    report:  document.getElementById('report'),
+    intro:   document.getElementById('intro'),
+    shell:   document.getElementById('progress-shell'),
+    fill:    document.getElementById('progress-fill'),
+    pct:     document.getElementById('pct'),
+    stage:   document.getElementById('stage-name')
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function push(evt, data) {
+    window.dataLayer = window.dataLayer || [];
+    var o = { event: evt }; for (var k in data) o[k] = data[k];
+    window.dataLayer.push(o);
+  }
+  function scrollDown() {
+    var last = el.chat.lastElementChild;
+    if (last && last.scrollIntoView) last.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'end' });
+  }
+
+  function bubble(side, html) {
+    var d = document.createElement('div');
+    d.className = 'msg from-' + side;
+    d.innerHTML = '<div class="bubble">' + html + '</div>';
+    el.chat.appendChild(d);
+    scrollDown();
+    return d;
+  }
+
+  function typing() {
+    var d = document.createElement('div');
+    d.className = 'msg from-bot';
+    d.innerHTML = '<div class="bubble typing"><i></i><i></i><i></i></div>';
+    el.chat.appendChild(d);
+    scrollDown();
+    return d;
+  }
+
+  /* Fala sequencial do bot, com indicador de digitação entre as falas. */
+  function say(lines, done) {
+    var n = 0;
+    function next() {
+      if (n >= lines.length) { done && done(); return; }
+      var line = lines[n++];
+      var html = (typeof line === 'function') ? line(A) : line;
+      var pause = reduced ? 0 : Math.min(900, 260 + html.replace(/<[^>]+>/g,'').length * 8);
+      var t = typing();
+      setTimeout(function () { t.remove(); bubble('bot', html); setTimeout(next, reduced ? 0 : 160); }, pause);
+    }
+    next();
+  }
+
+  /* ── Progresso ───────────────────────────────────────────────── */
+  function refreshProgress(step) {
+    var visible = SCRIPT.filter(function (s) { return !s.when || s.when(A); });
+    var doneCt = 0;
+    for (var k = 0; k < SCRIPT.length; k++) {
+      if (SCRIPT[k] === step) break;
+      if (!SCRIPT[k].when || SCRIPT[k].when(A)) doneCt++;
+    }
+    var p = Math.round(doneCt / visible.length * 100);
+    el.fill.style.width = p + '%';
+    el.pct.textContent = p + '%';
+    el.stage.textContent = STAGES[step.stage] || '';
+  }
+
+  /* ── Renderização das respostas ──────────────────────────────── */
+  function ask(step) {
+    refreshProgress(step);
+    el.zone.innerHTML = '';
+    el.answer.hidden = true;
+
+    say(step.bot, function () {
+      el.answer.hidden = false;
+      el.undo.hidden = trail.length === 0;
+      el.skip.hidden = !step.skippable;
+      el.skip.onclick = function () { commit(step, '—', 'Prefiro não responder'); };
+
+      if (step.type === 'choice')      renderChoice(step);
+      else if (step.type === 'multi')  renderMulti(step);
+      else                             renderText(step);
+      scrollDown();
+    });
+  }
+
+  function renderChoice(step) {
+    var box = document.createElement('div');
+    box.className = 'opts';
+    step.opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = o;
+      b.onclick = function () { commit(step, o, o); };
+      box.appendChild(b);
+    });
+    el.zone.appendChild(box);
+  }
+
+  function renderMulti(step) {
+    var picked = [];
+    var box = document.createElement('div');
+    box.className = 'opts';
+    step.opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = o;
+      b.onclick = function () {
+        var at = picked.indexOf(o);
+        if (at > -1) { picked.splice(at, 1); b.classList.remove('on'); }
+        else { picked.push(o); b.classList.add('on'); }
+        go.disabled = picked.length === 0;
+        go.style.opacity = picked.length ? '1' : '.4';
+      };
+      box.appendChild(b);
+    });
+    var go = document.createElement('button');
+    go.className = 'btn'; go.type = 'button'; go.textContent = 'Confirmar →';
+    go.disabled = true; go.style.opacity = '.4'; go.style.marginTop = '12px';
+    go.onclick = function () {
+      if (!picked.length) return;
+      commit(step, picked.join(' · '), picked.join(', '));
+    };
+    el.zone.appendChild(box);
+    el.zone.appendChild(go);
+  }
+
+  function renderText(step) {
+    var box = document.createElement('div');
+    box.className = 'field';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = step.placeholder || '';
+    inp.setAttribute('aria-label', step.placeholder || 'Resposta');
+    var go = document.createElement('button');
+    go.className = 'btn'; go.type = 'button'; go.textContent = 'Enviar';
+    function send() {
+      var v = inp.value.trim();
+      if (!v) { inp.focus(); return; }
+      commit(step, v, v);
+    }
+    go.onclick = send;
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); send(); } });
+    box.appendChild(inp); box.appendChild(go);
+    el.zone.appendChild(box);
+    if (!('ontouchstart' in window)) setTimeout(function () { inp.focus(); }, 60);
+  }
+
+  /* ── Registro da resposta e avanço ───────────────────────────── */
+  function commit(step, value, shown) {
+    trail.push({ idx: i, id: step.id, node: bubble('user', esc(shown)) });
+    A[step.id] = value;
+
+    // Dispara a sondagem técnica assim que uma URL entra.
+    if (step.id === 'siteUrl' || step.id === 'conc1' || step.id === 'conc2' || step.id === 'conc3') {
+      queueTech(value, step.id === 'siteUrl' ? 'Seu site' : 'Concorrente');
+    }
+
+    el.answer.hidden = true;
+    i++;
+    advance();
+  }
+
+  el.undo.onclick = function () {
+    var last = trail.pop();
+    if (!last) return;
+    if (last.node && last.node.remove) last.node.remove();
+    // remove também as falas do bot da pergunta atual
+    while (el.chat.lastElementChild && el.chat.lastElementChild.classList.contains('from-bot')) {
+      el.chat.lastElementChild.remove();
+    }
+    delete A[last.id];
+    i = last.idx;
+    advance();
+  };
+
+  function advance() {
+    while (i < SCRIPT.length && SCRIPT[i].when && !SCRIPT[i].when(A)) i++;
+    if (i >= SCRIPT.length) { finish(); return; }
+    ask(SCRIPT[i]);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SONDAGEM TÉCNICA (PageSpeed Insights) — opcional e tolerante
+     Roda em segundo plano enquanto a conversa continua.
+     ═══════════════════════════════════════════════════════════════ */
+  function normalizeUrl(raw) {
+    var v = String(raw || '').trim();
+    if (!v || v === '—') return null;
+    if (v.charAt(0) === '@') return null;                    // perfil social: fora do escopo do PSI
+    if (/instagram\.com|facebook\.com|tiktok\.com|linkedin\.com/i.test(v)) return null;
+    if (!/^https?:\/\//i.test(v)) v = 'https://' + v;
+    try {
+      var u = new URL(v);
+      if (u.hostname.indexOf('.') === -1) return null;
+      return u.origin + (u.pathname === '/' ? '' : u.pathname);
+    } catch (e) { return null; }
+  }
+
+  function queueTech(raw, rotulo) {
+    var url = normalizeUrl(raw);
+    if (!url) return;
+    if (!CONFIG.psiKey && !CONFIG.psiTryWithoutKey) return;
+    if (techQueue.length >= 4) return;
+    techQueue.push(url);
+
+    var api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
+            + '?url=' + encodeURIComponent(url)
+            + '&strategy=mobile&category=performance&category=seo&category=best-practices'
+            + (CONFIG.psiKey ? '&key=' + encodeURIComponent(CONFIG.psiKey) : '');
+
+    var ctrl = window.AbortController ? new AbortController() : null;
+    if (ctrl) setTimeout(function () { ctrl.abort(); }, CONFIG.psiTimeoutMs);
+
+    fetch(api, ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (d) {
+        var c = d && d.lighthouseResult && d.lighthouseResult.categories;
+        if (!c) return;
+        techResults.push({
+          url: url, rotulo: rotulo,
+          perf: c.performance ? Math.round(c.performance.score * 100) : null,
+          seo:  c.seo ? Math.round(c.seo.score * 100) : null,
+          bp:   c['best-practices'] ? Math.round(c['best-practices'].score * 100) : null
+        });
+        renderTech();
+      })
+      .catch(function () { /* silencioso por design: o diagnóstico não depende disso */ });
+  }
+
+  function renderTech() {
+    var host = document.getElementById('tech');
+    if (!host || !techResults.length) return;
+    host.hidden = false;
+    var html = '<div class="block-title"><span class="label">Sondagem técnica automática</span>'
+             + '<h2>O que as máquinas veem</h2></div>';
+    techResults.forEach(function (t) {
+      html += '<div class="tech-item"><h4>' + esc(t.rotulo) + ' — ' + esc(t.url.replace(/^https?:\/\//,'')) + '</h4><div class="tech-grid">';
+      [['Performance', t.perf], ['SEO técnico', t.seo], ['Boas práticas', t.bp]].forEach(function (p) {
+        if (p[1] === null) return;
+        html += '<span class="pill s-' + tier(p[1]) + '">' + p[0] + ': ' + p[1] + '/100</span>';
+      });
+      html += '</div></div>';
+    });
+    html += '<p class="tech-note">Medição do Google PageSpeed Insights, simulação em celular. '
+          + 'É a leitura de máquina — ela não julga proposta, oferta nem conteúdo.</p>';
+    host.innerHTML = html;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RELATÓRIO
+     ═══════════════════════════════════════════════════════════════ */
+  function finish() {
+    el.answer.hidden = true;
+    el.shell.hidden = true;
+
+    var s = scoreFronts(A);
+    var vals = FRONTS.map(function (f) { return s[f.key]; }).filter(function (v) { return v !== null; });
+    var geral = vals.length ? Math.round(vals.reduce(function (x, y) { return x + y; }, 0) / vals.length) : 0;
+
+    var findings = buildFindings(A, s);
+    var pior = FRONTS.slice().filter(function (f) { return s[f.key] !== null; })
+                     .sort(function (x, y) { return s[x.key] - s[y.key]; })[0];
+
+    say([
+      'Pronto, ' + esc(A.nome) + '. Terreno mapeado.',
+      'Montei a leitura das cinco frentes abaixo. Vou ser direto — é pra isso que serve um diagnóstico.'
+    ], function () { paint(s, geral, findings, pior); });
+  }
+
+  function paint(s, geral, findings, pior) {
+    var veredito =
+      geral >= 70 ? 'Posição sólida, com margem de eficiência'
+    : geral >= 50 ? 'Fundação de pé, execução irregular'
+    : geral >= 30 ? 'Operação exposta em frentes críticas'
+    :               'Terreno descoberto';
+
+    var resumo =
+      geral >= 70 ? 'A base está construída. O que separa vocês do próximo patamar é eficiência e consistência, não fundação.'
+    : geral >= 50 ? 'Os alicerces existem, mas a execução depende de improviso e de gente. Isso funciona até o volume aumentar.'
+    : geral >= 30 ? 'Há frentes descobertas que custam dinheiro todo mês — e o custo não aparece em relatório nenhum, porque é venda que nunca chegou a existir.'
+    :               'O negócio está sustentado por esforço pessoal e sorte de canal. É reversível, mas não sem decisão.';
+
+    var h = '';
+
+    h += '<div class="verdict">'
+       + '<div class="gauge"><div class="big num">' + geral + '</div><div class="of">Prontidão de campanha</div></div>'
+       + '<div class="verdict-txt"><h2>' + esc(veredito) + '</h2><p>' + resumo + '</p></div>'
+       + '</div>';
+
+    h += '<div class="block-title"><span class="label">Ordem de batalha</span><h2>As cinco frentes</h2></div>';
+    h += '<div class="fronts">';
+    FRONTS.forEach(function (f) {
+      var v = s[f.key]; if (v === null) return;
+      var t = tier(v);
+      h += '<div class="front">'
+         + '<div class="front-top"><h3>' + f.nome + '</h3>'
+         + '<span class="front-score s-' + t + '">' + tierWord(v) + ' · <span class="num">' + v + '</span>/100</span></div>'
+         + '<div class="bar"><span class="f-' + t + '" data-w="' + v + '"></span></div>'
+         + '<p>' + FRONT_READ[f.key][t] + '</p></div>';
+    });
+    h += '</div>';
+
+    h += '<div class="tech" id="tech" hidden></div>';
+
+    if (findings.length) {
+      var LIMITE = 8;
+      var mostrados = findings.slice(0, LIMITE);
+      var extras = findings.length - mostrados.length;
+
+      h += '<div class="block-title"><span class="label">O que eu observei</span>'
+         + '<h2>' + mostrados.length + ' ' + (mostrados.length === 1 ? 'ponto que sangra' : 'pontos que sangram') + '</h2></div>';
+      h += '<ul class="findings">';
+      mostrados.forEach(function (x) {
+        h += '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>';
+      });
+      h += '</ul>';
+      if (extras > 0) {
+        h += '<p style="color:var(--borda);font-size:14.5px;margin:-20px 0 34px">'
+           + 'Parei em ' + LIMITE + ' pra esta tela não virar um relatório. '
+           + 'Suas respostas acenderam <strong style="color:var(--ouro)">mais ' + extras
+           + (extras === 1 ? ' ponto' : ' pontos') + '</strong> — eles entram no diagnóstico completo.</p>';
+      }
+    }
+
+    // Sinaliza que a prescrição existe — sem entregá-la.
+    h += '<div class="sealed">'
+       + '<h3>Até aqui é observação. A recomendação é outra coisa.</h3>'
+       + '<p>Tudo que você leu acima é o que dá pra enxergar de fora com as suas respostas: onde sangra e quanto. '
+       + 'O diagnóstico completo é o passo seguinte — e ele é feito com dado, não com opinião.</p>'
+       + '<p>Nele eu olho os '
+       + (A.conc1 && A.conc1 !== '—' ? 'concorrentes que você citou' : 'seus concorrentes diretos')
+       + ' um a um (o que comunicam, com que frequência, o que cobram, por onde convertem), '
+       + 'meço o seu funil de ponta a ponta e devolvo a sequência de ataque priorizada por retorno — '
+       + 'o que fazer primeiro, o que pode esperar seis meses e o que <em>não</em> fazer.</p>'
+       + '<p>Adianto uma coisa: na maioria dos negócios com esse perfil, a primeira ação de maior retorno '
+       + '<strong>não é a que o mercado recomendaria</strong> — e costuma ser mais barata do que se imagina. '
+       + 'Mas essa parte eu não entrego numa tela automática.</p>'
+       + '</div>';
+
+    h += '<div class="cta"><h2>Quer o diagnóstico completo?</h2>'
+       + '<p>Clique abaixo e o resumo já vai montado no WhatsApp. Eu leio, faço a análise'
+       + (pior ? ' — começando por <strong>' + pior.nome.toLowerCase() + '</strong>, sua frente mais exposta' : '')
+       + ' — e volto com o material.</p>'
+       + '<div class="cta-row">'
+       + '<a class="btn btn-wa" id="wa-cta" href="#" target="_blank" rel="noopener">Pedir o diagnóstico completo →</a>'
+       + '<button class="btn" id="copy-cta" style="background:transparent;color:var(--marfim);border:1px solid rgba(200,196,187,.3)">Copiar meu resumo</button>'
+       + '</div>'
+       + '<p class="cta-note">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p></div>';
+
+    el.report.innerHTML = h;
+    el.report.hidden = false;
+
+    // anima as barras
+    setTimeout(function () {
+      var bars = el.report.querySelectorAll('.bar span');
+      for (var k = 0; k < bars.length; k++) bars[k].style.width = bars[k].getAttribute('data-w') + '%';
+    }, 80);
+
+    renderTech(); // caso a sondagem já tenha voltado
+
+    var msg = waMessage(s, geral);
+    var wa = document.getElementById('wa-cta');
+    wa.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg);
+    wa.addEventListener('click', function () {
+      push('whatsapp_click', { click_location: 'diagnostico_cta' });
+      push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
+    });
+
+    document.getElementById('copy-cta').addEventListener('click', function () {
+      var btn = this;
+      var full = fullSummary(s, geral, findings);
+      var ok = function () { btn.textContent = 'Copiado ✓'; setTimeout(function(){ btn.textContent = 'Copiar meu resumo'; }, 2200); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(full).then(ok, function(){ fallbackCopy(full); ok(); });
+      } else { fallbackCopy(full); ok(); }
+      push('diagnostico_copy', { score_geral: geral });
+    });
+
+    push('diagnostico_complete', {
+      score_geral: geral,
+      score_marca: s.marca, score_territorio: s.territorio,
+      score_distribuicao: s.distribuicao, score_aquisicao: s.aquisicao, score_conversao: s.conversao,
+      frente_critica: pior ? pior.nome : '',
+      segmento: A.segmento || '', objetivo: A.objetivo || ''
+    });
+
+    el.report.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  function fallbackCopy(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+  }
+
+  /* Mensagem do WhatsApp — compacta, porque wa.me trunca textos longos. */
+  function waMessage(s, geral) {
+    var L = [];
+    L.push('Olá, Arthur! Fiz o diagnóstico no site e quero o completo.');
+    L.push('');
+    L.push('Negócio: ' + (A.empresa || '-') + ' (' + (A.segmento || '-') + ')');
+    L.push('Falo com: ' + (A.nome || '-'));
+    if (A.contato && A.contato !== '—') L.push('Contato: ' + A.contato);
+    L.push('');
+    L.push('Prontidão geral: ' + geral + '/100');
+    FRONTS.forEach(function (f) {
+      if (s[f.key] === null) return;
+      L.push('- ' + f.nome + ': ' + s[f.key] + '/100');
+    });
+    L.push('');
+    if (A.objetivo) L.push('Prioridade 6 meses: ' + A.objetivo);
+    if (A.travamento && A.travamento !== '—') L.push('Trava hoje: ' + A.travamento);
+    var conc = [A.conc1, A.conc2, A.conc3].filter(function (c) { return c && c !== '—'; });
+    if (conc.length) L.push('Concorrentes: ' + conc.join(' | '));
+    return L.join('\n');
+  }
+
+  /* Resumo longo — vai pro clipboard, não pro WhatsApp. */
+  function fullSummary(s, geral, findings) {
+    var L = [];
+    L.push('DIAGNÓSTICO MIND & BIZ — ' + (A.empresa || ''));
+    L.push('Prontidão de campanha: ' + geral + '/100');
+    L.push('');
+    L.push('FRENTES');
+    FRONTS.forEach(function (f) {
+      if (s[f.key] === null) return;
+      L.push('  ' + f.nome + ': ' + s[f.key] + '/100 (' + tierWord(s[f.key]) + ')');
+    });
+    if (techResults.length) {
+      L.push('');
+      L.push('SONDAGEM TÉCNICA');
+      techResults.forEach(function (t) {
+        L.push('  ' + t.rotulo + ' ' + t.url + ' — perf ' + t.perf + ' | seo ' + t.seo + ' | boas práticas ' + t.bp);
+      });
+    }
+    if (findings.length) {
+      L.push('');
+      L.push('PONTOS QUE SANGRAM');
+      findings.forEach(function (x) { L.push('  • ' + x[0] + ' — ' + x[1].replace(/<[^>]+>/g, '')); });
+    }
+    L.push('');
+    L.push('RESPOSTAS');
+    SCRIPT.forEach(function (st) {
+      if (A[st.id] !== undefined) L.push('  ' + st.id + ': ' + A[st.id]);
+    });
+    L.push('');
+    L.push('mindandbiz.com.br');
+    return L.join('\n');
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     INÍCIO
+     ═══════════════════════════════════════════════════════════════ */
+  document.getElementById('start').addEventListener('click', function () {
+    el.intro.hidden = true;
+    el.shell.hidden = false;
+    push('diagnostico_start', {});
+    advance();
+  });
+
+  // atalho pra QA: ?auto=1 preenche o roteiro com respostas medianas
+  if (/[?&]auto=1/.test(location.search)) {
+    document.getElementById('start').click();
+    var guard = 0;
+    var timer = setInterval(function () {
+      if (++guard > 400) { clearInterval(timer); return; }
+      var z = document.getElementById('input-zone');
+      var inp = z.querySelector('input');
+      if (inp) { inp.value = 'teste'; z.querySelector('.btn').click(); return; }
+      var opts = z.querySelectorAll('.opt');
+      if (opts.length) {
+        opts[Math.min(1, opts.length - 1)].click();
+        var go = z.querySelector('.btn');
+        if (go) go.click();
+      }
+      if (!el.report.hidden) clearInterval(timer);
+    }, 120);
+  }
+})();
+</script>
+</body>
+</html>
