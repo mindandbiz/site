@@ -73,11 +73,13 @@ function blocosAchados(achados) {
 export const onRequestOptions = () => new Response(null, { status: 204, headers: cors() });
 
 export async function onRequestPost({ request, env }) {
-  if (!env.NOTION_TOKEN) return json({ erro: 'NOTION_TOKEN ausente' }, 500);
-
-  // Não impede um curioso determinado, mas corta abuso casual de outra origem.
+  // Origem primeiro: quem vem de fora não precisa saber nada sobre a
+  // configuração daqui. Não impede um curioso determinado, mas corta
+  // abuso casual de outro site.
   const origem = request.headers.get('Origin') || '';
   if (origem && ORIGENS_OK.indexOf(origem) === -1) return json({ erro: 'origem não autorizada' }, 403);
+
+  if (!env.NOTION_TOKEN) return json({ erro: 'NOTION_TOKEN ausente' }, 500);
 
   const bruto = await request.text();
   if (bruto.length > LIMITE_BYTES) return json({ erro: 'payload grande demais' }, 413);
