@@ -74,7 +74,7 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 150px 150px;
     }
-    header, main, footer { position: relative; z-index: 1; }
+    header, main, footer, .capa { position: relative; z-index: 1; }
     h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.05; letter-spacing: -0.02em; margin: 0; }
     h1 { font-size: clamp(32px, 5.2vw, 58px); font-weight: 700; }
     h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 700; }
@@ -124,10 +124,55 @@
     }
     .hdr-back:hover { color: var(--marfim); border-color: var(--ouro); }
 
-    /* ── Abertura ── */
-    .intro { padding: clamp(44px, 7vw, 84px) 0 clamp(20px, 3vw, 30px); text-align: center; }
-    .intro h1 { margin: 12px 0 18px; }
-    .intro .lead { color: var(--imperial); max-width: 580px; margin: 0 auto 26px; }
+    /* ── Capa ──
+       Escura como o hero do site; o corpo claro entra logo abaixo, no mesmo
+       ritmo de index.html (hero escuro → #problem claro). */
+    .capa {
+      position: relative; overflow: hidden;
+      background: var(--d0); color: var(--marfim);
+      padding: clamp(58px, 9vw, 104px) 0 clamp(46px, 7vw, 82px);
+      border-bottom: 1px solid rgba(166,139,91,.28);
+    }
+    .capa-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: url('bg-battle-map.webp') center / cover no-repeat;
+      opacity: .3;
+    }
+    /* A vinheta fica ACIMA das rotas: escurece o miolo onde o texto vive e
+       deixa as linhas respirarem só nas bordas. Invertido, o traçado cruza
+       a manchete e atrapalha a leitura. */
+    .capa::after {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        radial-gradient(ellipse 58% 52% at 50% 46%,
+          rgba(20,17,13,.86) 0%, rgba(20,17,13,.62) 55%, rgba(20,17,13,.15) 100%),
+        linear-gradient(180deg, rgba(20,17,13,.5) 0%, rgba(20,17,13,.15) 38%, var(--d0) 100%);
+    }
+    .capa-rotas { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; opacity: .62; }
+    .capa-inner { position: relative; z-index: 3; text-align: center; }
+
+    .rota { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracar 2.2s cubic-bezier(.35,0,.2,1) forwards; }
+    .rota:nth-child(2) { animation-delay: .14s; }
+    .rota:nth-child(3) { animation-delay: .28s; }
+    .rota:nth-child(4) { animation-delay: .42s; }
+    .rota:nth-child(5) { animation-delay: .56s; }
+    .rota:nth-child(6) { animation-delay: .7s; }
+    @keyframes tracar { to { stroke-dashoffset: 0; } }
+
+    .alvo { opacity: 0; animation: surgir .7s ease 1.7s forwards; }
+    @keyframes surgir { to { opacity: 1; } }
+    .alvo-pulso { transform-origin: 500px 281px; animation: pulsar 3.4s ease-in-out 2.4s infinite; }
+    @keyframes pulsar {
+      0%, 100% { transform: scale(1);    opacity: .5; }
+      50%      { transform: scale(1.35); opacity: .1; }
+    }
+
+    .capa h1 { margin: 14px 0 18px; }
+    .capa .lead { color: var(--borda); max-width: 570px; margin: 0 auto 28px; }
+    .capa .intro-meta { color: var(--borda); border-top-color: rgba(200,196,187,.18); }
+    .capa .intro-meta span::before { color: var(--ouro); }
+    .capa .consent { color: rgba(200,196,187,.62); }
+    .capa .consent a { color: var(--ouro); }
     .intro-meta {
       display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
       font-size: 13.5px; color: var(--imperial);
@@ -135,6 +180,11 @@
       padding-top: 20px; max-width: 620px; margin: 0 auto;
     }
     .intro-meta span::before { content: "▸ "; color: var(--ouro-txt); }
+    .consent {
+      max-width: 560px; margin: 18px auto 0;
+      font-size: 12.5px; line-height: 1.5; color: rgba(30,30,30,.55);
+    }
+    .consent a { color: var(--ouro-txt); }
 
     /* ── Progresso ── */
     .progress-shell { position: sticky; top: 59px; z-index: 40; background: var(--marfim); padding-top: 14px; }
@@ -354,7 +404,7 @@
       @page { margin: 14mm; }
       body { background: #fff; color: #000; }
       body::before { display: none; }
-      header, footer, #intro, .progress-shell, .chat, .answer,
+      header, footer, .capa, .progress-shell, .chat, .answer,
       .cta-row, .cta-note, .takeaway { display: none !important; }
       .print-only { display: block; }
       .print-head {
@@ -404,6 +454,9 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
+      /* sem a animação, as rotas ficariam invisíveis e o alvo transparente */
+      .rota { stroke-dashoffset: 0 !important; }
+      .alvo { opacity: 1 !important; }
     }
   </style>
 </head>
@@ -419,24 +472,48 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <!-- ── Abertura ── -->
-    <section class="intro" id="intro">
+  <!-- ── Capa ── -->
+  <section class="capa" id="intro">
+    <div class="capa-bg" aria-hidden="true"></div>
+    <svg class="capa-rotas" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" stroke="#C9A857" stroke-linecap="round" stroke-width="1.5">
+        <path class="rota" pathLength="1" d="M40,110 C250,96 360,196 486,272" />
+        <path class="rota" pathLength="1" d="M30,470 C250,452 388,352 492,292" />
+        <path class="rota" pathLength="1" d="M965,96 C740,132 604,206 514,270" />
+        <path class="rota" pathLength="1" d="M975,472 C752,468 620,360 518,294" />
+        <path class="rota" pathLength="1" d="M498,10 C486,120 492,190 498,258" />
+        <path class="rota" pathLength="1" d="M502,550 C514,440 508,368 502,304" />
+      </g>
+      <g class="alvo" fill="none" stroke="#C9A857">
+        <circle class="alvo-pulso" cx="500" cy="281" r="20" stroke-width="1.1" />
+        <circle cx="500" cy="281" r="8.5" stroke-width="1.9" />
+        <path stroke-width="1.4" d="M500,254 v-13 M500,308 v13 M473,281 h-13 M527,281 h13" />
+      </g>
+    </svg>
+
+    <div class="capa-inner wrap">
       <span class="label">Reconhecimento de Terreno</span>
       <h1>Antes do plano,<br />o diagnóstico.</h1>
       <p class="lead">
         Nenhuma campanha séria começa sem mapear o terreno. Responda o que dá pra responder
-        e eu devolvo, na hora, um raio-x das cinco frentes que sustentam (ou travam) o
+        e eu devolvo, na hora, um raio-x das cinco frentes que sustentam — ou travam — o
         crescimento do seu negócio.
       </p>
       <button class="btn" id="start">Iniciar o reconhecimento →</button>
       <div class="intro-meta">
         <span>4 a 6 minutos</span>
         <span>Sem custo</span>
-        <span>Resultado na tela, sem cadastro</span>
+        <span>Resultado na tela, na hora</span>
       </div>
-    </section>
+      <p class="consent">
+        Ao iniciar, você concorda que a Mind &amp; Biz registre suas respostas para preparar
+        o diagnóstico. Não repassamos nada a terceiros — veja a
+        <a href="/privacidade.html">Política de Privacidade</a>.
+      </p>
+    </div>
+  </section>
 
+  <main class="wrap">
     <!-- ── Progresso ── -->
     <div class="progress-shell" id="progress-shell" hidden>
       <div class="progress-meta">
@@ -496,7 +573,11 @@
     // Deixamos a tentativa ligada: se passar, é bônus; se falhar, o diagnóstico
     // segue normalmente sem o bloco técnico.
     psiTryWithoutKey: true,
-    psiTimeoutMs: 32000
+    psiTimeoutMs: 32000,
+
+    // Endpoint que registra o diagnóstico no Notion (Cloudflare Pages Function).
+    // Vazio desliga o registro — a página continua funcionando igual.
+    endpoint: '/api/diagnostico'
   };
 
   /* ═══════════════════════════════════════════════════════════════
@@ -978,6 +1059,7 @@
      ═══════════════════════════════════════════════════════════════ */
   var A = {};              // respostas
   var CONSULTA = false;    // true quando aberto via link de resgate
+  var PAGE_ID = null;      // id da página criada no Notion
   var trail = [];          // histórico p/ desfazer
   var i = 0;               // índice no roteiro
   var techQueue = [];      // urls p/ sondagem técnica
@@ -1412,6 +1494,7 @@
       wa.addEventListener('click', function () {
         push('whatsapp_click', { click_location: 'diagnostico_cta' });
         push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
+        marcarPediu();
       });
     }
 
@@ -1459,6 +1542,8 @@
       segmento: valorReal('segmento') || '', objetivo: A.objetivo || ''
     });
 
+    registrar(s, geral, findings, pior);
+
     el.report.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   }
 
@@ -1468,6 +1553,51 @@
     document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); } catch (e) {}
     ta.remove();
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     REGISTRO NO NOTION
+     Grava todo diagnóstico concluído, tenha o lead clicado no WhatsApp
+     ou não — quem responde tudo e desiste no último clique é justamente
+     quem some. Falha em silêncio: nada aqui pode quebrar o diagnóstico.
+     ═══════════════════════════════════════════════════════════════ */
+  function enviar(corpo, aoReceber) {
+    if (!CONFIG.endpoint) return;
+    try {
+      fetch(CONFIG.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(corpo),
+        keepalive: true
+      }).then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { if (j && aoReceber) aoReceber(j); })
+        .catch(function () {});
+    } catch (e) {}
+  }
+
+  function registrar(s, geral, findings, pior) {
+    if (CONSULTA) return;
+    var conc = [A.conc1, A.conc2, A.conc3].filter(function (c) { return c && c !== '—'; });
+    var code = encodeAnswers();
+    enviar({
+      empresa:       A.empresa || '',
+      nome:          A.nome || '',
+      contato:       (A.contato && A.contato !== '—') ? A.contato : '',
+      segmento:      valorReal('segmento') || '',
+      faturamento:   A.faturamento || '',
+      objetivo:      A.objetivo || '',
+      trava:         (A.travamento && A.travamento !== '—') ? A.travamento : '',
+      concorrentes:  conc.join(' | '),
+      geral:         geral,
+      scores:        s,
+      frenteCritica: pior ? pior.nome : '',
+      link:          code ? (CONFIG.origem || location.origin) + '/diagnostico?r=' + code : '',
+      achados:       findings.map(function (x) { return { titulo: x[0], texto: x[1] }; })
+    }, function (j) { if (j.id) PAGE_ID = j.id; });
+  }
+
+  function marcarPediu() {
+    if (PAGE_ID) enviar({ pageId: PAGE_ID });
   }
 
   /* ═══════════════════════════════════════════════════════════════
