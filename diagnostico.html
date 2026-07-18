@@ -47,22 +47,34 @@
       --d0: #14110D;
       --d1: #1A1712;
       --d2: #211D17;
-      /* semáforo do diagnóstico */
-      --bad:  #B4542F;
-      --mid:  #B58B3A;
-      --good: #6F8B4E;
+      /* ouro legível sobre fundo claro — o --ouro puro não passa contraste em texto pequeno */
+      --ouro-txt: #7A6238;
+      --linha: rgba(30,30,30,.13);
+      --papel: #FFFFFF;
+      /* semáforo, calibrado para leitura sobre o marfim */
+      --bad:  #A8441F;
+      --mid:  #8A6620;
+      --good: #55703A;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--d0);
-      color: var(--marfim);
+      background: var(--marfim);
+      color: var(--chumbo);
       font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
     }
+    /* Textura de papel — mesmo ruído das seções claras do index.html */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: .05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 150px 150px;
+    }
+    header, main, footer { position: relative; z-index: 1; }
     h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.05; letter-spacing: -0.02em; margin: 0; }
     h1 { font-size: clamp(32px, 5.2vw, 58px); font-weight: 700; }
     h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 700; }
@@ -75,7 +87,7 @@
       display: inline-block;
       font-size: 12px; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ouro);
+      color: var(--ouro-txt);
     }
     .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
 
@@ -96,9 +108,8 @@
     /* ── Cabeçalho ── */
     header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(20,17,13,.86);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(200,196,187,.12);
+      background: var(--d0);
+      border-bottom: 1px solid rgba(166,139,91,.25);
     }
     .hdr-inner {
       max-width: 1160px; margin: 0 auto; padding: 14px 20px;
@@ -116,24 +127,24 @@
     /* ── Abertura ── */
     .intro { padding: clamp(44px, 7vw, 84px) 0 clamp(20px, 3vw, 30px); text-align: center; }
     .intro h1 { margin: 12px 0 18px; }
-    .intro .lead { color: var(--borda); max-width: 580px; margin: 0 auto 26px; }
+    .intro .lead { color: var(--imperial); max-width: 580px; margin: 0 auto 26px; }
     .intro-meta {
       display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
-      font-size: 13.5px; color: var(--borda);
-      border-top: 1px solid rgba(200,196,187,.12);
+      font-size: 13.5px; color: var(--imperial);
+      border-top: 1px solid var(--linha);
       padding-top: 20px; max-width: 620px; margin: 0 auto;
     }
-    .intro-meta span::before { content: "▸ "; color: var(--ouro); }
+    .intro-meta span::before { content: "▸ "; color: var(--ouro-txt); }
 
     /* ── Progresso ── */
-    .progress-shell { position: sticky; top: 59px; z-index: 40; background: var(--d0); padding-top: 14px; }
+    .progress-shell { position: sticky; top: 59px; z-index: 40; background: var(--marfim); padding-top: 14px; }
     .progress-meta {
       display: flex; justify-content: space-between; align-items: baseline;
       font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--borda); margin-bottom: 7px;
+      color: var(--imperial); margin-bottom: 7px;
     }
-    .progress-meta b { color: var(--ouro); font-weight: 700; }
-    .progress-track { height: 3px; background: rgba(200,196,187,.14); border-radius: 2px; overflow: hidden; }
+    .progress-meta b { color: var(--ouro-txt); font-weight: 700; }
+    .progress-track { height: 3px; background: rgba(30,30,30,.12); border-radius: 2px; overflow: hidden; }
     .progress-fill { height: 100%; width: 0; background: var(--ouro); transition: width .45s cubic-bezier(.2,.8,.2,1); }
 
     /* ── Chat ── */
@@ -146,23 +157,24 @@
       font-size: 15.5px; line-height: 1.55;
     }
     .from-bot .bubble {
-      background: var(--d2);
-      border: 1px solid rgba(200,196,187,.13);
+      background: var(--papel);
+      border: 1px solid var(--linha);
+      box-shadow: 0 1px 2px rgba(30,30,30,.05);
       border-bottom-left-radius: 4px;
     }
     .from-user .bubble {
       background: var(--ouro); color: #14110D;
       font-weight: 500; border-bottom-right-radius: 4px;
     }
-    .bubble strong { color: var(--ouro); font-weight: 600; }
+    .bubble strong { color: var(--ouro-txt); font-weight: 600; }
     .from-user .bubble strong { color: #14110D; }
-    .bubble .hint { display: block; margin-top: 7px; font-size: 13.5px; color: var(--borda); }
+    .bubble .hint { display: block; margin-top: 7px; font-size: 13.5px; color: var(--imperial); }
 
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     .typing { display: flex; gap: 5px; padding: 16px 18px; }
     .typing i {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--borda);
+      width: 6px; height: 6px; border-radius: 50%; background: var(--imperial);
       opacity: .45; animation: blink 1.25s infinite;
     }
     .typing i:nth-child(2) { animation-delay: .2s; }
@@ -172,44 +184,53 @@
     /* ── Área de resposta ── */
     .answer {
       position: sticky; bottom: 0;
-      background: linear-gradient(180deg, rgba(20,17,13,0) 0%, var(--d0) 22%);
+      background: linear-gradient(180deg, rgba(248,245,240,0) 0%, var(--marfim) 22%);
       padding: 16px 0 22px;
     }
     .opts { display: flex; flex-wrap: wrap; gap: 9px; }
     .opt {
-      background: transparent; color: var(--marfim);
-      border: 1px solid rgba(200,196,187,.3);
+      background: var(--papel); color: var(--chumbo);
+      border: 1px solid rgba(30,30,30,.22);
       border-radius: 999px; padding: 11px 19px;
       font-family: inherit; font-size: 14.5px; cursor: pointer;
       transition: border-color .18s, background .18s, color .18s;
       text-align: left;
     }
-    .opt:hover { border-color: var(--ouro); color: var(--ouro); }
+    .opt:hover { border-color: var(--ouro-dk); color: var(--ouro-txt); }
     .opt.on { background: var(--ouro); border-color: var(--ouro); color: #14110D; font-weight: 600; }
     .opt.on::before { content: "✓ "; }
 
     .field { display: flex; gap: 9px; align-items: stretch; }
     .field input {
       flex: 1; min-width: 0;
-      background: var(--d2); color: var(--marfim);
-      border: 1px solid rgba(200,196,187,.24); border-radius: 8px;
+      background: var(--papel); color: var(--chumbo);
+      border: 1px solid rgba(30,30,30,.22); border-radius: 8px;
       padding: 14px 16px; font-family: inherit; font-size: 15.5px;
     }
-    .field input:focus { outline: none; border-color: var(--ouro); }
-    .field input::placeholder { color: rgba(200,196,187,.5); }
+    .field input:focus { outline: none; border-color: var(--ouro-dk); box-shadow: 0 0 0 3px rgba(166,139,91,.18); }
+    .field input::placeholder { color: rgba(30,30,30,.42); }
     .field .btn { padding: 14px 24px; }
 
     .under {
-      display: flex; justify-content: space-between; align-items: center; gap: 14px;
-      margin-top: 11px; min-height: 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      margin-top: 14px;
     }
     .undo, .skip {
-      background: none; border: none; padding: 0; cursor: pointer;
-      font-family: inherit; font-size: 13px; color: var(--borda);
-      text-decoration: underline; text-underline-offset: 3px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; cursor: pointer;
+      border: 1px solid rgba(30,30,30,.18); border-radius: 999px;
+      padding: 7px 15px;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      color: var(--imperial); text-decoration: none; white-space: nowrap;
+      transition: border-color .18s, color .18s, background .18s;
     }
-    .undo:hover, .skip:hover { color: var(--ouro); }
-    .undo[hidden], .skip[hidden] { display: none; }
+    .undo:hover, .skip:hover {
+      border-color: var(--ouro-dk); color: var(--ouro-txt); background: rgba(166,139,91,.08);
+    }
+    .undo:focus-visible, .skip:focus-visible { outline: 2px solid var(--ouro-dk); outline-offset: 2px; }
+    /* Ocultos mantêm o lugar: sem isso o "pular" salta para a esquerda
+       quando o "voltar" some, e a linha inteira dança a cada pergunta. */
+    .undo[hidden], .skip[hidden] { visibility: hidden; pointer-events: none; }
 
     /* ── Relatório ── */
     .report { padding: 8px 0 90px; animation: rise .5s cubic-bezier(.2,.8,.2,1) both; }
@@ -231,15 +252,27 @@
 
     .fronts { display: grid; gap: 14px; margin-bottom: 34px; }
     .front {
-      background: var(--d1); border: 1px solid rgba(200,196,187,.12);
+      background: var(--papel); border: 1px solid var(--linha);
       border-radius: 10px; padding: 18px 20px;
     }
-    .front-top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 9px; }
+    .front-top {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; row-gap: 8px; flex-wrap: wrap; margin-bottom: 11px;
+    }
+    .front-id { display: flex; align-items: center; gap: 11px; min-width: 0; }
     .front-top h3 { font-size: 16.5px; }
     .front-score { font-size: 15px; font-weight: 700; white-space: nowrap; }
-    .bar { height: 6px; background: rgba(200,196,187,.13); border-radius: 3px; overflow: hidden; }
+    .front-ico {
+      flex: 0 0 auto; width: 36px; height: 36px; border-radius: 9px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .front-ico svg { width: 20px; height: 20px; display: block; }
+    .i-bad  { color: var(--bad);  background: rgba(168,68,31,.10); }
+    .i-mid  { color: var(--mid);  background: rgba(138,102,32,.11); }
+    .i-good { color: var(--good); background: rgba(85,112,58,.12); }
+    .bar { height: 6px; background: rgba(30,30,30,.10); border-radius: 3px; overflow: hidden; }
     .bar span { display: block; height: 100%; border-radius: 3px; width: 0; transition: width .9s cubic-bezier(.2,.8,.2,1); }
-    .front p { font-size: 14.5px; color: var(--borda); margin: 10px 0 0; }
+    .front p { font-size: 14.5px; color: var(--imperial); margin: 10px 0 0; }
     .s-bad  { color: var(--bad); }  .f-bad  { background: var(--bad); }
     .s-mid  { color: var(--mid); }  .f-mid  { background: var(--mid); }
     .s-good { color: var(--good); } .f-good { background: var(--good); }
@@ -249,34 +282,102 @@
 
     .findings { list-style: none; padding: 0; margin: 0 0 34px; display: grid; gap: 12px; }
     .findings li {
-      border-left: 2px solid var(--ouro);
-      background: var(--d1);
+      border: 1px solid var(--linha);
+      border-left: 3px solid var(--ouro);
+      background: var(--papel);
       padding: 15px 18px; border-radius: 0 8px 8px 0;
       font-size: 15px;
     }
-    .findings li b { color: var(--ouro); display: block; margin-bottom: 4px; font-size: 14px; letter-spacing: .02em; }
-    .findings li span { color: var(--borda); }
+    .findings li b { color: var(--ouro-txt); display: block; margin-bottom: 4px; font-size: 14px; letter-spacing: .02em; }
+    .findings li span { color: var(--imperial); }
 
     .sealed {
       border: 1px dashed rgba(166,139,91,.45);
       border-radius: 10px; padding: 22px 24px; margin-bottom: 32px;
-      background: rgba(166,139,91,.05);
+      background: rgba(166,139,91,.09);
     }
     .sealed h3 { margin-bottom: 10px; }
-    .sealed p { color: var(--borda); font-size: 15px; margin-bottom: 10px; }
+    .sealed p { color: var(--imperial); font-size: 15px; margin-bottom: 10px; }
     .sealed p:last-child { margin-bottom: 0; }
 
-    .cta { text-align: center; border-top: 1px solid rgba(200,196,187,.12); padding-top: 34px; }
+    .cta { text-align: center; border-top: 1px solid var(--linha); padding-top: 34px; }
     .cta h2 { margin-bottom: 12px; }
-    .cta > p { color: var(--borda); max-width: 540px; margin: 0 auto 22px; }
+    .cta > p { color: var(--imperial); max-width: 540px; margin: 0 auto 22px; }
     .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .cta-note { font-size: 13px; color: rgba(200,196,187,.7); margin: 18px 0 0; }
+    .cta-note { font-size: 13px; color: rgba(30,30,30,.55); margin: 18px 0 0; }
+
+    /* ── Levar o resultado embora (tudo client-side, sem servidor) ── */
+    .takeaway { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--linha); }
+    .takeaway .label { display: block; margin-bottom: 14px; }
+    .take-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .take {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--papel); color: var(--chumbo);
+      border: 1px solid rgba(30,30,30,.2); border-radius: 8px;
+      padding: 11px 17px; font-family: inherit; font-size: 14px; font-weight: 500;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: border-color .18s, color .18s, background .18s;
+    }
+    .take:hover { border-color: var(--ouro-dk); color: var(--ouro-txt); background: rgba(166,139,91,.08); }
+    .take svg { width: 16px; height: 16px; flex: 0 0 auto; }
+
+    .print-only, .print-head { display: none; }
+
+    /* ── Modo consulta (link de resgate) ── */
+    .consulta {
+      background: var(--d1); color: var(--marfim);
+      border-radius: 10px; padding: 15px 18px; margin-bottom: 22px;
+      font-size: 14.5px;
+    }
+    .consulta b { color: var(--ouro); }
+    .consulta strong { color: var(--ouro); }
+    .answers {
+      margin: 0 0 34px; padding: 4px 0 0;
+      display: grid; grid-template-columns: 1fr; gap: 0;
+    }
+    .answers dt {
+      font-size: 13px; color: var(--imperial); font-weight: 600;
+      padding-top: 12px; border-top: 1px solid var(--linha);
+    }
+    .answers dd {
+      margin: 3px 0 12px; font-size: 15px; color: var(--chumbo); font-weight: 500;
+    }
+    .answers dd i { color: var(--imperial); font-weight: 400; }
+    @media (min-width: 680px) {
+      .answers { grid-template-columns: 1fr 1fr; column-gap: 26px; }
+      .answers dt { grid-column: 1; }
+      .answers dd { grid-column: 2; border-top: 1px solid var(--linha); padding-top: 12px; margin-bottom: 0; }
+    }
+
+    /* ── Impressão / salvar em PDF ── */
+    @media print {
+      @page { margin: 14mm; }
+      body { background: #fff; color: #000; }
+      body::before { display: none; }
+      header, footer, #intro, .progress-shell, .chat, .answer,
+      .cta-row, .cta-note, .takeaway { display: none !important; }
+      .print-only { display: block; }
+      .print-head {
+        display: block; margin-bottom: 22px; padding-bottom: 12px;
+        border-bottom: 2px solid var(--ouro);
+        font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+        letter-spacing: .1em; text-transform: uppercase;
+      }
+      .report { padding: 0; }
+      /* o cartão do veredito é escuro na tela: no papel viraria um bloco de tinta */
+      .verdict { background: #fff !important; border: 2px solid var(--ouro); }
+      .verdict-txt h2, .gauge .big { color: #000 !important; }
+      .gauge .of, .verdict-txt p { color: #333 !important; }
+      .front, .findings li, .tech-item, .sealed, .verdict, .cta { break-inside: avoid; }
+      .front, .findings li, .tech-item { border: 1px solid #bbb; box-shadow: none; }
+      a { color: #000; text-decoration: none; }
+    }
 
     /* ── Sondagem técnica (PageSpeed) ── */
     .tech { margin-bottom: 32px; }
     .tech[hidden] { display: none; }
     .tech-item {
-      background: var(--d1); border: 1px solid rgba(200,196,187,.12);
+      background: var(--papel); border: 1px solid var(--linha);
       border-radius: 10px; padding: 16px 18px; margin-bottom: 10px;
     }
     .tech-item h4 { font-size: 15px; margin-bottom: 10px; word-break: break-all; }
@@ -285,15 +386,15 @@
       font-size: 12.5px; padding: 5px 12px; border-radius: 999px;
       border: 1px solid currentColor; font-weight: 600;
     }
-    .tech-note { font-size: 13px; color: var(--borda); margin: 8px 0 0; }
+    .tech-note { font-size: 13px; color: var(--imperial); margin: 8px 0 0; }
 
     footer {
-      border-top: 1px solid rgba(200,196,187,.12);
+      border-top: 1px solid var(--linha);
       padding: 26px 0; text-align: center;
-      font-size: 13px; color: rgba(200,196,187,.6);
+      font-size: 13px; color: rgba(30,30,30,.6);
     }
-    footer a { color: rgba(200,196,187,.8); text-decoration: none; }
-    footer a:hover { color: var(--ouro); }
+    footer a { color: var(--imperial); text-decoration: none; }
+    footer a:hover { color: var(--ouro-txt); }
 
     @media (max-width: 560px) {
       .bubble { max-width: 92%; font-size: 15px; }
@@ -352,8 +453,8 @@
     <div class="answer" id="answer" hidden>
       <div id="input-zone"></div>
       <div class="under">
-        <button class="undo" id="undo" hidden>↩ corrigir resposta anterior</button>
-        <button class="skip" id="skip" hidden>pular esta →</button>
+        <button class="undo" id="undo" type="button" aria-label="Voltar e corrigir a resposta anterior" hidden>← Voltar</button>
+        <button class="skip" id="skip" type="button" aria-label="Pular esta pergunta" hidden>Pular esta →</button>
       </div>
     </div>
 
@@ -377,6 +478,11 @@
      ═══════════════════════════════════════════════════════════════ */
   var CONFIG = {
     whatsapp: '5511999318970',
+
+    // Base do link de resgate que vai dentro da mensagem do WhatsApp.
+    // Vazio = usa o domínio em que a página está aberta, então o link
+    // funciona igual em preview e em produção. Só preencha para forçar.
+    origem: '',
 
     // ── Sondagem técnica automática (Google PageSpeed Insights) ──
     // Deixe vazio para desligar. Com chave, a página analisa sozinha o site
@@ -413,7 +519,10 @@
     { id:'segmento', stage:1, type:'choice',
       bot:[function(a){ return 'Certo. Agora eu preciso entender o terreno em que a ' + esc(a.empresa) + ' opera.'; },
            'Qual dessas opções descreve melhor o que vocês fazem?'],
-      opts:['Serviço para empresas (B2B)','Serviço para consumidor final','Comércio ou loja física','E-commerce','Software / produto digital','Profissional liberal','Outro'] },
+      opts:['Serviço para empresas (B2B)','Serviço para consumidor final','Comércio ou loja física','E-commerce','Software / produto digital','Profissional liberal','Outro'],
+      detalhe:{ quando:['Outro'], placeholder:'Ex.: cooperativa de crédito rural',
+                bot:['Nenhuma caixinha serviu — melhor assim.',
+                     '<strong>Me conta com suas palavras: o que vocês fazem e pra quem?</strong>'] } },
 
     { id:'tempo', stage:1, type:'choice',
       bot:['<strong>Há quanto tempo o negócio existe?</strong>'],
@@ -444,14 +553,14 @@
       opts:['Sim, está escrito e a equipe usa','Sim, mas só na minha cabeça','Tenho uma ideia vaga','Não, e isso me incomoda'] },
 
     { id:'materiais', stage:2, type:'choice',
-      bot:['<strong>Quando precisa de uma arte — post, cardápio, proposta, apresentação — como resolve?</strong>'],
+      bot:['<strong>Quando precisa de uma peça — um post, uma proposta, uma apresentação — como vocês resolvem?</strong>'],
       opts:['Temos modelos prontos e padronizados','Alguém da equipe faz do zero','Contratamos por fora toda vez','Faço no improviso mesmo'] },
 
     // ── 3. Território próprio ────────────────────────────────────
     { id:'temSite', stage:3, type:'choice',
       bot:['Agora o território que é seu de verdade — o que não depende do algoritmo de ninguém.',
            '<strong>Vocês têm site?</strong>'],
-      opts:['Sim, temos site','Só um linktree ou página de rede social','Não temos nada'] },
+      opts:['Sim, temos site','Só um linktree ou página de rede social','Só o perfil no Google Meu Negócio','Não temos nada'] },
 
     { id:'siteUrl', stage:3, type:'text', placeholder:'seusite.com.br',
       when:function(a){ return a.temSite === 'Sim, temos site'; },
@@ -500,7 +609,11 @@
     { id:'trafego', stage:5, type:'choice',
       bot:['Aquisição paga agora.',
            '<strong>Vocês investem em anúncios?</strong>'],
-      opts:['Sim, de forma constante','Impulsiono um post de vez em quando','Já testei e parei','Nunca investi'] },
+      opts:['Sim, de forma constante','Impulsiono um post de vez em quando','Já testei e parei','Nunca investi'],
+      detalhe:{ quando:['Já testei e parei'],
+                bot:['Essa resposta me interessa mais que um "sim".',
+                     '<strong>Por que vocês pararam?</strong>'],
+                opts:['Não trouxe retorno','Ficou caro demais','Nunca soube dizer se funcionou','Quem operava saiu ou parou','Precisei cortar custos','Dava trabalho demais pra tocar'] } },
 
     { id:'verba', stage:5, type:'choice',
       when:function(a){ return a.trafego === 'Sim, de forma constante' || a.trafego === 'Impulsiono um post de vez em quando'; },
@@ -568,6 +681,44 @@
            'Antes: <strong>me deixa um WhatsApp ou e-mail?</strong><span class="hint">Opcional — só pra eu conseguir te devolver o diagnóstico completo se você pedir.</span>'] }
   ];
 
+  /* ───────────────────────────────────────────────────────────────
+     Passos com `detalhe` ganham uma pergunta de follow-up logo depois,
+     que só aparece quando a resposta do pai casa com um dos gatilhos.
+     Serve para "Outro" (texto livre) e para qualquer opção que peça
+     explicação (lista de opções, via `detalhe.opts`).
+     ─────────────────────────────────────────────────────────────── */
+  (function expandirDetalhes() {
+    for (var k = SCRIPT.length - 1; k >= 0; k--) {
+      if (!SCRIPT[k].detalhe) continue;
+      var pai = SCRIPT[k], d = pai.detalhe;
+      SCRIPT.splice(k + 1, 0, {
+        id: pai.id + 'Detalhe',
+        stage: pai.stage,
+        type: d.opts ? 'choice' : 'text',
+        opts: d.opts,
+        placeholder: d.placeholder,
+        skippable: !!d.skippable,
+        bot: d.bot,
+        when: (function (paiId, gatilhos) {
+          return function (a) {
+            var v = a[paiId];
+            if (v === undefined) return false;
+            for (var g = 0; g < gatilhos.length; g++) {
+              if (String(v).indexOf(gatilhos[g]) > -1) return true;
+            }
+            return false;
+          };
+        })(pai.id, d.quando)
+      });
+    }
+  })();
+
+  /* Quando houve detalhamento, é ele que vale para exibição. */
+  function valorReal(id) {
+    var d = A[id + 'Detalhe'];
+    return (d && d !== '—') ? d : A[id];
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      MOTOR DE PONTUAÇÃO — determinístico, 5 frentes
      Cada regra devolve pontos; a frente é normalizada em 0–100.
@@ -578,7 +729,7 @@
     posicionamento:  { 'Sim, está escrito e a equipe usa':10, 'Sim, mas só na minha cabeça':5, 'Tenho uma ideia vaga':2, 'Não, e isso me incomoda':0 },
     materiais:       { 'Temos modelos prontos e padronizados':10, 'Alguém da equipe faz do zero':5, 'Contratamos por fora toda vez':4, 'Faço no improviso mesmo':1 },
 
-    temSite:         { 'Sim, temos site':10, 'Só um linktree ou página de rede social':3, 'Não temos nada':0 },
+    temSite:         { 'Sim, temos site':10, 'Só o perfil no Google Meu Negócio':4, 'Só um linktree ou página de rede social':3, 'Não temos nada':0 },
     siteIdade:       { 'Nos últimos 6 meses':10, 'Entre 1 e 2 anos atrás':6, 'Mais de 2 anos atrás':2, 'Não faço ideia':2 },
     lista:           { 'Sim, organizada e usada':10, 'Temos os dados, mas nunca usamos':4, 'Está espalhado em vários lugares':2, 'Não temos':0 },
 
@@ -643,6 +794,34 @@
   function tierWord(n) { return n >= 70 ? 'Sólido' : n >= 40 ? 'Frágil' : 'Descoberto'; }
 
   /* ── Leitura curta por frente ─────────────────────────────────── */
+  /* Ícones de traço, um por frente. Inline por obrigação (a CSP do site não
+     permite recurso externo) e em currentColor, para herdarem o semáforo. */
+  var ICO = {
+    // estandarte: a marca é a bandeira que a tropa segue
+    marca: '<path d="M6 2.5v19"/><path d="M6 4h11.5l-2.6 4.2 2.6 4.2H6z"/>',
+    // mapa dobrado com setores: território que é seu
+    territorio: '<path d="M3 6.4 9 3.8l6 2.6 6-2.6v13.4l-6 2.6-6-2.6-6 2.6z"/><path d="M9 3.8v13.4"/><path d="M15 6.4v13.4"/>',
+    // emissão em ondas: distribuição de sinal
+    distribuicao: '<circle cx="12" cy="12" r="2.1"/><path d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8"/><path d="M15.4 15.4a4.8 4.8 0 0 0 0-6.8"/><path d="M6.2 6.2a8.2 8.2 0 0 0 0 11.6"/><path d="M17.8 17.8a8.2 8.2 0 0 0 0-11.6"/>',
+    // mira: aquisição é pontaria, não sorte
+    aquisicao: '<circle cx="12" cy="12" r="7.8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 1.6v3.2"/><path d="M12 19.2v3.2"/><path d="M1.6 12h3.2"/><path d="M19.2 12h3.2"/>',
+    // funil + seta de retorno: converter e retomar quem escapou
+    conversao: '<path d="M2.8 4.6h11.4l-4.5 5.6v6.6l-2.4-1.6v-5z"/><path d="M20.6 16.2a4.4 4.4 0 1 1-1.7-5.6"/><path d="M20.4 8.2v3.6h-3.6"/>'
+  };
+
+  /* Ícones da barra "levar o resultado". */
+  var ICO_UI = {
+    pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 17v2.5h16V17"/></svg>',
+    wa:   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.05 2C6.6 2 2.2 6.4 2.2 11.85c0 1.9.5 3.75 1.45 5.4L2 22l4.9-1.6a9.8 9.8 0 0 0 5.15 1.45h.01c5.44 0 9.85-4.4 9.85-9.85 0-2.63-1.03-5.1-2.9-6.96A9.78 9.78 0 0 0 12.05 2Zm0 17.9h-.01a8.2 8.2 0 0 1-4.15-1.14l-.3-.18-3.1.82.83-3.02-.2-.31a8.15 8.15 0 0 1-1.25-4.36c0-4.52 3.68-8.2 8.2-8.2a8.16 8.16 0 0 1 8.19 8.2c0 4.52-3.68 8.2-8.2 8.2Zm4.5-6.14c-.25-.13-1.46-.72-1.68-.8-.23-.09-.39-.13-.56.12-.16.25-.63.8-.78.97-.14.16-.28.19-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.05-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.48c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.66-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 5.5H5.8a2.3 2.3 0 0 0-2.3 2.3v9.7"/></svg>'
+  };
+
+  function icone(key) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
+         + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[key] + '</svg>';
+  }
+
   var FRONT_READ = {
     marca: {
       bad:  'A marca hoje é um logo e pouco mais. Sem posicionamento escrito e sem padrão, cada peça que sai reinventa a empresa — e o cliente nunca consolida uma lembrança.',
@@ -698,6 +877,27 @@
           : 'Sem custo por cliente definido, não existe teto de investimento defensável: qualquer verba parece cara, e qualquer resultado parece razoável.']);
     }
 
+    if (a.trafegoDetalhe && a.trafegoDetalhe !== '—') {
+      var pq = a.trafegoDetalhe;
+      var cego = (a.mede === 'Não meço nada disso' || a.mede === 'Só acompanho alcance e cliques');
+      if (pq === 'Nunca soube dizer se funcionou' || (pq === 'Não trouxe retorno' && cego)) {
+        f.push(['Canal desligado sem veredito',
+          'Vocês pararam de anunciar, mas sem medição não havia como saber se aquilo funcionava. O canal não foi reprovado — foi arquivado sem julgamento. E a frase "não funciona pro meu negócio" acabou ocupando o lugar de um número que nunca existiu.']);
+      } else if (pq === 'Ficou caro demais') {
+        f.push(['Caro em relação a quê',
+          'Anúncio só é caro comparado ao que devolve. Sem custo por cliente e sem saber quanto vale um cliente ao longo do tempo, "caro" é sensação — e ela costuma aparecer justamente na ausência do número que provaria o contrário.']);
+      } else if (pq === 'Quem operava saiu ou parou') {
+        f.push(['Aquisição presa a uma pessoa',
+          'O canal parou porque alguém saiu, não porque deixou de funcionar. Isso revela que ele nunca virou processo da empresa: era conhecimento de uma cabeça só, e foi embora junto.']);
+      } else if (pq === 'Dava trabalho demais pra tocar') {
+        f.push(['Custo escondido de operação',
+          'O canal foi abandonado pelo esforço, não pelo resultado. É uma decisão tomada sem a comparação que importa: quanto valia a sua hora ali contra o que aquilo devolvia por mês.']);
+      } else if (pq === 'Precisei cortar custos') {
+        f.push(['Aquisição tratada como custo',
+          'Anúncio entrou na fila de corte junto com despesa fixa. Isso só acontece quando ele está classificado como custo e não como compra de cliente — e essa classificação, na prática, decide se ele volta ou não.']);
+      }
+    }
+
     if (a.posicionamento === 'Sim, mas só na minha cabeça' || a.posicionamento === 'Tenho uma ideia vaga' || a.posicionamento === 'Não, e isso me incomoda') {
       f.push(['Diferencial não documentado',
         'Se o motivo de escolherem vocês não está escrito, ele não chega ao site, nem ao anúncio, nem ao vendedor no WhatsApp. Na prática, a decisão do cliente cai pra única variável que sempre está visível: preço.']);
@@ -720,7 +920,10 @@
         'Sumir raramente é recusa; quase sempre é a vida atropelando. Sem rotina de retomada, vocês tratam adiamento como "não" e descartam demanda já paga.']);
     }
 
-    if (a.temSite === 'Não temos nada' || a.temSite === 'Só um linktree ou página de rede social') {
+    if (a.temSite === 'Só o perfil no Google Meu Negócio') {
+      f.push(['Presença só no perfil do Google',
+        'O Google Meu Negócio é ativo valioso e mal explorado — mas ele é uma ficha dentro da casa dos outros: vocês não controlam o layout, não escolhem o que aparece primeiro e não têm pra onde levar quem se interessou. Ele apresenta o negócio; ele não vende por vocês.']);
+    } else if (a.temSite === 'Não temos nada' || a.temSite === 'Só um linktree ou página de rede social') {
       f.push(['Sem território próprio',
         'Sem site, vocês não aparecem em busca, não controlam a narrativa e não têm pra onde levar o tráfego. Toda a operação vive dentro de plataformas cujas regras mudam sem aviso.']);
     } else if (a.siteIdade === 'Mais de 2 anos atrás' || a.siteIdade === 'Não faço ideia') {
@@ -774,6 +977,7 @@
      ESTADO
      ═══════════════════════════════════════════════════════════════ */
   var A = {};              // respostas
+  var CONSULTA = false;    // true quando aberto via link de resgate
   var trail = [];          // histórico p/ desfazer
   var i = 0;               // índice no roteiro
   var techQueue = [];      // urls p/ sondagem técnica
@@ -1038,17 +1242,33 @@
   /* ═══════════════════════════════════════════════════════════════
      RELATÓRIO
      ═══════════════════════════════════════════════════════════════ */
+  function computar() {
+    var s = scoreFronts(A);
+    var vals = FRONTS.map(function (f) { return s[f.key]; }).filter(function (v) { return v !== null; });
+    var geral = vals.length ? Math.round(vals.reduce(function (x, y) { return x + y; }, 0) / vals.length) : 0;
+    var findings = buildFindings(A, s);
+    var pior = FRONTS.slice().filter(function (f) { return s[f.key] !== null; })
+                     .sort(function (x, y) { return s[x.key] - s[y.key]; })[0];
+    return { s: s, geral: geral, findings: findings, pior: pior };
+  }
+
+  /* Modo consulta: abre direto no relatório, a partir do link de resgate. */
+  function modoConsulta(dados) {
+    CONSULTA = true;
+    for (var k in dados) { if (dados.hasOwnProperty(k)) A[k] = dados[k]; }
+    el.intro.hidden = true;
+    el.shell.hidden = true;
+    el.answer.hidden = true;
+    var c = computar();
+    paint(c.s, c.geral, c.findings, c.pior);
+  }
+
   function finish() {
     el.answer.hidden = true;
     el.shell.hidden = true;
 
-    var s = scoreFronts(A);
-    var vals = FRONTS.map(function (f) { return s[f.key]; }).filter(function (v) { return v !== null; });
-    var geral = vals.length ? Math.round(vals.reduce(function (x, y) { return x + y; }, 0) / vals.length) : 0;
-
-    var findings = buildFindings(A, s);
-    var pior = FRONTS.slice().filter(function (f) { return s[f.key] !== null; })
-                     .sort(function (x, y) { return s[x.key] - s[y.key]; })[0];
+    var c = computar();
+    var s = c.s, geral = c.geral, findings = c.findings, pior = c.pior;
 
     say([
       'Pronto, ' + esc(A.nome) + '. Terreno mapeado.',
@@ -1071,6 +1291,15 @@
 
     var h = '';
 
+    if (CONSULTA) {
+      h += '<div class="consulta"><b>Modo consulta</b> — diagnóstico remontado a partir do link. '
+         + 'Abaixo estão o relatório e as respostas completas de '
+         + '<strong>' + esc(A.empresa || 'este lead') + '</strong>.</div>';
+    }
+
+    h += '<div class="print-head">Mind &amp; Biz · Diagnóstico de marketing — '
+       + esc(A.empresa || '') + ' · ' + new Date().toLocaleDateString('pt-BR') + '</div>';
+
     h += '<div class="verdict">'
        + '<div class="gauge"><div class="big num">' + geral + '</div><div class="of">Prontidão de campanha</div></div>'
        + '<div class="verdict-txt"><h2>' + esc(veredito) + '</h2><p>' + resumo + '</p></div>'
@@ -1082,7 +1311,9 @@
       var v = s[f.key]; if (v === null) return;
       var t = tier(v);
       h += '<div class="front">'
-         + '<div class="front-top"><h3>' + f.nome + '</h3>'
+         + '<div class="front-top">'
+         + '<div class="front-id"><span class="front-ico i-' + t + '">' + icone(f.key) + '</span>'
+         + '<h3>' + f.nome + '</h3></div>'
          + '<span class="front-score s-' + t + '">' + tierWord(v) + ' · <span class="num">' + v + '</span>/100</span></div>'
          + '<div class="bar"><span class="f-' + t + '" data-w="' + v + '"></span></div>'
          + '<p>' + FRONT_READ[f.key][t] + '</p></div>';
@@ -1104,15 +1335,29 @@
       });
       h += '</ul>';
       if (extras > 0) {
-        h += '<p style="color:var(--borda);font-size:14.5px;margin:-20px 0 34px">'
+        h += '<p style="color:var(--imperial);font-size:14.5px;margin:-20px 0 34px">'
            + 'Parei em ' + LIMITE + ' pra esta tela não virar um relatório. '
-           + 'Suas respostas acenderam <strong style="color:var(--ouro)">mais ' + extras
+           + 'Suas respostas acenderam <strong style="color:var(--ouro-txt)">mais ' + extras
            + (extras === 1 ? ' ponto' : ' pontos') + '</strong> — eles entram no diagnóstico completo.</p>';
       }
     }
 
+    // No modo consulta, o relatório é para os olhos da Mind & Biz: mostra tudo.
+    if (CONSULTA) {
+      h += '<div class="block-title"><span class="label">Respostas completas</span>'
+         + '<h2>O que foi respondido</h2></div><dl class="answers">';
+      SCRIPT.forEach(function (st) {
+        var v = A[st.id];
+        if (v === undefined) return;
+        h += '<dt>' + esc(perguntaCurta(st)) + '</dt><dd>'
+           + (v === '—' ? '<i>pulou</i>' : esc(String(v).replace(/ · /g, ', ')))
+           + '</dd>';
+      });
+      h += '</dl>';
+    }
+
     // Sinaliza que a prescrição existe — sem entregá-la.
-    h += '<div class="sealed">'
+    if (!CONSULTA) h += '<div class="sealed">'
        + '<h3>Até aqui é observação. A recomendação é outra coisa.</h3>'
        + '<p>Tudo que você leu acima é o que dá pra enxergar de fora com as suas respostas: onde sangra e quanto. '
        + 'O diagnóstico completo é o passo seguinte — e ele é feito com dado, não com opinião.</p>'
@@ -1126,15 +1371,29 @@
        + 'Mas essa parte eu não entrego numa tela automática.</p>'
        + '</div>';
 
-    h += '<div class="cta"><h2>Quer o diagnóstico completo?</h2>'
+    h += '<div class="cta">';
+    if (!CONSULTA) {
+      h += '<h2>Quer o diagnóstico completo?</h2>'
        + '<p>Clique abaixo e o resumo já vai montado no WhatsApp. Eu leio, faço a análise'
        + (pior ? ' — começando por <strong>' + pior.nome.toLowerCase() + '</strong>, sua frente mais exposta' : '')
        + ' — e volto com o material.</p>'
        + '<div class="cta-row">'
        + '<a class="btn btn-wa" id="wa-cta" href="#" target="_blank" rel="noopener">Pedir o diagnóstico completo →</a>'
-       + '<button class="btn" id="copy-cta" style="background:transparent;color:var(--marfim);border:1px solid rgba(200,196,187,.3)">Copiar meu resumo</button>'
        + '</div>'
-       + '<p class="cta-note">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p></div>';
+       + '<p class="cta-note">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p>'
+       + '<p class="print-only">Para o diagnóstico completo: WhatsApp +55 11 99931-8970 · mindandbiz.com.br</p>';
+    }
+    h += '<div class="takeaway">'
+       + '<span class="label">Leve este resultado com você</span>'
+       + '<div class="take-row">'
+       +   '<button class="take" id="take-pdf" type="button">' + ICO_UI.pdf + 'Salvar em PDF</button>'
+       +   '<a class="take" id="take-wa" href="#" target="_blank" rel="noopener">' + ICO_UI.wa + 'Enviar no WhatsApp</a>'
+       +   '<a class="take" id="take-mail" href="#">' + ICO_UI.mail + 'Enviar por e-mail</a>'
+       +   '<button class="take" id="take-copy" type="button">' + ICO_UI.copy + 'Copiar texto</button>'
+       + '</div>'
+       + '<p class="cta-note">O WhatsApp e o e-mail abrem no seu próprio aplicativo, com o texto já pronto — '
+       + 'você escolhe para quem mandar, inclusive para você mesmo. Nada disso passa por servidor nosso.</p>'
+       + '</div></div>';
 
     el.report.innerHTML = h;
     el.report.hidden = false;
@@ -1147,22 +1406,49 @@
 
     renderTech(); // caso a sondagem já tenha voltado
 
-    var msg = waMessage(s, geral);
     var wa = document.getElementById('wa-cta');
-    wa.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg);
-    wa.addEventListener('click', function () {
-      push('whatsapp_click', { click_location: 'diagnostico_cta' });
-      push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
+    if (wa) {
+      wa.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(waMessage(s, geral));
+      wa.addEventListener('click', function () {
+        push('whatsapp_click', { click_location: 'diagnostico_cta' });
+        push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
+      });
+    }
+
+    /* ── Levar o resultado: PDF, WhatsApp, e-mail e cópia ──
+       Tudo resolvido no navegador do lead — nenhum servidor envolvido. */
+    var levar = resumoLevar(s, geral, findings);
+
+    document.getElementById('take-pdf').addEventListener('click', function () {
+      push('diagnostico_salvar', { formato: 'pdf', score_geral: geral });
+      window.print();
     });
 
-    document.getElementById('copy-cta').addEventListener('click', function () {
+    var tw = document.getElementById('take-wa');
+    tw.href = 'https://wa.me/?text=' + encodeURIComponent(levar);
+    tw.addEventListener('click', function () {
+      push('diagnostico_salvar', { formato: 'whatsapp', score_geral: geral });
+    });
+
+    var tm = document.getElementById('take-mail');
+    tm.href = 'mailto:?subject=' + encodeURIComponent('Diagnóstico de marketing — ' + (A.empresa || ''))
+            + '&body=' + encodeURIComponent(levar);
+    tm.addEventListener('click', function () {
+      push('diagnostico_salvar', { formato: 'email', score_geral: geral });
+    });
+
+    document.getElementById('take-copy').addEventListener('click', function () {
       var btn = this;
       var full = fullSummary(s, geral, findings);
-      var ok = function () { btn.textContent = 'Copiado ✓'; setTimeout(function(){ btn.textContent = 'Copiar meu resumo'; }, 2200); };
+      var rotulo = btn.innerHTML;
+      var ok = function () {
+        btn.textContent = 'Copiado ✓';
+        setTimeout(function () { btn.innerHTML = rotulo; }, 2200);
+      };
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(full).then(ok, function(){ fallbackCopy(full); ok(); });
+        navigator.clipboard.writeText(full).then(ok, function () { fallbackCopy(full); ok(); });
       } else { fallbackCopy(full); ok(); }
-      push('diagnostico_copy', { score_geral: geral });
+      push('diagnostico_salvar', { formato: 'copia', score_geral: geral });
     });
 
     push('diagnostico_complete', {
@@ -1170,7 +1456,7 @@
       score_marca: s.marca, score_territorio: s.territorio,
       score_distribuicao: s.distribuicao, score_aquisicao: s.aquisicao, score_conversao: s.conversao,
       frente_critica: pior ? pior.nome : '',
-      segmento: A.segmento || '', objetivo: A.objetivo || ''
+      segmento: valorReal('segmento') || '', objetivo: A.objetivo || ''
     });
 
     el.report.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
@@ -1184,12 +1470,99 @@
     ta.remove();
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     LINK DE RESGATE
+     Sem servidor, as respostas morreriam quando o lead fechasse a aba —
+     e a mensagem do WhatsApp só carrega os scores. Então empacotamos as
+     respostas inteiras num código que viaja dentro do próprio link.
+     Abrindo esse link, a página remonta o diagnóstico completo.
+     Opções viram índices para o código não estourar o tamanho da URL.
+     ═══════════════════════════════════════════════════════════════ */
+  function encodeAnswers() {
+    var pack = {};
+    SCRIPT.forEach(function (st) {
+      var v = A[st.id];
+      if (v === undefined) return;
+      if (st.type === 'choice' && st.opts) {
+        var idx = st.opts.indexOf(v);
+        pack[st.id] = idx > -1 ? idx : v;
+      } else if (st.type === 'multi' && st.opts) {
+        pack[st.id] = String(v).split(' · ').map(function (o) {
+          var j = st.opts.indexOf(o); return j > -1 ? j : o;
+        });
+      } else {
+        pack[st.id] = v;
+      }
+    });
+    try {
+      // btoa não engole acento: converte para UTF-8 antes, e deixa a saída
+      // segura para URL (base64url).
+      var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(pack))));
+      return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    } catch (e) { return ''; }
+  }
+
+  function decodeAnswers(code) {
+    try {
+      var b64 = String(code).replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      var pack = JSON.parse(decodeURIComponent(escape(atob(b64))));
+      var out = {};
+      SCRIPT.forEach(function (st) {
+        var v = pack[st.id];
+        if (v === undefined) return;
+        if (st.type === 'choice' && st.opts && typeof v === 'number') {
+          out[st.id] = st.opts[v];
+        } else if (st.type === 'multi' && st.opts && Object.prototype.toString.call(v) === '[object Array]') {
+          out[st.id] = v.map(function (j) { return typeof j === 'number' ? st.opts[j] : j; }).join(' · ');
+        } else {
+          out[st.id] = v;
+        }
+      });
+      return out;
+    } catch (e) { return null; }
+  }
+
+  /* Enunciado curto de cada pergunta, derivado da última fala do bot. */
+  function perguntaCurta(st) {
+    var ultima = st.bot[st.bot.length - 1];
+    var html = (typeof ultima === 'function') ? ultima(A) : ultima;
+    return html.replace(/<span class="hint">[\s\S]*?<\/span>/g, '')
+               .replace(/<[^>]+>/g, '').trim();
+  }
+
+  /* Resumo que o lead leva embora (WhatsApp dele / e-mail dele).
+     Só os títulos dos achados: `mailto:` e `wa.me` truncam corpo longo,
+     e o texto inteiro de cada ponto fica no PDF. */
+  function resumoLevar(s, geral, findings) {
+    var L = [];
+    L.push('DIAGNÓSTICO DE MARKETING — ' + (A.empresa || ''));
+    L.push('Mind & Biz · mindandbiz.com.br');
+    L.push('');
+    L.push('Prontidão de campanha: ' + geral + '/100');
+    L.push('');
+    FRONTS.forEach(function (f) {
+      if (s[f.key] === null) return;
+      L.push('- ' + f.nome + ': ' + s[f.key] + '/100 (' + tierWord(s[f.key]) + ')');
+    });
+    if (findings.length) {
+      L.push('');
+      L.push('Pontos que sangram:');
+      findings.slice(0, 8).forEach(function (x) { L.push('- ' + x[0]); });
+      L.push('');
+      L.push('O detalhe de cada ponto está na tela do diagnóstico — de lá dá pra salvar em PDF.');
+    }
+    L.push('');
+    L.push('Diagnóstico completo: WhatsApp +55 11 99931-8970');
+    return L.join('\n');
+  }
+
   /* Mensagem do WhatsApp — compacta, porque wa.me trunca textos longos. */
   function waMessage(s, geral) {
     var L = [];
     L.push('Olá, Arthur! Fiz o diagnóstico no site e quero o completo.');
     L.push('');
-    L.push('Negócio: ' + (A.empresa || '-') + ' (' + (A.segmento || '-') + ')');
+    L.push('Negócio: ' + (A.empresa || '-') + ' (' + (valorReal('segmento') || '-') + ')');
     L.push('Falo com: ' + (A.nome || '-'));
     if (A.contato && A.contato !== '—') L.push('Contato: ' + A.contato);
     L.push('');
@@ -1203,6 +1576,12 @@
     if (A.travamento && A.travamento !== '—') L.push('Trava hoje: ' + A.travamento);
     var conc = [A.conc1, A.conc2, A.conc3].filter(function (c) { return c && c !== '—'; });
     if (conc.length) L.push('Concorrentes: ' + conc.join(' | '));
+
+    var code = encodeAnswers();
+    if (code) {
+      L.push('');
+      L.push('Respostas completas: ' + (CONFIG.origem || location.origin) + '/diagnostico?r=' + code);
+    }
     return L.join('\n');
   }
 
@@ -1242,6 +1621,13 @@
   /* ═══════════════════════════════════════════════════════════════
      INÍCIO
      ═══════════════════════════════════════════════════════════════ */
+  /* Link de resgate (?r=…): abre direto no relatório remontado. */
+  var resgate = /[?&]r=([^&#]+)/.exec(location.search);
+  if (resgate) {
+    var recuperado = decodeAnswers(resgate[1]);
+    if (recuperado) modoConsulta(recuperado);
+  }
+
   document.getElementById('start').addEventListener('click', function () {
     el.intro.hidden = true;
     el.shell.hidden = false;
