@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página não encontrada — Mind &amp; Biz</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="/favicon.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;600&family=Spectral:ital,wght@1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ouro: #A68B5B; --ouro-dk: #8a7249; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: #100E0A; color: #EDE6D8; font-family: 'Instrument Sans', sans-serif;
+      text-align: center; padding: 24px;
+    }
+    main { max-width: 560px; }
+    .num {
+      font-family: 'Spectral', serif; font-style: italic; font-weight: 400;
+      font-size: clamp(96px, 18vw, 160px); line-height: 1; color: var(--ouro);
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: clamp(24px, 4.5vw, 34px); margin: 16px 0 10px;
+    }
+    p { color: #B9AE9A; font-size: 17px; line-height: 1.6; }
+    p.en { font-size: 15px; margin-top: 8px; opacity: .75; }
+    .actions { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    a.btn {
+      display: inline-block; padding: 14px 28px; border-radius: 6px; text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px;
+      background: var(--ouro); color: #100E0A; transition: background .2s;
+    }
+    a.btn:hover { background: var(--ouro-dk); }
+    a.btn.ghost { background: transparent; color: var(--ouro); border: 1px solid var(--ouro-dk); }
+    a.btn.ghost:hover { background: rgba(166, 139, 91, .12); }
+    img.logo { height: 44px; margin-bottom: 28px; opacity: .9; }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.svg" alt="Mind &amp; Biz" />
+    <div class="num" aria-hidden="true">404</div>
+    <h1>Este território ainda não foi conquistado.</h1>
+    <p>A página que você procura não existe ou mudou de endereço.</p>
+    <p class="en" lang="en">This page doesn't exist or has moved.</p>
+    <div class="actions">
+      <a class="btn" href="/">Voltar ao início</a>
+      <a class="btn ghost" href="/en/" lang="en">English home</a>
+    </div>
+  </main>
+</body>
+</html>
