@@ -815,79 +815,6 @@
     .exit-dismiss { background: none; border: 0; color: #8a8175; font-family: 'Instrument Sans', sans-serif; font-size: 13px; cursor: pointer; padding: 6px; transition: color .2s; }
     .exit-dismiss:hover { color: #C8C4BB; }
 
-    /* ══════════════ TEASER DO DIAGNÓSTICO ══════════════ */
-    /* Papel claro sobre seção escura: o relatório parece um documento
-       na mesa, e não mais um bloco do site. É o que faz o lead querer o dele. */
-    /* isolation cria contexto de empilhamento: sem isso as "folhas de trás"
-       (z-index:-1) somem atrás do fundo da seção. */
-    .tz-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 5vw, 68px); align-items: center; isolation: isolate; }
-    .tz-lead h2 { margin-bottom: 16px; }
-    .tz-lead p { color: #C8C4BB; font-size: clamp(15px,1.6vw,17px); line-height: 1.7; margin-bottom: 26px; max-width: 460px; }
-    .tz-note { display: block; margin-top: 14px; font-size: 13px; color: #8a8175; letter-spacing: .01em; }
-
-    .tz-paper {
-      position: relative; background: #FFFFFF; border-radius: 12px;
-      padding: clamp(20px, 3vw, 28px);
-      box-shadow: 0 26px 70px rgba(0,0,0,.45);
-      color: var(--chumbo);
-    }
-    /* Duas folhas atrás sugerem que o relatório continua. */
-    .tz-paper::before, .tz-paper::after {
-      content: ''; position: absolute; left: 4%; right: 4%; bottom: -7px;
-      height: 20px; background: rgba(248,245,240,.30); border-radius: 0 0 12px 12px; z-index: -1;
-    }
-    .tz-paper::after { left: 8%; right: 8%; bottom: -13px; background: rgba(248,245,240,.16); }
-
-    /* Cabeçalho de documento. A tag ficava absoluta no canto e no mobile
-       atropelava a manchete quando ela quebrava em duas linhas. */
-    .tz-doc {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
-      color: #9a8f80; margin-bottom: 15px;
-    }
-    .tz-tag {
-      flex: 0 0 auto; color: #7A6238; background: rgba(166,139,91,.13);
-      border: 1px solid rgba(166,139,91,.32); border-radius: 4px; padding: 4px 9px;
-    }
-
-    .tz-head { display: flex; align-items: center; gap: 18px; padding-bottom: 16px; border-bottom: 1px solid rgba(30,30,30,.12); margin-bottom: 16px; }
-    .tz-gauge { text-align: center; flex: 0 0 auto; }
-    .tz-gauge b { display: block; font-family: 'Space Grotesk',sans-serif; font-size: clamp(40px,5.4vw,54px); line-height: 1; color: #A8441F; font-weight: 700; }
-    .tz-gauge span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #8a8175; }
-    .tz-head h3 { font-size: clamp(16px,1.9vw,19px); line-height: 1.25; margin-bottom: 5px; }
-    .tz-head p { font-size: 13.5px; color: var(--imperial); margin: 0; }
-
-    .tz-fronts { display: grid; gap: 11px; margin-bottom: 16px; }
-    .tz-front-top { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
-    .tz-ico { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; }
-    .tz-ico svg { width: 15px; height: 15px; display: block; }
-    .tz-front-top h4 { font-size: 13.5px; font-weight: 600; flex: 1 1 auto; letter-spacing: 0; }
-    .tz-val { font-family: 'Space Grotesk',sans-serif; font-size: 13px; font-weight: 700; white-space: nowrap; }
-    .tz-bar { height: 5px; background: rgba(30,30,30,.09); border-radius: 3px; overflow: hidden; }
-    .tz-bar i { display: block; height: 100%; width: 0; border-radius: 3px; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
-    .tz-paper.in .tz-bar i { width: var(--w); }
-    .t-bad  { color: #A8441F; } .t-bad  .tz-ico, .tz-bar i.t-bad  { background: rgba(168,68,31,.11); }
-    .t-mid  { color: #8A6620; } .t-mid  .tz-ico, .tz-bar i.t-mid  { background: rgba(138,102,32,.12); }
-    .t-good { color: #55703A; } .t-good .tz-ico, .tz-bar i.t-good { background: rgba(85,112,58,.13); }
-    .tz-bar i.t-bad { background: #A8441F; } .tz-bar i.t-mid { background: #8A6620; } .tz-bar i.t-good { background: #55703A; }
-
-    .tz-finds { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
-    .tz-finds li {
-      border-left: 3px solid var(--ouro); background: var(--marfim);
-      padding: 11px 14px; border-radius: 0 7px 7px 0; font-size: 13px; line-height: 1.55;
-    }
-    .tz-finds b { display: block; color: #7A6238; font-size: 12.5px; margin-bottom: 3px; letter-spacing: .02em; }
-    .tz-finds span { color: var(--imperial); }
-    /* O último achado fica ilegível de propósito: o lead vê que há mais. */
-    .tz-finds li.tz-blur { filter: blur(3.4px); opacity: .55; user-select: none; }
-    .tz-more { margin: 12px 0 0; font-size: 12.5px; color: var(--imperial); text-align: center; }
-    .tz-more b { color: #7A6238; }
-
-    @media (max-width: 900px) {
-      .tz-grid { grid-template-columns: 1fr; gap: 34px; }
-      .tz-lead p { max-width: none; }
-    }
-
     /* ══════════════ REDUCED MOTION ══════════════ */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -997,80 +924,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p class="prob-txt">A marca existe, mas não conecta. O público não entende o valor. A promessa não chega a quem precisa ouvir.</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── TEASER DO DIAGNÓSTICO (dark) ──
-       Entra logo após o problema: o lead acabou de ler "não fica claro por quê"
-       e a resposta é justamente o diagnóstico. O relatório de exemplo é fictício
-       e está marcado como tal — não é caso de cliente. -->
-  <section id="teaser" class="sec-dark alt" aria-labelledby="tz-title">
-    <div class="container">
-      <div class="tz-grid">
-        <div class="tz-lead reveal">
-          <span class="label">Reconhecimento de terreno</span>
-          <h2 id="tz-title">Antes de contratar, <em>veja o mapa.</em></h2>
-          <p>Cinco minutos de perguntas e você recebe na hora um raio-x das cinco frentes do seu marketing: onde está sólido, onde está frágil e onde não existe nada. Sem esperar retorno de ninguém.</p>
-          <a class="btn" href="/diagnostico" data-cta="teaser">Fazer meu diagnóstico →</a>
-          <span class="tz-note">Gratuito · resultado na tela · você decide se quer conversar depois</span>
-        </div>
-
-        <div class="tz-paper reveal" role="img" aria-label="Exemplo de diagnóstico: prontidão 38 de 100, com as cinco frentes pontuadas e os pontos críticos listados.">
-          <div class="tz-doc"><span>Diagnóstico Mind &amp; Biz</span><span class="tz-tag">Exemplo</span></div>
-          <div class="tz-head">
-            <div class="tz-gauge"><b>38</b><span>de 100</span></div>
-            <div>
-              <h3>Você não tem um problema de marketing. Tem cinco.</h3>
-              <p>A operação vende, mas nenhuma frente sustenta a próxima.</p>
-            </div>
-          </div>
-
-          <div class="tz-fronts">
-            <div class="tz-front t-bad">
-              <div class="tz-front-top">
-                <span class="tz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v19"/><path d="M6 4h11.5l-2.6 4.2 2.6 4.2H6z"/></svg></span>
-                <h4>Marca e Posicionamento</h4><span class="tz-val">15/100</span>
-              </div>
-              <div class="tz-bar"><i class="t-bad" style="--w:15%"></i></div>
-            </div>
-            <div class="tz-front t-mid">
-              <div class="tz-front-top">
-                <span class="tz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.4 9 3.8l6 2.6 6-2.6v13.4l-6 2.6-6-2.6-6 2.6z"/><path d="M9 3.8v13.4"/><path d="M15 6.4v13.4"/></svg></span>
-                <h4>Território Próprio</h4><span class="tz-val">55/100</span>
-              </div>
-              <div class="tz-bar"><i class="t-mid" style="--w:55%"></i></div>
-            </div>
-            <div class="tz-front t-mid">
-              <div class="tz-front-top">
-                <span class="tz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.1"/><path d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8"/><path d="M15.4 15.4a4.8 4.8 0 0 0 0-6.8"/><path d="M6.2 6.2a8.2 8.2 0 0 0 0 11.6"/><path d="M17.8 17.8a8.2 8.2 0 0 0 0-11.6"/></svg></span>
-                <h4>Distribuição e Conteúdo</h4><span class="tz-val">60/100</span>
-              </div>
-              <div class="tz-bar"><i class="t-mid" style="--w:60%"></i></div>
-            </div>
-            <div class="tz-front t-bad">
-              <div class="tz-front-top">
-                <span class="tz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 1.6v3.2"/><path d="M12 19.2v3.2"/><path d="M1.6 12h3.2"/><path d="M19.2 12h3.2"/></svg></span>
-                <h4>Aquisição</h4><span class="tz-val">10/100</span>
-              </div>
-              <div class="tz-bar"><i class="t-bad" style="--w:10%"></i></div>
-            </div>
-            <div class="tz-front t-mid">
-              <div class="tz-front-top">
-                <span class="tz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.8 4.6h11.4l-4.5 5.6v6.6l-2.4-1.6v-5z"/><path d="M20.6 16.2a4.4 4.4 0 1 1-1.7-5.6"/><path d="M20.4 8.2v3.6h-3.6"/></svg></span>
-                <h4>Conversão e Retomada</h4><span class="tz-val">48/100</span>
-              </div>
-              <div class="tz-bar"><i class="t-mid" style="--w:48%"></i></div>
-            </div>
-          </div>
-
-          <ul class="tz-finds">
-            <li><b>Canal desligado sem veredito</b><span>Vocês pararam de anunciar, mas sem medição não havia como saber se aquilo funcionava. O canal não foi reprovado — foi arquivado sem julgamento.</span></li>
-            <li><b>Origem única de clientes</b><span>Quase tudo vem de indicação. É barato e é bom — até o mês em que ninguém indica, e não existe segunda torneira para abrir.</span></li>
-            <li class="tz-blur" aria-hidden="true"><b>Promessa que não sobrevive à comparação</b><span>Dois concorrentes dizem exatamente a mesma coisa que você na primeira dobra do site, e o cliente decide no preço.</span></li>
-          </ul>
-          <p class="tz-more">…e mais <b>6 pontos</b> no seu diagnóstico.</p>
         </div>
       </div>
     </div>
@@ -1864,37 +1717,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (form) form.addEventListener('submit', function(){
       window.dataLayer.push({ event: 'contact_form_submit' });
     });
-    document.addEventListener('click', function(e){
-      var a = e.target.closest ? e.target.closest('a[href="/diagnostico"]') : null;
-      if (!a) return;
-      window.dataLayer.push({ event: 'diagnostico_cta', click_location: a.dataset.cta || 'page' });
-    });
-  })();
-
-  /* ── Teaser: o número sobe junto com as barras ── */
-  (function(){
-    var g = document.querySelector('.tz-gauge b');
-    var paper = document.querySelector('.tz-paper');
-    if (!g || !paper || !('IntersectionObserver' in window)) return;
-    var alvo = parseInt(g.textContent, 10) || 0;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    g.textContent = '0';
-    var io = new IntersectionObserver(function(ents){
-      ents.forEach(function(en){
-        if (!en.isIntersecting) return;
-        io.disconnect();
-        var t0 = null;
-        requestAnimationFrame(function passo(t){
-          if (t0 === null) t0 = t;
-          var p = Math.min(1, (t - t0) / 1100);
-          g.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
-          if (p < 1) requestAnimationFrame(passo);
-        });
-      });
-    }, { threshold: 0.35 });
-    io.observe(paper);
-    /* Se o observer nunca disparar, o número não pode ficar preso em zero. */
-    setTimeout(function(){ if (g.textContent === '0') g.textContent = alvo; }, 4000);
   })();
 
 </script>
