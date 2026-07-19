@@ -151,17 +151,21 @@
     .capa-rotas { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; opacity: .62; }
     .capa-inner { position: relative; z-index: 3; text-align: center; }
 
-    .rota { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracar 2.2s cubic-bezier(.35,0,.2,1) forwards; }
-    .rota:nth-child(2) { animation-delay: .14s; }
-    .rota:nth-child(3) { animation-delay: .28s; }
-    .rota:nth-child(4) { animation-delay: .42s; }
-    .rota:nth-child(5) { animation-delay: .56s; }
-    .rota:nth-child(6) { animation-delay: .7s; }
+    /* As rotas partem do ponto e vão PARA as bordas: é varredura de terreno,
+       não convergência num alvo. Traçado invertido lia como mira de ataque —
+       e aqui ainda não há ataque nenhum, só reconhecimento. */
+    .rota { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracar 2.2s cubic-bezier(.35,0,.2,1) .5s forwards; }
+    .rota:nth-child(2) { animation-delay: .64s; }
+    .rota:nth-child(3) { animation-delay: .78s; }
+    .rota:nth-child(4) { animation-delay: .92s; }
+    .rota:nth-child(5) { animation-delay: 1.06s; }
+    .rota:nth-child(6) { animation-delay: 1.2s; }
     @keyframes tracar { to { stroke-dashoffset: 0; } }
 
-    .alvo { opacity: 0; animation: surgir .7s ease 1.7s forwards; }
+    /* O ponto surge ANTES das rotas — é dele que a varredura sai. */
+    .ponto { opacity: 0; animation: surgir .7s ease .1s forwards; }
     @keyframes surgir { to { opacity: 1; } }
-    .alvo-pulso { transform-origin: 500px 281px; animation: pulsar 3.4s ease-in-out 2.4s infinite; }
+    .ponto-pulso { transform-origin: 500px 281px; animation: pulsar 3.4s ease-in-out 1s infinite; }
     @keyframes pulsar {
       0%, 100% { transform: scale(1);    opacity: .5; }
       50%      { transform: scale(1.35); opacity: .1; }
@@ -528,17 +532,18 @@
     <div class="capa-bg" aria-hidden="true"></div>
     <svg class="capa-rotas" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <g fill="none" stroke="#C9A857" stroke-linecap="round" stroke-width="1.5">
-        <path class="rota" pathLength="1" d="M40,110 C250,96 360,196 486,272" />
-        <path class="rota" pathLength="1" d="M30,470 C250,452 388,352 492,292" />
-        <path class="rota" pathLength="1" d="M965,96 C740,132 604,206 514,270" />
-        <path class="rota" pathLength="1" d="M975,472 C752,468 620,360 518,294" />
-        <path class="rota" pathLength="1" d="M498,10 C486,120 492,190 498,258" />
-        <path class="rota" pathLength="1" d="M502,550 C514,440 508,368 502,304" />
+        <path class="rota" pathLength="1" d="M486,272 C360,196 250,96 40,110" />
+        <path class="rota" pathLength="1" d="M492,292 C388,352 250,452 30,470" />
+        <path class="rota" pathLength="1" d="M514,270 C604,206 740,132 965,96" />
+        <path class="rota" pathLength="1" d="M518,294 C620,360 752,468 975,472" />
+        <path class="rota" pathLength="1" d="M498,258 C492,190 486,120 498,10" />
+        <path class="rota" pathLength="1" d="M502,304 C508,368 514,440 502,550" />
       </g>
-      <g class="alvo" fill="none" stroke="#C9A857">
-        <circle class="alvo-pulso" cx="500" cy="281" r="20" stroke-width="1.1" />
+      <!-- Ponto de observação, não alvo: anel pulsando + marca de referência. -->
+      <g class="ponto" fill="none" stroke="#C9A857">
+        <circle class="ponto-pulso" cx="500" cy="281" r="20" stroke-width="1.1" />
         <circle cx="500" cy="281" r="8.5" stroke-width="1.9" />
-        <path stroke-width="1.4" d="M500,254 v-13 M500,308 v13 M473,281 h-13 M527,281 h13" />
+        <circle cx="500" cy="281" r="2.6" fill="#C9A857" stroke="none" />
       </g>
     </svg>
 
@@ -578,7 +583,7 @@
       <div class="amostra-doc"><span>Diagnóstico Mind &amp; Biz</span><span class="am-tag">Exemplo</span></div>
 
       <div class="verdict">
-        <div class="gauge"><div class="big num" id="am-num">38</div><div class="of">Prontidão de campanha</div></div>
+        <div class="gauge"><div class="big num" id="am-num">38</div><div class="of">Prontidão de marketing</div></div>
         <div class="verdict-txt">
           <h2>Você não tem um problema de marketing. Tem cinco.</h2>
           <p>A operação vende, mas nenhuma frente sustenta a próxima.</p>
@@ -738,9 +743,8 @@
       bot:[function(a){ return 'Certo. Agora eu preciso entender o terreno em que a ' + esc(a.empresa) + ' opera.'; },
            'Qual dessas opções descreve melhor o que vocês fazem?'],
       opts:['Serviço para empresas (B2B)','Serviço para consumidor final','Comércio ou loja física','E-commerce','Software / produto digital','Profissional liberal','Outro'],
-      detalhe:{ quando:['Outro'], placeholder:'Ex.: cooperativa de crédito rural',
-                bot:['Nenhuma caixinha serviu — melhor assim.',
-                     '<strong>Me conta com suas palavras: o que vocês fazem e pra quem?</strong>'] } },
+      detalhe:{ quando:['Outro'], placeholder:'O que você faz e pra quem',
+                bot:['<strong>Me conta com suas palavras: o que você faz e pra quem?</strong>'] } },
 
     { id:'tempo', stage:1, type:'choice',
       bot:['<strong>Há quanto tempo o negócio existe?</strong>'],
@@ -758,16 +762,16 @@
     // ── 2. Marca ─────────────────────────────────────────────────
     { id:'logo', stage:2, type:'choice',
       bot:['Vamos falar de marca — a camada que todo mundo acha que é só o desenho.',
-           '<strong>Vocês têm logo?</strong>'],
-      opts:['Sim, feito por profissional','Sim, mas amador ou datado','Não temos'] },
+           '<strong>Tem logo?</strong>'],
+      opts:['Sim, feito por profissional','Sim, mas amador ou datado','Ainda não'] },
 
     { id:'manual', stage:2, type:'choice',
       bot:['<strong>E manual de marca?</strong><span class="hint">Documento com cores, tipografia, uso do logo e tom de voz.</span>'],
-      opts:['Sim, documentado e seguido','Existe, mas ninguém consulta','Não temos','Não sei o que é isso'] },
+      opts:['Sim, documentado e seguido','Existe, mas ninguém consulta','Ainda não','Não sei o que é isso'] },
 
     { id:'posicionamento', stage:2, type:'choice',
       bot:['Pergunta que separa marca de logotipo:',
-           '<strong>Você consegue dizer, em uma frase, por que um cliente escolhe vocês e não o concorrente ao lado?</strong>'],
+           '<strong>Você consegue dizer, em uma frase, por que um cliente escolhe você e não um concorrente?</strong>'],
       opts:['Sim, está escrito e a equipe usa','Sim, mas só na minha cabeça','Tenho uma ideia vaga','Não, e isso me incomoda'] },
 
     { id:'materiais', stage:2, type:'choice',
@@ -778,7 +782,7 @@
     { id:'temSite', stage:3, type:'choice',
       bot:['Agora o território que é seu de verdade — o que não depende do algoritmo de ninguém.',
            '<strong>Vocês têm site?</strong>'],
-      opts:['Sim, temos site','Só um linktree ou página de rede social','Só o perfil no Google Meu Negócio','Não temos nada'] },
+      opts:['Sim, temos site','Só um linktree ou página de rede social','Só o perfil no Google Meu Negócio','Nada disso ainda'] },
 
     { id:'siteUrl', stage:3, type:'text', placeholder:'seusite.com.br',
       when:function(a){ return a.temSite === 'Sim, temos site'; },
@@ -796,7 +800,7 @@
 
     { id:'lista', stage:3, type:'choice',
       bot:['<strong>Vocês têm uma lista própria de contatos de clientes?</strong><span class="hint">E-mails ou telefones organizados, que dá pra acionar quando quiser.</span>'],
-      opts:['Sim, organizada e usada','Temos os dados, mas nunca usamos','Está espalhado em vários lugares','Não temos'] },
+      opts:['Sim, organizada e usada','Temos os dados, mas nunca usamos','Está espalhado em vários lugares','Ainda não'] },
 
     // ── 4. Distribuição ──────────────────────────────────────────
     { id:'redes', stage:4, type:'multi',
@@ -863,11 +867,11 @@
       opts:['Temos resposta automática ou plantão','Alguém responde quando vê','Fica pro próximo dia útil','Provavelmente se perde'] },
 
     { id:'crm', stage:6, type:'choice',
-      bot:['<strong>Como vocês acompanham quem pediu orçamento e ainda não fechou?</strong>'],
+      bot:['<strong>Como vocês acompanham quem procurou e ainda não virou cliente?</strong><span class="hint">Vale orçamento, reserva, agendamento — qualquer contato que ficou no ar.</span>'],
       opts:['CRM ou ferramenta dedicada','Planilha','Na cabeça e no histórico do WhatsApp','Não acompanhamos'] },
 
     { id:'followup', stage:6, type:'choice',
-      bot:['<strong>E quem pediu orçamento e sumiu — vocês voltam a procurar?</strong>'],
+      bot:['<strong>E quem chegou a falar com vocês e sumiu — voltam a procurar?</strong>'],
       opts:['Sim, temos rotina de retomada','Às vezes, quando lembramos','Não, se sumiu é porque não quis'] },
 
     // ── 7. Concorrência ──────────────────────────────────────────
@@ -882,8 +886,12 @@
       bot:['<strong>E um terceiro?</strong><span class="hint">Opcional também.</span>'] },
 
     { id:'diferenca', stage:7, type:'choice',
-      bot:['<strong>Comparando com eles, como você se sente na disputa?</strong>'],
+      bot:['<strong>Comparando com eles, onde você está na disputa?</strong>'],
       opts:['Somos claramente melhores, mas eles aparecem mais','Estamos parelhos','Eles estão à frente','Não faço ideia de como nos comparamos'] },
+
+    { id:'porqueMelhor', stage:7, type:'text', placeholder:'O que você entrega melhor que eles',
+      when:function(a){ return a.diferenca !== 'Não faço ideia de como nos comparamos'; },
+      bot:['<strong>E por que um cliente deveria escolher você, e não eles?</strong><span class="hint">O que você faz melhor na prática — sem modéstia.</span>'] },
 
     // ── 8. Objetivo ──────────────────────────────────────────────
     { id:'objetivo', stage:8, type:'choice',
@@ -894,9 +902,9 @@
     { id:'travamento', stage:8, type:'text', placeholder:'Escreva com suas palavras', skippable:true,
       bot:['<strong>E o que mais te trava hoje?</strong><span class="hint">Pode escrever solto — é o campo que eu mais leio.</span>'] },
 
-    { id:'contato', stage:8, type:'text', placeholder:'WhatsApp ou e-mail', skippable:true,
+    { id:'contato', stage:8, type:'text', placeholder:'WhatsApp ou e-mail',
       bot:['Fechado. Vou montar o relatório.',
-           'Antes: <strong>me deixa um WhatsApp ou e-mail?</strong><span class="hint">Opcional — só pra eu conseguir te devolver o diagnóstico completo se você pedir.</span>'] }
+           'Antes: <strong>onde eu te encontro?</strong><span class="hint">WhatsApp ou e-mail — é por onde o diagnóstico completo chega até você.</span>'] }
   ];
 
   /* ───────────────────────────────────────────────────────────────
@@ -942,14 +950,14 @@
      Cada regra devolve pontos; a frente é normalizada em 0–100.
      ═══════════════════════════════════════════════════════════════ */
   var SCALES = {
-    logo:            { 'Sim, feito por profissional':10, 'Sim, mas amador ou datado':5, 'Não temos':0 },
-    manual:          { 'Sim, documentado e seguido':10, 'Existe, mas ninguém consulta':4, 'Não temos':0, 'Não sei o que é isso':0 },
+    logo:            { 'Sim, feito por profissional':10, 'Sim, mas amador ou datado':5, 'Ainda não':0 },
+    manual:          { 'Sim, documentado e seguido':10, 'Existe, mas ninguém consulta':4, 'Ainda não':0, 'Não sei o que é isso':0 },
     posicionamento:  { 'Sim, está escrito e a equipe usa':10, 'Sim, mas só na minha cabeça':5, 'Tenho uma ideia vaga':2, 'Não, e isso me incomoda':0 },
     materiais:       { 'Temos modelos prontos e padronizados':10, 'Alguém da equipe faz do zero':5, 'Contratamos por fora toda vez':4, 'Faço no improviso mesmo':1 },
 
-    temSite:         { 'Sim, temos site':10, 'Só o perfil no Google Meu Negócio':4, 'Só um linktree ou página de rede social':3, 'Não temos nada':0 },
+    temSite:         { 'Sim, temos site':10, 'Só o perfil no Google Meu Negócio':4, 'Só um linktree ou página de rede social':3, 'Nada disso ainda':0 },
     siteIdade:       { 'Nos últimos 6 meses':10, 'Entre 1 e 2 anos atrás':6, 'Mais de 2 anos atrás':2, 'Não faço ideia':2 },
-    lista:           { 'Sim, organizada e usada':10, 'Temos os dados, mas nunca usamos':4, 'Está espalhado em vários lugares':2, 'Não temos':0 },
+    lista:           { 'Sim, organizada e usada':10, 'Temos os dados, mas nunca usamos':4, 'Está espalhado em vários lugares':2, 'Ainda não':0 },
 
     frequencia:      { 'Todo dia':10, 'Algumas vezes por semana':9, 'Uma vez por semana':6, 'Quando sobra tempo':3, 'Está parado há meses':0 },
     quemPosta:       { 'Profissional dedicado':10, 'Agência ou freelancer':8, 'Alguém da equipe, acumulando função':5, 'Eu mesmo, no intervalo do trabalho':4, 'Ninguém, na prática':0 },
@@ -1130,8 +1138,8 @@
         'Boa parte da demanda nasce à noite e no fim de semana, exatamente quando a operação está fechada. Esse contato não aparece em relatório nenhum: ele não vira lead perdido, ele nunca vira lead.']);
     }
     if (a.crm === 'Na cabeça e no histórico do WhatsApp' || a.crm === 'Não acompanhamos') {
-      f.push(['Orçamento em aberto sem dono',
-        'Quem pediu preço e não respondeu é o público mais barato que existe — já conhece vocês. Sem lugar pra registrar, esse estoque simplesmente evapora.']);
+      f.push(['Contato em aberto sem dono',
+        'Quem já procurou e não fechou é o público mais barato que existe — já conhece vocês. Sem lugar pra registrar, esse estoque simplesmente evapora.']);
     }
     if (a.followup === 'Não, se sumiu é porque não quis') {
       f.push(['Zero retomada',
@@ -1141,7 +1149,7 @@
     if (a.temSite === 'Só o perfil no Google Meu Negócio') {
       f.push(['Presença só no perfil do Google',
         'O Google Meu Negócio é ativo valioso e mal explorado — mas ele é uma ficha dentro da casa dos outros: vocês não controlam o layout, não escolhem o que aparece primeiro e não têm pra onde levar quem se interessou. Ele apresenta o negócio; ele não vende por vocês.']);
-    } else if (a.temSite === 'Não temos nada' || a.temSite === 'Só um linktree ou página de rede social') {
+    } else if (a.temSite === 'Nada disso ainda' || a.temSite === 'Só um linktree ou página de rede social') {
       f.push(['Sem território próprio',
         'Sem site, vocês não aparecem em busca, não controlam a narrativa e não têm pra onde levar o tráfego. Toda a operação vive dentro de plataformas cujas regras mudam sem aviso.']);
     } else if (a.siteIdade === 'Mais de 2 anos atrás' || a.siteIdade === 'Não faço ideia') {
@@ -1522,7 +1530,7 @@
        + esc(A.empresa || '') + ' · ' + new Date().toLocaleDateString('pt-BR') + '</div>';
 
     h += '<div class="verdict">'
-       + '<div class="gauge"><div class="big num">' + geral + '</div><div class="of">Prontidão de campanha</div></div>'
+       + '<div class="gauge"><div class="big num">' + geral + '</div><div class="of">Prontidão de marketing</div></div>'
        + '<div class="verdict-txt"><h2>' + esc(veredito) + '</h2><p>' + resumo + '</p></div>'
        + '</div>';
 
@@ -1808,7 +1816,7 @@
     L.push('DIAGNÓSTICO DE MARKETING — ' + (A.empresa || ''));
     L.push('Mind & Biz · mindandbiz.com.br');
     L.push('');
-    L.push('Prontidão de campanha: ' + geral + '/100');
+    L.push('Prontidão de marketing: ' + geral + '/100');
     L.push('');
     FRONTS.forEach(function (f) {
       if (s[f.key] === null) return;
@@ -1835,7 +1843,7 @@
     L.push('Falo com: ' + (A.nome || '-'));
     if (A.contato && A.contato !== '—') L.push('Contato: ' + A.contato);
     L.push('');
-    L.push('Prontidão geral: ' + geral + '/100');
+    L.push('Prontidão de marketing: ' + geral + '/100');
     FRONTS.forEach(function (f) {
       if (s[f.key] === null) return;
       L.push('- ' + f.nome + ': ' + s[f.key] + '/100');
@@ -1858,7 +1866,7 @@
   function fullSummary(s, geral, findings) {
     var L = [];
     L.push('DIAGNÓSTICO MIND & BIZ — ' + (A.empresa || ''));
-    L.push('Prontidão de campanha: ' + geral + '/100');
+    L.push('Prontidão de marketing: ' + geral + '/100');
     L.push('');
     L.push('FRENTES');
     FRONTS.forEach(function (f) {
