@@ -282,6 +282,55 @@
        quando o "voltar" some, e a linha inteira dança a cada pergunta. */
     .undo[hidden], .skip[hidden] { visibility: hidden; pointer-events: none; }
 
+    /* ── Amostra do relatório ──
+       Fica entre a capa e a conversa: quem chega aqui vê o entregável antes
+       de decidir gastar cinco minutos. Some assim que a conversa começa —
+       um exemplo à vista enquanto ele responde ancoraria as respostas dele. */
+    .amostra { padding: 52px 0 12px; }
+    .amostra[hidden] { display: none; }
+    .amostra-head { text-align: center; max-width: 560px; margin: 0 auto 24px; }
+    .amostra-head h2 { font-size: clamp(21px, 3.2vw, 27px); margin: 0 0 8px; }
+    .amostra-head p { color: var(--imperial); font-size: 15px; margin: 0; }
+
+    .amostra-folha {
+      position: relative; border: 1px solid var(--linha); border-radius: 14px;
+      background: var(--marfim); padding: clamp(18px, 3.2vw, 26px);
+      box-shadow: 0 20px 54px rgba(30,20,10,.10);
+    }
+    /* Duas folhas atrás: o documento continua abaixo do que se vê. */
+    .amostra-folha::before, .amostra-folha::after {
+      content: ''; position: absolute; left: 3%; right: 3%; bottom: -8px; height: 22px;
+      border: 1px solid var(--linha); border-top: 0; background: var(--marfim);
+      border-radius: 0 0 14px 14px; z-index: -1;
+    }
+    .amostra-folha::after { left: 6.5%; right: 6.5%; bottom: -15px; opacity: .6; }
+
+    .amostra-doc {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+      color: #9a8f80; margin-bottom: 16px;
+    }
+    /* Marcado como exemplo: o relatório é fictício, não é caso de cliente. */
+    .am-tag {
+      flex: 0 0 auto; color: var(--ouro-txt); background: rgba(166,139,91,.13);
+      border: 1px solid rgba(166,139,91,.32); border-radius: 4px; padding: 4px 9px;
+    }
+
+    /* O corte por máscara diz "tem mais" sem precisar escrever. */
+    .amostra-corte {
+      -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 96%);
+              mask-image: linear-gradient(180deg, #000 30%, transparent 96%);
+      max-height: 86px; overflow: hidden;
+    }
+    .amostra-mais { text-align: center; font-size: 14px; color: var(--imperial); margin: 14px 0 0; }
+    .amostra-mais b { color: var(--ouro-txt); }
+    .amostra-cta { text-align: center; margin: 26px 0 0; }
+    .amostra-cta .btn { margin: 0; }
+
+    /* Dentro da amostra as barras enchem só quando a folha entra na tela. */
+    .amostra .bar span { width: 0; }
+    .amostra.am-in .bar span { width: var(--w); }
+
     /* ── Relatório ── */
     .report { padding: 8px 0 90px; animation: rise .5s cubic-bezier(.2,.8,.2,1) both; }
     .report[hidden] { display: none; }
@@ -297,7 +346,9 @@
     .gauge .big { font-size: clamp(56px, 10vw, 84px); line-height: 1; color: var(--ouro); }
     .gauge .of { font-size: 13px; color: var(--borda); letter-spacing: .1em; text-transform: uppercase; }
     .verdict-txt { flex: 1 1 280px; }
-    .verdict-txt h2 { margin-bottom: 10px; }
+    /* O bloco do veredito é escuro dentro de uma página clara: a manchete
+       precisa de cor explícita, senão herda o chumbo do body e some. */
+    .verdict-txt h2 { margin-bottom: 10px; color: var(--marfim); }
     .verdict-txt p { color: var(--borda); margin: 0; }
 
     .fronts { display: grid; gap: 14px; margin-bottom: 34px; }
@@ -510,6 +561,92 @@
         o diagnóstico. Não repassamos nada a terceiros — veja a
         <a href="/privacidade.html">Política de Privacidade</a>.
       </p>
+    </div>
+  </section>
+
+  <!-- ── Amostra do entregável ──
+       Usa as mesmas classes do relatório real (.verdict/.front/.findings):
+       o que ele vê aqui é literalmente o formato que vai receber. -->
+  <section class="amostra wrap" id="amostra" aria-labelledby="am-title">
+    <div class="amostra-head">
+      <span class="label">O que você recebe</span>
+      <h2 id="am-title">Assim, na tela, ao terminar.</h2>
+      <p>Um exemplo do relatório — score geral, as cinco frentes pontuadas e os pontos que estão sangrando no seu caso.</p>
+    </div>
+
+    <div class="amostra-folha">
+      <div class="amostra-doc"><span>Diagnóstico Mind &amp; Biz</span><span class="am-tag">Exemplo</span></div>
+
+      <div class="verdict">
+        <div class="gauge"><div class="big num" id="am-num">38</div><div class="of">Prontidão de campanha</div></div>
+        <div class="verdict-txt">
+          <h2>Você não tem um problema de marketing. Tem cinco.</h2>
+          <p>A operação vende, mas nenhuma frente sustenta a próxima.</p>
+        </div>
+      </div>
+
+      <div class="fronts">
+        <div class="front">
+          <div class="front-top">
+            <div class="front-id"><span class="front-ico i-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v19"/><path d="M6 4h11.5l-2.6 4.2 2.6 4.2H6z"/></svg></span>
+            <h3>Marca e Posicionamento</h3></div>
+            <span class="front-score s-bad">Descoberto · <span class="num">15</span>/100</span>
+          </div>
+          <div class="bar"><span class="f-bad" style="--w:15%"></span></div>
+        </div>
+
+        <div class="front">
+          <div class="front-top">
+            <div class="front-id"><span class="front-ico i-mid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.4 9 3.8l6 2.6 6-2.6v13.4l-6 2.6-6-2.6-6 2.6z"/><path d="M9 3.8v13.4"/><path d="M15 6.4v13.4"/></svg></span>
+            <h3>Território Próprio</h3></div>
+            <span class="front-score s-mid">Frágil · <span class="num">55</span>/100</span>
+          </div>
+          <div class="bar"><span class="f-mid" style="--w:55%"></span></div>
+        </div>
+
+        <div class="front">
+          <div class="front-top">
+            <div class="front-id"><span class="front-ico i-mid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.1"/><path d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8"/><path d="M15.4 15.4a4.8 4.8 0 0 0 0-6.8"/><path d="M6.2 6.2a8.2 8.2 0 0 0 0 11.6"/><path d="M17.8 17.8a8.2 8.2 0 0 0 0-11.6"/></svg></span>
+            <h3>Distribuição e Conteúdo</h3></div>
+            <span class="front-score s-mid">Frágil · <span class="num">60</span>/100</span>
+          </div>
+          <div class="bar"><span class="f-mid" style="--w:60%"></span></div>
+        </div>
+
+        <div class="front">
+          <div class="front-top">
+            <div class="front-id"><span class="front-ico i-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 1.6v3.2"/><path d="M12 19.2v3.2"/><path d="M1.6 12h3.2"/><path d="M19.2 12h3.2"/></svg></span>
+            <h3>Aquisição</h3></div>
+            <span class="front-score s-bad">Descoberto · <span class="num">10</span>/100</span>
+          </div>
+          <div class="bar"><span class="f-bad" style="--w:10%"></span></div>
+        </div>
+
+        <div class="front">
+          <div class="front-top">
+            <div class="front-id"><span class="front-ico i-mid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.8 4.6h11.4l-4.5 5.6v6.6l-2.4-1.6v-5z"/><path d="M20.6 16.2a4.4 4.4 0 1 1-1.7-5.6"/><path d="M20.4 8.2v3.6h-3.6"/></svg></span>
+            <h3>Conversão e Retomada</h3></div>
+            <span class="front-score s-mid">Frágil · <span class="num">48</span>/100</span>
+          </div>
+          <div class="bar"><span class="f-mid" style="--w:48%"></span></div>
+        </div>
+      </div>
+
+      <div class="block-title"><span class="label">O que eu observei</span><h2>8 pontos que sangram</h2></div>
+      <ul class="findings">
+        <li><b>Canal desligado sem veredito</b><span>Vocês pararam de anunciar, mas sem medição não havia como saber se aquilo funcionava. O canal não foi reprovado — foi arquivado sem julgamento.</span></li>
+        <li><b>Origem única de clientes</b><span>Quase tudo vem de indicação. É barato e é bom — até o mês em que ninguém indica, e não existe segunda torneira para abrir.</span></li>
+      </ul>
+      <div class="amostra-corte" aria-hidden="true">
+        <ul class="findings">
+          <li><b>Promessa que não sobrevive à comparação</b><span>Dois concorrentes dizem exatamente a mesma coisa que você na primeira dobra do site, e a decisão volta para o preço.</span></li>
+        </ul>
+      </div>
+      <p class="amostra-mais">…e mais <b>6 pontos</b>, cada um com o que ele custa na prática.</p>
+    </div>
+
+    <div class="amostra-cta">
+      <button class="btn" id="start2" type="button">Começar o meu →</button>
     </div>
   </section>
 
@@ -1073,6 +1210,7 @@
     skip:    document.getElementById('skip'),
     report:  document.getElementById('report'),
     intro:   document.getElementById('intro'),
+    amostra: document.getElementById('amostra'),
     shell:   document.getElementById('progress-shell'),
     fill:    document.getElementById('progress-fill'),
     pct:     document.getElementById('pct'),
@@ -1339,6 +1477,7 @@
     CONSULTA = true;
     for (var k in dados) { if (dados.hasOwnProperty(k)) A[k] = dados[k]; }
     el.intro.hidden = true;
+    if (el.amostra) el.amostra.hidden = true;
     el.shell.hidden = true;
     el.answer.hidden = true;
     var c = computar();
@@ -1758,12 +1897,45 @@
     if (recuperado) modoConsulta(recuperado);
   }
 
-  document.getElementById('start').addEventListener('click', function () {
+  function iniciar(origem) {
     el.intro.hidden = true;
+    if (el.amostra) el.amostra.hidden = true;
     el.shell.hidden = false;
-    push('diagnostico_start', {});
+    push('diagnostico_start', { origem: origem });
     advance();
-  });
+  }
+  document.getElementById('start').addEventListener('click', function () { iniciar('capa'); });
+  var start2 = document.getElementById('start2');
+  if (start2) start2.addEventListener('click', function () { iniciar('amostra'); });
+
+  /* Amostra: barras enchem e o score sobe quando a folha entra na tela. */
+  (function () {
+    var sec = document.getElementById('amostra');
+    var n = document.getElementById('am-num');
+    if (!sec || !n) return;
+    if (reduced || !('IntersectionObserver' in window)) { sec.classList.add('am-in'); return; }
+    var alvo = parseInt(n.textContent, 10) || 0;
+    n.textContent = '0';
+    var io = new IntersectionObserver(function (ents) {
+      for (var i = 0; i < ents.length; i++) {
+        if (!ents[i].isIntersecting) continue;
+        io.disconnect();
+        sec.classList.add('am-in');
+        var t0 = null;
+        requestAnimationFrame(function passo(t) {
+          if (t0 === null) t0 = t;
+          var p = Math.min(1, (t - t0) / 1100);
+          n.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(passo);
+        });
+      }
+    }, { threshold: .3 });
+    io.observe(sec);
+    /* Se o observer nunca disparar, o número não pode ficar preso em zero. */
+    setTimeout(function () {
+      if (n.textContent === '0') { n.textContent = alvo; sec.classList.add('am-in'); }
+    }, 4000);
+  })();
 
   // atalho pra QA: ?auto=1 preenche o roteiro com respostas medianas
   if (/[?&]auto=1/.test(location.search)) {
