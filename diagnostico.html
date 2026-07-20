@@ -1738,7 +1738,7 @@
       geral:         geral,
       scores:        s,
       frenteCritica: pior ? pior.nome : '',
-      link:          code ? (CONFIG.origem || location.origin) + '/diagnostico?r=' + code : '',
+      link:          code ? (CONFIG.origem || location.origin) + '/diagnostico#r=' + code : '',
       achados:       findings.map(function (x) { return { titulo: x[0], texto: x[1] }; })
     }, function (j) { if (j.id) PAGE_ID = j.id; });
   }
@@ -1755,11 +1755,17 @@
      Abrindo esse link, a página remonta o diagnóstico completo.
      Opções viram índices para o código não estourar o tamanho da URL.
      ═══════════════════════════════════════════════════════════════ */
+  /* Nunca viajam no link de resgate. O telefone/e-mail é dado pessoal e o
+     lead não precisa recebê-lo de volta; o faturamento não entra em nenhuma
+     conta do relatório (só no Notion), então no link seria risco sem função.
+     Ambos continuam indo pro Notion pela Function, que é servidor. */
+  var FORA_DO_LINK = { contato: 1, faturamento: 1 };
+
   function encodeAnswers() {
     var pack = {};
     SCRIPT.forEach(function (st) {
       var v = A[st.id];
-      if (v === undefined) return;
+      if (v === undefined || FORA_DO_LINK[st.id]) return;
       if (st.type === 'choice' && st.opts) {
         var idx = st.opts.indexOf(v);
         pack[st.id] = idx > -1 ? idx : v;
@@ -1857,7 +1863,7 @@
     var code = encodeAnswers();
     if (code) {
       L.push('');
-      L.push('Respostas completas: ' + (CONFIG.origem || location.origin) + '/diagnostico?r=' + code);
+      L.push('Respostas completas: ' + (CONFIG.origem || location.origin) + '/diagnostico#r=' + code);
     }
     return L.join('\n');
   }
@@ -1898,11 +1904,21 @@
   /* ═══════════════════════════════════════════════════════════════
      INÍCIO
      ═══════════════════════════════════════════════════════════════ */
-  /* Link de resgate (?r=…): abre direto no relatório remontado. */
-  var resgate = /[?&]r=([^&#]+)/.exec(location.search);
+  /* Link de resgate (#r=…): abre direto no relatório remontado.
+     Fica no FRAGMENTO, não na query: o que vem depois do # nunca é enviado ao
+     servidor — não entra em log da Cloudflare, não vai no Referer e o GTM não
+     registra. Na query, as respostas do lead viravam URL de página no Analytics.
+     Links antigos ainda usam ?r= — aceitamos, e limpamos a query do histórico
+     pra que o payload não fique parado na barra de endereço. */
+  var resgate = /[#&]r=([^&]+)/.exec(location.hash) || /[?&]r=([^&#]+)/.exec(location.search);
   if (resgate) {
     var recuperado = decodeAnswers(resgate[1]);
-    if (recuperado) modoConsulta(recuperado);
+    if (recuperado) {
+      if (location.search.indexOf('r=') > -1 && window.history && history.replaceState) {
+        try { history.replaceState(null, '', location.pathname + '#r=' + resgate[1]); } catch (e) {}
+      }
+      modoConsulta(recuperado);
+    }
   }
 
   function iniciar(origem) {
