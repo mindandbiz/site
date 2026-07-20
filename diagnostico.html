@@ -409,6 +409,10 @@
     .cta h2 { margin-bottom: 12px; }
     .cta > p { color: var(--imperial); max-width: 540px; margin: 0 auto 22px; }
     .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .pedido-ok {
+      margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+      font-size: 17px; color: var(--ouro-txt);
+    }
     .cta-note { font-size: 13px; color: rgba(30,30,30,.55); margin: 18px 0 0; }
 
     /* ── Levar o resultado embora (tudo client-side, sem servidor) ── */
@@ -460,7 +464,7 @@
       body { background: #fff; color: #000; }
       body::before { display: none; }
       header, footer, .capa, .progress-shell, .chat, .answer,
-      .cta-row, .cta-note, .takeaway { display: none !important; }
+      .cta-row, .cta-note, .takeaway, .no-print { display: none !important; }
       .print-only { display: block; }
       .print-head {
         display: block; margin-bottom: 22px; padding-bottom: 12px;
@@ -476,6 +480,15 @@
       .front, .findings li, .tech-item, .sealed, .verdict, .cta { break-inside: avoid; }
       .front, .findings li, .tech-item { border: 1px solid #bbb; box-shadow: none; }
       a { color: #000; text-decoration: none; }
+      /* O PDF virou o único formato de saída: sem isto o navegador descarta
+         o preenchimento das barras e o relatório sai sem a leitura visual. */
+      .bar, .bar span, .front-score, .front-ico, .pill {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .bar span { transition: none !important; }
+      .amostra { display: none !important; }
+      .report h2 { break-after: avoid; }
+      .findings li { page-break-inside: avoid; }
     }
 
     /* ── Sondagem técnica (PageSpeed) ── */
@@ -562,9 +575,10 @@
         <span>Resultado na tela, na hora</span>
       </div>
       <p class="consent">
-        Ao iniciar, você concorda que a Mind &amp; Biz registre suas respostas para preparar
-        o diagnóstico. Não repassamos nada a terceiros — veja a
-        <a href="/privacidade.html">Política de Privacidade</a>.
+        Ao iniciar, você concorda que a Mind &amp; Biz registre suas respostas — inclusive o
+        contato que você deixar no fim — para preparar o diagnóstico e retornar. Não vendemos
+        nem cedemos seus dados; usamos apenas fornecedores necessários para operar o site.
+        Detalhes na <a href="/privacidade.html">Política de Privacidade</a>.
       </p>
     </div>
   </section>
@@ -1037,10 +1051,7 @@
 
   /* Ícones da barra "levar o resultado". */
   var ICO_UI = {
-    pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 17v2.5h16V17"/></svg>',
-    wa:   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.05 2C6.6 2 2.2 6.4 2.2 11.85c0 1.9.5 3.75 1.45 5.4L2 22l4.9-1.6a9.8 9.8 0 0 0 5.15 1.45h.01c5.44 0 9.85-4.4 9.85-9.85 0-2.63-1.03-5.1-2.9-6.96A9.78 9.78 0 0 0 12.05 2Zm0 17.9h-.01a8.2 8.2 0 0 1-4.15-1.14l-.3-.18-3.1.82.83-3.02-.2-.31a8.15 8.15 0 0 1-1.25-4.36c0-4.52 3.68-8.2 8.2-8.2a8.16 8.16 0 0 1 8.19 8.2c0 4.52-3.68 8.2-8.2 8.2Zm4.5-6.14c-.25-.13-1.46-.72-1.68-.8-.23-.09-.39-.13-.56.12-.16.25-.63.8-.78.97-.14.16-.28.19-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.05-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.48c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.66-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>',
-    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>',
-    copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 5.5H5.8a2.3 2.3 0 0 0-2.3 2.3v9.7"/></svg>'
+    pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 17v2.5h16V17"/></svg>'
   };
 
   function icone(key) {
@@ -1603,25 +1614,25 @@
     h += '<div class="cta">';
     if (!CONSULTA) {
       h += '<h2>Quer o diagnóstico completo?</h2>'
-       + '<p>Clique abaixo e o resumo já vai montado no WhatsApp. Eu leio, faço a análise'
+       + '<p class="no-print">Peça abaixo. Eu leio as suas respostas, faço a análise'
        + (pior ? ' — começando por <strong>' + pior.nome.toLowerCase() + '</strong>, sua frente mais exposta' : '')
-       + ' — e volto com o material.</p>'
+       + ' — e volto no contato que você deixou.</p>'
        + '<div class="cta-row">'
-       + '<a class="btn btn-wa" id="wa-cta" href="#" target="_blank" rel="noopener">Pedir o diagnóstico completo →</a>'
+       + '<button class="btn btn-wa" id="pedir-cta" type="button">Pedir o diagnóstico completo →</button>'
        + '</div>'
-       + '<p class="cta-note">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p>'
-       + '<p class="print-only">Para o diagnóstico completo: WhatsApp +55 11 99931-8970 · mindandbiz.com.br</p>';
+       + '<p class="cta-note" id="pedir-nota">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p>'
+       + '<p class="print-only">O diagnóstico completo se pede na própria página: '
+       + 'mindandbiz.com.br/diagnostico — ou responda o contato que você deixou.</p>';
     }
+    /* Só PDF: o relatório fica na tela e sai em papel. Enviar por WhatsApp ou
+       e-mail espalhava o resultado em texto solto — e o link de resgate junto. */
     h += '<div class="takeaway">'
        + '<span class="label">Leve este resultado com você</span>'
        + '<div class="take-row">'
-       +   '<button class="take" id="take-pdf" type="button">' + ICO_UI.pdf + 'Salvar em PDF</button>'
-       +   '<a class="take" id="take-wa" href="#" target="_blank" rel="noopener">' + ICO_UI.wa + 'Enviar no WhatsApp</a>'
-       +   '<a class="take" id="take-mail" href="#">' + ICO_UI.mail + 'Enviar por e-mail</a>'
-       +   '<button class="take" id="take-copy" type="button">' + ICO_UI.copy + 'Copiar texto</button>'
+       +   '<button class="take" id="take-pdf" type="button">' + ICO_UI.pdf + 'Baixar em PDF</button>'
        + '</div>'
-       + '<p class="cta-note">O WhatsApp e o e-mail abrem no seu próprio aplicativo, com o texto já pronto — '
-       + 'você escolhe para quem mandar, inclusive para você mesmo. Nada disso passa por servidor nosso.</p>'
+       + '<p class="cta-note">Abre a impressão do seu navegador — escolha <strong>Salvar como PDF</strong> '
+       + 'como destino. O arquivo é gerado no seu aparelho; não passa por servidor nenhum.</p>'
        + '</div></div>';
 
     el.report.innerHTML = h;
@@ -1635,50 +1646,25 @@
 
     renderTech(); // caso a sondagem já tenha voltado
 
-    var wa = document.getElementById('wa-cta');
-    if (wa) {
-      wa.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(waMessage(s, geral));
-      wa.addEventListener('click', function () {
-        push('whatsapp_click', { click_location: 'diagnostico_cta' });
+    /* Pedir o completo não abre WhatsApp nem e-mail: o contato é obrigatório
+       no roteiro, então quem procura é a Mind & Biz. Aqui só registramos o
+       pedido e confirmamos na tela. */
+    var pedir = document.getElementById('pedir-cta');
+    if (pedir) {
+      pedir.addEventListener('click', function () {
         push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
         marcarPediu();
+        var linha = pedir.parentNode;
+        linha.innerHTML = '<p class="pedido-ok">Pedido registrado ✓</p>';
+        var nota = document.getElementById('pedir-nota');
+        if (nota) nota.textContent = 'Retorno no contato que você deixou. Sem compromisso e sem cobrança.';
       });
     }
 
-    /* ── Levar o resultado: PDF, WhatsApp, e-mail e cópia ──
-       Tudo resolvido no navegador do lead — nenhum servidor envolvido. */
-    var levar = resumoLevar(s, geral, findings);
-
+    /* ── Levar o resultado: só PDF, gerado pelo próprio navegador. ── */
     document.getElementById('take-pdf').addEventListener('click', function () {
       push('diagnostico_salvar', { formato: 'pdf', score_geral: geral });
       window.print();
-    });
-
-    var tw = document.getElementById('take-wa');
-    tw.href = 'https://wa.me/?text=' + encodeURIComponent(levar);
-    tw.addEventListener('click', function () {
-      push('diagnostico_salvar', { formato: 'whatsapp', score_geral: geral });
-    });
-
-    var tm = document.getElementById('take-mail');
-    tm.href = 'mailto:?subject=' + encodeURIComponent('Diagnóstico de marketing — ' + (A.empresa || ''))
-            + '&body=' + encodeURIComponent(levar);
-    tm.addEventListener('click', function () {
-      push('diagnostico_salvar', { formato: 'email', score_geral: geral });
-    });
-
-    document.getElementById('take-copy').addEventListener('click', function () {
-      var btn = this;
-      var full = fullSummary(s, geral, findings);
-      var rotulo = btn.innerHTML;
-      var ok = function () {
-        btn.textContent = 'Copiado ✓';
-        setTimeout(function () { btn.innerHTML = rotulo; }, 2200);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(full).then(ok, function () { fallbackCopy(full); ok(); });
-      } else { fallbackCopy(full); ok(); }
-      push('diagnostico_salvar', { formato: 'copia', score_geral: geral });
     });
 
     push('diagnostico_complete', {
@@ -1694,13 +1680,6 @@
     el.report.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   }
 
-  function fallbackCopy(txt) {
-    var ta = document.createElement('textarea');
-    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); } catch (e) {}
-    ta.remove();
-  }
 
   /* ═══════════════════════════════════════════════════════════════
      REGISTRO NO NOTION
@@ -1814,92 +1793,6 @@
                .replace(/<[^>]+>/g, '').trim();
   }
 
-  /* Resumo que o lead leva embora (WhatsApp dele / e-mail dele).
-     Só os títulos dos achados: `mailto:` e `wa.me` truncam corpo longo,
-     e o texto inteiro de cada ponto fica no PDF. */
-  function resumoLevar(s, geral, findings) {
-    var L = [];
-    L.push('DIAGNÓSTICO DE MARKETING — ' + (A.empresa || ''));
-    L.push('Mind & Biz · mindandbiz.com.br');
-    L.push('');
-    L.push('Prontidão de marketing: ' + geral + '/100');
-    L.push('');
-    FRONTS.forEach(function (f) {
-      if (s[f.key] === null) return;
-      L.push('- ' + f.nome + ': ' + s[f.key] + '/100 (' + tierWord(s[f.key]) + ')');
-    });
-    if (findings.length) {
-      L.push('');
-      L.push('Pontos que sangram:');
-      findings.slice(0, 8).forEach(function (x) { L.push('- ' + x[0]); });
-      L.push('');
-      L.push('O detalhe de cada ponto está na tela do diagnóstico — de lá dá pra salvar em PDF.');
-    }
-    L.push('');
-    L.push('Diagnóstico completo: WhatsApp +55 11 99931-8970');
-    return L.join('\n');
-  }
-
-  /* Mensagem do WhatsApp — compacta, porque wa.me trunca textos longos. */
-  function waMessage(s, geral) {
-    var L = [];
-    L.push('Olá, Arthur! Fiz o diagnóstico no site e quero o completo.');
-    L.push('');
-    L.push('Negócio: ' + (A.empresa || '-') + ' (' + (valorReal('segmento') || '-') + ')');
-    L.push('Falo com: ' + (A.nome || '-'));
-    if (A.contato && A.contato !== '—') L.push('Contato: ' + A.contato);
-    L.push('');
-    L.push('Prontidão de marketing: ' + geral + '/100');
-    FRONTS.forEach(function (f) {
-      if (s[f.key] === null) return;
-      L.push('- ' + f.nome + ': ' + s[f.key] + '/100');
-    });
-    L.push('');
-    if (A.objetivo) L.push('Prioridade 6 meses: ' + A.objetivo);
-    if (A.travamento && A.travamento !== '—') L.push('Trava hoje: ' + A.travamento);
-    var conc = [A.conc1, A.conc2, A.conc3].filter(function (c) { return c && c !== '—'; });
-    if (conc.length) L.push('Concorrentes: ' + conc.join(' | '));
-
-    var code = encodeAnswers();
-    if (code) {
-      L.push('');
-      L.push('Respostas completas: ' + (CONFIG.origem || location.origin) + '/diagnostico#r=' + code);
-    }
-    return L.join('\n');
-  }
-
-  /* Resumo longo — vai pro clipboard, não pro WhatsApp. */
-  function fullSummary(s, geral, findings) {
-    var L = [];
-    L.push('DIAGNÓSTICO MIND & BIZ — ' + (A.empresa || ''));
-    L.push('Prontidão de marketing: ' + geral + '/100');
-    L.push('');
-    L.push('FRENTES');
-    FRONTS.forEach(function (f) {
-      if (s[f.key] === null) return;
-      L.push('  ' + f.nome + ': ' + s[f.key] + '/100 (' + tierWord(s[f.key]) + ')');
-    });
-    if (techResults.length) {
-      L.push('');
-      L.push('SONDAGEM TÉCNICA');
-      techResults.forEach(function (t) {
-        L.push('  ' + t.rotulo + ' ' + t.url + ' — perf ' + t.perf + ' | seo ' + t.seo + ' | boas práticas ' + t.bp);
-      });
-    }
-    if (findings.length) {
-      L.push('');
-      L.push('PONTOS QUE SANGRAM');
-      findings.forEach(function (x) { L.push('  • ' + x[0] + ' — ' + x[1].replace(/<[^>]+>/g, '')); });
-    }
-    L.push('');
-    L.push('RESPOSTAS');
-    SCRIPT.forEach(function (st) {
-      if (A[st.id] !== undefined) L.push('  ' + st.id + ': ' + A[st.id]);
-    });
-    L.push('');
-    L.push('mindandbiz.com.br');
-    return L.join('\n');
-  }
 
   /* ═══════════════════════════════════════════════════════════════
      INÍCIO
