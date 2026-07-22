@@ -104,6 +104,7 @@
     .btn:hover { background: var(--ouro-dk); transform: translateY(-2px); }
     .btn-wa { background: var(--wa); color: #06301A; }
     .btn-wa:hover { background: #1fb857; }
+    .btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
 
     /* ── Cabeçalho ── */
     header {
@@ -409,10 +410,6 @@
     .cta h2 { margin-bottom: 12px; }
     .cta > p { color: var(--imperial); max-width: 540px; margin: 0 auto 22px; }
     .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .pedido-ok {
-      margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-      font-size: 17px; color: var(--ouro-txt);
-    }
     .cta-note { font-size: 13px; color: rgba(30,30,30,.55); margin: 18px 0 0; }
 
     /* ── Levar o resultado embora (tudo client-side, sem servidor) ── */
@@ -1051,7 +1048,8 @@
 
   /* Ícones da barra "levar o resultado". */
   var ICO_UI = {
-    pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 17v2.5h16V17"/></svg>'
+    pdf:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5 12 14.5 16 10.5"/><path d="M4 17v2.5h16V17"/></svg>',
+    wa:   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.17c-.25.69-1.22 1.26-1.98 1.42-.53.11-1.22.2-3.54-.76-2.97-1.23-4.88-4.25-5.03-4.45-.14-.2-1.19-1.59-1.19-3.03s.75-2.15 1.02-2.44c.27-.29.59-.37.78-.37h.56c.18 0 .42-.07.66.5.25.6.84 2.06.91 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.71.81 2.01.96.29.15.49.22.56.34.07.13.07.72-.18 1.41z"/></svg>'
   };
 
   function icone(key) {
@@ -1503,7 +1501,14 @@
     paint(c.s, c.geral, c.findings, c.pior);
   }
 
+  var FECHADO = false;
   function finish() {
+    // Entre o último clique e o relatório há ~2s de animação de digitação.
+    // Nessa janela o botão está oculto, mas segue clicável pelo DOM — sem
+    // esta trava, um duplo-clique renderiza o relatório (e dispara
+    // diagnostico_complete, e grava no Notion) mais de uma vez.
+    if (FECHADO) return;
+    FECHADO = true;
     el.answer.hidden = true;
     el.shell.hidden = true;
 
@@ -1618,7 +1623,8 @@
        + (pior ? ' — começando por <strong>' + pior.nome.toLowerCase() + '</strong>, sua frente mais exposta' : '')
        + ' — e volto no contato que você deixou.</p>'
        + '<div class="cta-row">'
-       + '<button class="btn btn-wa" id="pedir-cta" type="button">Pedir o diagnóstico completo →</button>'
+       + '<a class="btn btn-wa" id="pedir-cta" href="' + waHref(geral, pior) + '" '
+       +   'target="_blank" rel="noopener">' + ICO_UI.wa + 'Pedir no WhatsApp</a>'
        + '</div>'
        + '<p class="cta-note" id="pedir-nota">Sem compromisso e sem cobrança. Se não fizer sentido pra você, eu mesmo digo.</p>'
        + '<p class="print-only">O diagnóstico completo se pede na própria página: '
@@ -1646,18 +1652,17 @@
 
     renderTech(); // caso a sondagem já tenha voltado
 
-    /* Pedir o completo não abre WhatsApp nem e-mail: o contato é obrigatório
-       no roteiro, então quem procura é a Mind & Biz. Aqui só registramos o
-       pedido e confirmamos na tela. */
+    /* O CTA abre o WhatsApp com a mensagem pronta. O contato do roteiro é a
+       rede de segurança: se o lead não mandar a mensagem, o pedido não se
+       perde — a Mind & Biz procura. Só registramos e deixamos o link seguir. */
     var pedir = document.getElementById('pedir-cta');
     if (pedir) {
       pedir.addEventListener('click', function () {
         push('diagnostico_lead', { score_geral: geral, frente_critica: pior ? pior.nome : '' });
+        push('whatsapp_click', { click_location: 'diagnostico_cta' });
         marcarPediu();
-        var linha = pedir.parentNode;
-        linha.innerHTML = '<p class="pedido-ok">Pedido registrado ✓</p>';
         var nota = document.getElementById('pedir-nota');
-        if (nota) nota.textContent = 'Retorno no contato que você deixou. Sem compromisso e sem cobrança.';
+        if (nota) nota.textContent = 'Pedido registrado ✓ — se o WhatsApp não abrir, tudo bem: eu retorno no contato que você deixou.';
       });
     }
 
@@ -1724,6 +1729,25 @@
 
   function marcarPediu() {
     if (PAGE_ID) enviar({ pageId: PAGE_ID });
+  }
+
+  /* Mensagem do CTA. Curta de propósito: wa.me trunca texto longo, e o que
+     importa aqui é o lead conseguir mandar sem editar nada. O link de resgate
+     vai junto para a Mind & Biz reabrir o relatório inteiro — ele não carrega
+     contato nem faturamento (ver FORA_DO_LINK). */
+  function waHref(geral, pior) {
+    var nome = valorReal('nome') || A.nome || '';
+    var txt = 'Oi! Fiz o diagnóstico no site'
+            + (nome ? ' — sou ' + nome : '')
+            + '. Deu ' + geral + '/100'
+            + (pior ? ', com ' + pior.nome.toLowerCase() + ' como frente mais exposta' : '')
+            + '. Quero o diagnóstico completo.';
+    var code = encodeAnswers();
+    if (code) {
+      var base = CONFIG.origem || (location.protocol + '//' + location.host);
+      txt += '\n\nMeu relatório: ' + base + '/diagnostico#r=' + code;
+    }
+    return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(txt);
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -1859,7 +1883,9 @@
     document.getElementById('start').click();
     var guard = 0;
     var timer = setInterval(function () {
-      if (++guard > 400) { clearInterval(timer); return; }
+      // A checagem vem ANTES de agir: no fim do laço, ela deixava o teste
+      // reenviar a última pergunta e re-renderizar o relatório várias vezes.
+      if (++guard > 400 || !el.report.hidden) { clearInterval(timer); return; }
       var z = document.getElementById('input-zone');
       var inp = z.querySelector('input');
       if (inp) { inp.value = 'teste'; z.querySelector('.btn').click(); return; }
@@ -1869,7 +1895,6 @@
         var go = z.querySelector('.btn');
         if (go) go.click();
       }
-      if (!el.report.hidden) clearInterval(timer);
     }, 120);
   }
 })();
