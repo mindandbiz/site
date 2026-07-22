@@ -224,6 +224,7 @@
     .bubble strong { color: var(--ouro-txt); font-weight: 600; }
     .from-user .bubble strong { color: #14110D; }
     .bubble .hint { display: block; margin-top: 7px; font-size: 13.5px; color: var(--imperial); }
+    .multi-dica { margin: 0 0 10px; font-size: 13.5px; color: var(--imperial); }
 
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
@@ -239,7 +240,10 @@
     /* ── Área de resposta ── */
     .answer {
       position: sticky; bottom: 0;
-      background: linear-gradient(180deg, rgba(248,245,240,0) 0%, var(--marfim) 22%);
+      /* Fade em px, não em %: em % o ponto opaco andava conforme a altura do
+         bloco, e qualquer conteúdo novo no topo (a dica de múltipla escolha)
+         caía na faixa translúcida com o chat aparecendo por trás. */
+      background: linear-gradient(180deg, rgba(248,245,240,0) 0, var(--marfim) 16px);
       padding: 16px 0 22px;
     }
     .opts { display: flex; flex-wrap: wrap; gap: 9px; }
@@ -766,7 +770,7 @@
       opts:['Até R$ 20 mil/mês','R$ 20 a 50 mil/mês','R$ 50 a 150 mil/mês','R$ 150 a 500 mil/mês','Acima de R$ 500 mil/mês','Prefiro não dizer'] },
 
     { id:'origem', stage:1, type:'multi',
-      bot:['<strong>De onde vêm os seus clientes hoje?</strong><span class="hint">Marque todas que valem — e depois confirme.</span>'],
+      bot:['<strong>De onde vêm os seus clientes hoje?</strong>'],
       opts:['Indicação e boca a boca','Busca no Google','Instagram ou outras redes','Tráfego pago','Prospecção ativa','Marketplace ou plataforma','Clientes antigos que voltam','Sinceramente, não sei dizer'] },
 
     // ── 2. Marca ─────────────────────────────────────────────────
@@ -796,7 +800,11 @@
 
     { id:'siteUrl', stage:3, type:'text', placeholder:'seusite.com.br',
       when:function(a){ return a.temSite === 'Sim, temos site'; },
-      bot:['<strong>Qual o endereço?</strong><span class="hint">Vou dar uma olhada enquanto a gente continua conversando.</span>'] },
+      /* Não prometer "vou dar uma olhada": a sondagem técnica (PageSpeed)
+         depende de chave e falha em silêncio, então a promessa podia não se
+         cumprir. O que é sempre verdade é que o endereço entra na análise
+         que a Mind & Biz faz depois, à mão. */
+      bot:['<strong>Qual o endereço?</strong><span class="hint">É por ele que eu avalio o seu território próprio.</span>'] },
 
     { id:'siteFuncao', stage:3, type:'multi',
       when:function(a){ return a.temSite === 'Sim, temos site'; },
@@ -858,9 +866,8 @@
       opts:['Eu mesmo','Equipe interna','Agência','Freelancer','O sobrinho / alguém próximo'] },
 
     { id:'mede', stage:5, type:'choice',
-      bot:['Essa é a pergunta mais importante do diagnóstico inteiro:',
-           '<strong>Você sabe quanto custa conquistar um cliente novo?</strong>'],
-      opts:['Sei o custo por cliente fechado','Sei o custo por lead, não por cliente','Só acompanho alcance e cliques','Não meço nada disso'] },
+      bot:['<strong>Você sabe quanto de marketing custa para entrar um cliente novo?</strong><span class="hint">A conta crua: o que você gasta para atrair, dividido pelos clientes que entraram.</span>'],
+      opts:['Sei quanto custa cada cliente que fecha','Sei quanto custa cada contato, mas não cada cliente','Só acompanho alcance e cliques','Não meço nada disso'] },
 
     // ── 6. Conversão ─────────────────────────────────────────────
     { id:'canal', stage:6, type:'multi',
@@ -910,7 +917,10 @@
       opts:['Aumentar o volume de clientes novos','Vender mais para quem já é cliente','Entrar em um novo mercado ou público','Profissionalizar a marca','Reduzir a dependência de indicação','Não sei por onde começar'] },
 
     { id:'travamento', stage:8, type:'text', placeholder:'Escreva com suas palavras', skippable:true,
-      bot:['<strong>E o que mais te trava hoje?</strong><span class="hint">Pode escrever solto — é o campo que eu mais leio.</span>'] },
+      /* "o campo que eu mais leio" sugeria leitura humana imediata. O
+         relatório da tela é automático; quem lê texto solto é o Arthur, e
+         só no diagnóstico completo. A copy agora diz isso. */
+      bot:['<strong>E o que mais te trava hoje?</strong><span class="hint">Pode escrever solto. O relatório da tela é automático — este campo é o que eu leio se você pedir o diagnóstico completo.</span>'] },
 
     { id:'contato', stage:8, type:'text', placeholder:'WhatsApp ou e-mail',
       bot:['Fechado. Vou montar o relatório.',
@@ -975,7 +985,7 @@
 
     trafego:         { 'Sim, de forma constante':10, 'Impulsiono um post de vez em quando':4, 'Já testei e parei':2, 'Nunca investi':0 },
     quemTrafego:     { 'Agência':9, 'Equipe interna':9, 'Freelancer':7, 'Eu mesmo':5, 'O sobrinho / alguém próximo':1 },
-    mede:            { 'Sei o custo por cliente fechado':10, 'Sei o custo por lead, não por cliente':6, 'Só acompanho alcance e cliques':2, 'Não meço nada disso':0 },
+    mede:            { 'Sei quanto custa cada cliente que fecha':10, 'Sei quanto custa cada contato, mas não cada cliente':6, 'Só acompanho alcance e cliques':2, 'Não meço nada disso':0 },
 
     resposta:        { 'Minutos':10, 'Poucas horas':8, 'No mesmo dia':5, 'No dia seguinte ou depois':1, 'Depende muito do movimento':2 },
     foraHorario:     { 'Temos resposta automática ou plantão':10, 'Alguém responde quando vê':5, 'Fica pro próximo dia útil':3, 'Provavelmente se perde':0 },
@@ -1328,6 +1338,14 @@
 
   function renderMulti(step) {
     var picked = [];
+    /* A dica sai daqui, e não da copy de cada pergunta: quem escreve uma
+       pergunta nova não tem como esquecer de avisar que aceita mais de uma
+       resposta. Sem ela, o botão nasce desabilitado e a tela parece travada. */
+    var dica = document.createElement('p');
+    dica.className = 'multi-dica';
+    dica.textContent = 'Pode marcar mais de uma.';
+    el.zone.appendChild(dica);
+
     var box = document.createElement('div');
     box.className = 'opts';
     step.opts.forEach(function (o) {
@@ -1600,19 +1618,17 @@
       h += '</dl>';
     }
 
-    // Sinaliza que a prescrição existe — sem entregá-la.
+    /* Sinaliza que a prescrição existe — sem entregá-la e sem prometê-la.
+       O escopo do diagnóstico completo depende do negócio, e nem todo caso
+       compensa a energia: quem decide isso é o Arthur, depois de ler. Aqui
+       não se descreve entregável nem se antecipa conclusão. */
     if (!CONSULTA) h += '<div class="sealed">'
        + '<h3>Até aqui é observação. A recomendação é outra coisa.</h3>'
-       + '<p>Tudo que você leu acima é o que dá pra enxergar de fora com as suas respostas: onde sangra e quanto. '
-       + 'O diagnóstico completo é o passo seguinte — e ele é feito com dado, não com opinião.</p>'
-       + '<p>Nele eu olho os '
-       + (A.conc1 && A.conc1 !== '—' ? 'concorrentes que você citou' : 'seus concorrentes diretos')
-       + ' um a um (o que comunicam, com que frequência, o que cobram, por onde convertem), '
-       + 'meço o seu funil de ponta a ponta e devolvo a sequência de ataque priorizada por retorno — '
-       + 'o que fazer primeiro, o que pode esperar seis meses e o que <em>não</em> fazer.</p>'
-       + '<p>Adianto uma coisa: na maioria dos negócios com esse perfil, a primeira ação de maior retorno '
-       + '<strong>não é a que o mercado recomendaria</strong> — e costuma ser mais barata do que se imagina. '
-       + 'Mas essa parte eu não entrego numa tela automática.</p>'
+       + '<p>Tudo que você leu acima é o que dá pra enxergar de fora, no automático, '
+       + 'a partir das suas respostas: onde sangra e quanto.</p>'
+       + '<p>O passo seguinte é a leitura à mão — feita por mim, olhando o seu caso '
+       + 'e o seu mercado. O que ela cobre depende do que o seu negócio precisa: '
+       + 'não é um pacote fechado, e por isso eu não prometo aqui o que ela vai dizer.</p>'
        + '</div>';
 
     h += '<div class="cta">';
